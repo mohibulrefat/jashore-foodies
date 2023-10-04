@@ -1,6 +1,10 @@
 const NavBar = () => {
   return (
-    <div>NavBar</div>
+    <div>
+      <div>Logo</div>
+      <div>Navbar</div>
+      <div>Login Logout</div>
+    </div>
   )
 }
 
