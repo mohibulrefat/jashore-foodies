@@ -1,8 +1,24 @@
-# React + Vite
+## Jashore Foodies
+This Project is created with React.js, Express,js, Firebase and React Router, 
+## Technology Used
+* React.js
+* Firebase
+* Express.js
+* MongoDB
+* React Router
+* Axios
+* TanStack Query
+* React Swiper
+* TailwindCSS
+* React Private Route
+* React Toastify
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Links
+A list of links according to this project:
+* Live Site: [Jashore Foodies]() 
+* Server Side Code Link: [Server Repo]()
+## Admin Info
 
-Currently, two official plugins are available:
+## Frontend Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Backend Installation
