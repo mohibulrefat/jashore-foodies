@@ -1,0 +1,13 @@
+[
+    {
+        "restaurentId": 1,
+        "name": "Cafe Mariot",
+        "liscenceNo": "abcd1234",
+        "address": "14,Rail Road, Jessore Bangladesh",
+        "schedule": "9:00 AM to 10:00PM",
+        "category": "Bengali",
+        "image": "https://www.mawbiz.com.bd/application/views/module/product_image/cafe-mariot-food-menu_1.jpg?h=60",
+        "contact":"+880 1711-212030",
+        "email":"test@123.com"
+    }
+]
