@@ -9,5 +9,16 @@
         "image": "https://www.mawbiz.com.bd/application/views/module/product_image/cafe-mariot-food-menu_1.jpg?h=60",
         "contact":"+880 1711-212030",
         "email":"test@123.com"
+    },
+    {
+        "restaurentId": 2,
+        "name": "Theatre Cafe",
+        "liscenceNo": "abcd1234",
+        "address": "R.S Building, beside Queens Hospital, Ghop Jail Road, Jessore, Bangladesh",
+        "schedule": "10:00 AM to 10:00PM",
+        "category": "Bengali",
+        "image": "https://i.ibb.co/7KTtjNX/290234412-990953711573826-1147188667094075914-n.jpg",
+        "contact":"+880 1721-479622",
+        "email":"test@123.com"
     }
 ]
