@@ -1,0 +1,13 @@
+[
+    {
+        "itemId": 1,
+        "foodName": "Aloo Potol Posto",
+        "restaurentID": "1",
+        "price": "500tk",
+        "foodImage": "https://www.holidify.com/images/cmsuploads/compressed/Alooposto_bhaat_20170829115400.jpg",
+        "categoryID": "01",
+        "availability": "available",
+        "ingredients":"Posto with potatoes and pointed gourd, complete with red and green chillies and sometimes coconut puree to add some much-needed spice to it.",
+        "reviewID":"01"
+    }
+]
