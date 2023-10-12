@@ -1,5 +1,7 @@
 const Trending = () => {
-  return <div>Trending</div>;
+  return <div>
+    
+  </div>;
 };
 
 export default Trending;

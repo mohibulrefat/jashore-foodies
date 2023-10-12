@@ -52,7 +52,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <p className="mt-10"><hr /></p>
+      <hr className="mt-10"/>
       <p className="mt-10">© 2020 Your Company, Inc. All rights reserved.</p>
     </div>
   )
