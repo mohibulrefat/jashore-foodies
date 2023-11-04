@@ -5,7 +5,6 @@ import logo from "../../assets/logo.png";
 
 const NavBar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
-
   return (
     <div className="bg-[#FFF8EE] py-4">
       <div className="w-full md:w-11/12 mx-auto">
@@ -34,10 +33,17 @@ const NavBar = () => {
                 <MoonIcon className="h-6 w-6 " />
                 <SunIcon className="h-6 w-6" />
               </div>
-              <div className="hidden lg:block">
-                <button className="rounded-lg border-solid border-2 border-[#E94339] py-1 px-4 hover:bg-[#E94339] hover:text-white">
-                  LOGIN
-                </button>
+              <div className="hidden lg:flex gap-2 font-poppins">
+                <Link to="/login">
+                  <button className="w-28 mx-auto rounded-lg border-solid border-2 border-[#E94339] py-1 px-4 hover:bg-[#E94339] hover:text-white text-gray-900">
+                    LOGIN
+                  </button>
+                </Link>
+                <Link to="/signup">
+                  <button className="w-28 mx-auto rounded-lg border-solid border-2 hover:border-[#E94339] hover:bg-white hover:text-gray-900 py-1 px-4 bg-[#E94339] text-white">
+                    SIGNUP
+                  </button>
+                </Link>
               </div>
             </div>
             {/* Mobile navigation toggle */}
@@ -51,19 +57,26 @@ const NavBar = () => {
       </div>
       {/* mobile navigation */}
       <div
-        className={`w-52 z-50 absolute overflow-hidden bg-red-100 flex flex-col lg:hidden gap-12  origin-top duration-700 rounded-br-xl ${
-          !toggleMenu ? "h-0" : "h-2/3"
+        className={`w-52 z-50 absolute overflow-hidden bg-red-100 flex flex-col lg:hidden origin-top duration-700 rounded-br-xl ${
+          !toggleMenu ? "h-0" : "h-fit mt-3 py-5"
         }`}
       >
         <div className="px-8">
-          <div className="flex flex-col gap-8 text-sm tracking-wider">
+          <div className="flex flex-col gap-6 text-sm tracking-wider">
             <a href="#">HOME</a>
             <a href="#">RESTAURANTS</a>
             <a href="#">FOOD ITEMS</a>
             <a href="#">MY DASHBOARD</a>
-            <button className="rounded-lg border-solid border-2 border-[#E94339] py-1 px-4 hover:bg-[#E94339] hover:text-white">
-              LOGIN
-            </button>
+            <Link to="/login">
+              <button className="w-28 mx-auto rounded-lg border-solid border-2 border-[#E94339] py-1 px-4 hover:bg-[#E94339] hover:text-white">
+                LOGIN
+              </button>
+            </Link>
+            <Link to="/signup">
+              <button className="w-28 mx-auto rounded-lg border-solid border-2 hover:border-[#E94339] py-1 px-4 bg-[#E94339] text-white">
+                SIGNUP
+              </button>
+            </Link>
           </div>
         </div>
       </div>
