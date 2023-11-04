@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const Login = () => {
   return (
     <div className="flex justify-center items-center">
-      <div className="p-5 m-5 md:w-1/5 rounded-xl border border-green-300">
+      <div className="p-5 m-5 md:w-1/5 rounded-xl shadow-xl border border-[#E94339]">
         {/* {errormsg.length > 2 && (
           <p
             style={{ border: "1px solid red" }}
@@ -16,12 +16,12 @@ const Login = () => {
           LOGIN HERE
         </h2>
         <div className="flex justify-around mt-2">
-          <button className="p-2 rounded  hover:bg-gray-100 flex items-center gap-2 border border-green-300">
-            <FaGoogle className="text-green-500"></FaGoogle>
+          <button className="p-2 rounded  hover:bg-gray-100 flex items-center gap-2 border border-[#E94339]">
+            <FaGoogle className="text-[#E94339]"></FaGoogle>
             <span className="font-semibold text-gray-600">Google</span>
           </button>
-          <button className="p-2 rounded hover:bg-gray-100 flex items-center gap-2 border border-green-300">
-            <FaFacebook className="text-green-500"></FaFacebook>
+          <button className="p-2 rounded hover:bg-gray-100 flex items-center gap-2 border border-[#E94339]">
+            <FaFacebook className="text-[#E94339]"></FaFacebook>
             <span className="font-semibold text-gray-600">Facebook</span>
           </button>
         </div>
@@ -48,12 +48,12 @@ const Login = () => {
           <input
             type="submit"
             value="Login"
-            className="bg-green-500 text-white font-semibold rounded"
+            className="bg-[#E94339] text-white font-semibold rounded"
           />
         </form>
         <h4 className="my-3 text-sm text-gray-500 text-center">
           Not have an account?{" "}
-          <Link to="/signup" className="text-green-600">
+          <Link to="/signup" className="text-[#E94339]">
             SignUp
           </Link>
         </h4>
