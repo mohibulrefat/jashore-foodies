@@ -60,8 +60,9 @@ const NavBar = () => {
         </div>
         {/* mobile navigation */}
         <div
-          className={`w-52  bg-gray-100 overflow-hidden flex flex-col lg:hidden gap-12  origin-top duration-700  ${!toggleMenu ? "h-0" : "h-2/3"
-            }`}
+          className={`w-52 z-50 absolute overflow-hidden bg-red-100 flex flex-col lg:hidden gap-12  origin-top duration-700 rounded-br-xl ${
+            !toggleMenu ? "h-0" : "h-2/3"
+          }`}
         >
           <div className="px-8">
             <div className="flex flex-col gap-8 text-sm tracking-wider">
