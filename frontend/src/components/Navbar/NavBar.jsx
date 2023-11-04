@@ -24,7 +24,7 @@ const NavBar = () => {
                   href="/"
                   className="flex gap-1 font-bold text-gray-700 items-center "
                 >
-                  <PaperAirplaneIcon className="h-6 w-6 text-primary" />
+                  <PaperAirplaneIcon className="ml-4 lg:ml-0 h-6 w-6 text-primary" />
                   <span>JASHORE FOODIES</span>
                 </a>
               </div>
@@ -38,19 +38,19 @@ const NavBar = () => {
             </div>
             {/* secondary */}
             <div className="flex gap-6">
-              <div className="hidden lg:flex items-center gap-5">
-                <div className="hidden lg:flex items-center gap-2">
+              <div className="lg:flex items-center gap-5">
+                <div className="flex mt-6 lg:mt-0 items-center gap-2">
                   <MoonIcon className="h-6 w-6 " />
                   <SunIcon className="h-6 w-6" />
                 </div>
-                <div>
+                <div className="hidden lg:flex">
                   <button className="rounded-lg border-solid border-2 border-[#E94339] py-1 px-4 hover:bg-[#E94339] hover:text-white">
                     LOGIN
                   </button>
                 </div>
               </div>
               {/* Mobile navigation toggle */}
-              <div className="lg:hidden flex items-center">
+              <div className="lg:hidden flex items-center pr-4">
                 <button onClick={() => setToggleMenu(!toggleMenu)}>
                   <Bars3Icon className="h-6" />
                 </button>
@@ -60,24 +60,22 @@ const NavBar = () => {
         </div>
         {/* mobile navigation */}
         <div
-          className={`fixed z-40 w-40  bg-gray-100 overflow-hidden flex flex-col lg:hidden gap-12  origin-top duration-700  ${!toggleMenu ? "h-0" : "h-2/3"
-            }`}
+          className={`w-52 z-50 absolute overflow-hidden bg-red-100 flex flex-col lg:hidden gap-12  origin-top duration-700 rounded-br-xl ${
+            !toggleMenu ? "h-0" : "h-2/3"
+          }`}
         >
           <div className="px-8">
-            <div className="flex flex-col gap-8 font-bold tracking-wider">
-              <a href="#" className="border-l-4 border-gray-600">
-                Features
-              </a>
-              <a href="#">Pricing</a>
-              <a href="#">Download</a>
-              <a href="#">Classic</a>
-              <MoonIcon className="h-6 w-6 " />
-              <SunIcon className="h-6 w-6" />
+            <div className="flex flex-col gap-8 text-sm tracking-wider">
+              <a href="#">HOME</a>
+              <a href="#">RESTAURANTS</a>
+              <a href="#">FOOD ITEMS</a>
+              <a href="#">MY DASHBOARD</a>
               <button className="rounded-lg border-solid border-2 border-[#E94339] py-1 px-4 hover:bg-[#E94339] hover:text-white">
                 LOGIN
               </button>
             </div>
           </div>
+
         </div>
       </nav>
     </div>
