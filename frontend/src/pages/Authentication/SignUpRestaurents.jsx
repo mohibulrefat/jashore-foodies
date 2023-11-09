@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const SignUpRestaurents = () => {
+const SignUpRestaurants = () => {
   return (
     <div className="flex justify-center items-center">
       <div className="p-5 m-5 bg-red-100 rounded shadow-xl border border-[#E94339]">
@@ -99,4 +99,4 @@ const SignUpRestaurents = () => {
   );
 };
 
-export default SignUpRestaurents;
+export default SignUpRestaurants;

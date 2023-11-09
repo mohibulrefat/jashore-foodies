@@ -1,6 +1,6 @@
-const RestaurentsCard = ({ restu }) => {
+const RestaurantsCard = ({ restu }) => {
   const {
-    // restaurentId,
+    // restaurantId,
     name,
     // liscenceNo,
     address,
@@ -14,7 +14,7 @@ const RestaurentsCard = ({ restu }) => {
   return (
     <div className="card w-96 bg-base-100 shadow-xl border border-green-200">
       <figure>
-        <img className="min-w-full max-h-56" src={image} alt="Restaurent" />
+        <img className="min-w-full max-h-56" src={image} alt="Restaurant" />
       </figure>
       <div className="card-body">
         <h2 className="card-title">{name}</h2>
@@ -31,4 +31,4 @@ const RestaurentsCard = ({ restu }) => {
   );
 };
 
-export default RestaurentsCard;
+export default RestaurantsCard;

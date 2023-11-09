@@ -1,26 +1,26 @@
 import { useEffect, useState } from "react";
-import RestaurentsCard from "./RestaurentsCard";
+import RestaurantsCard from "./RestaurantsCard";
 
-const Restaurents = () => {
-  const [restarents, setRestaurents] = useState([]);
+const Restaurants = () => {
+  const [restarents, setRestaurants] = useState([]);
   useEffect(() => {
-    fetch("restaurents.json")
+    fetch("restaurants.json")
       .then((res) => res.json())
-      .then((data) => setRestaurents(data));
+      .then((data) => setRestaurants(data));
   }, []);
   return (
     <div className="max-w-7xl mx-auto">
       <h1>Resturents Tables</h1>
       <div className="grid grid-cols-3 gap-7">
         {restarents.map((restu) => (
-          <RestaurentsCard
-            key={restu.restaurentId}
+          <RestaurantsCard
+            key={restu.restaurantId}
             restu={restu}
-          ></RestaurentsCard>
+          ></RestaurantsCard>
         ))}
       </div>
     </div>
   );
 };
 
-export default Restaurents;
+export default Restaurants;

@@ -23,8 +23,9 @@ const NavBar = () => {
             {/* primary */}
             <div className="hidden lg:flex gap-8 text-lg">
               <NavLink to="/">Home</NavLink>
-              <NavLink to="allrestaurents">Restaurents</NavLink>
-              <NavLink to="allrestaurentsitems">All Items</NavLink>
+              <NavLink to="allrestaurants">Restaurants</NavLink>
+              <NavLink to="allrestaurantsitems">All Items</NavLink>
+              <NavLink to="offers">Offers</NavLink>
               <NavLink to="">My Dashboard</NavLink>
             </div>
           </div>
@@ -81,8 +82,8 @@ const NavBar = () => {
         <div className="px-8">
           <div className="flex flex-col gap-6 text-sm tracking-wider">
             <NavLink to="/">Home</NavLink>
-            <NavLink to="allrestaurents">Restaurents</NavLink>
-            <NavLink to="allrestaurentsitems">All Items</NavLink>
+            <NavLink to="allrestaurants">Restaurants</NavLink>
+            <NavLink to="allrestaurantsitems">All Items</NavLink>
             <NavLink to="">My Dashboard</NavLink>
             {!user && loading ? (
               <>

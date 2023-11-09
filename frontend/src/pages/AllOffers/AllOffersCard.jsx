@@ -4,9 +4,12 @@ import { BsCartCheck } from "react-icons/bs";
 import { TbCurrencyTaka } from "react-icons/tb";
 
 import "@smastrom/react-rating/style.css";
-const FoodCardRegular = () => {
+const AllOffersCard = () => {
   return (
-    <div className="p-5 bg-[#fff8ee] rounded shadow shadow-red-200">
+    <div className="p-5 bg-[#fff8ee] rounded shadow shadow-red-20 relative">
+      <p className="absolute right-1 top-1 rounded-full text-white py-1 px-2 bg-red-600">
+        25% Off
+      </p>
       <img
         className="rounded shadow-2xl shadow-red-200"
         src="https://natashaskitchen.com/wp-content/uploads/2023/06/Cheeseburger.jpg"
@@ -63,4 +66,4 @@ const FoodCardRegular = () => {
   );
 };
 
-export default FoodCardRegular;
+export default AllOffersCard;

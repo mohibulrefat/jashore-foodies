@@ -1,9 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../layout/Main";
-import AllRestaurentsItems from "../pages/AllRestaurrentsItems/AllRestaurentsItems";
 import SignIn from "../pages/Authentication/SignIn";
 import SignUp from "../pages/Authentication/SignUp";
 import Home from "../pages/Home/Home";
+import { AllOffers } from "../pages/AllOffers/AllOffers";
+import AllRestaurantsItems from "../pages/AllRestaurrentsItems/AllRestaurentsItems";
 
 const router = createBrowserRouter([
   {
@@ -23,9 +24,13 @@ const router = createBrowserRouter([
         element: <SignUp></SignUp>,
       },
       {
-        path: "allrestaurentsitems",
-        element: <AllRestaurentsItems></AllRestaurentsItems>,
+        path: "allrestaurantsitems",
+        element: <AllRestaurantsItems></AllRestaurantsItems>
       },
+      {
+        path: "offers",
+        element: <AllOffers></AllOffers>
+      }
     ],
   },
 ]);

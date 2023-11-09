@@ -1,5 +1,4 @@
 import NewItems from "../../components/NewItems/NewItems";
-import Offers from "../../components/Offers/Offers";
 import Trending from "../../components/Trending/Trending";
 import useSectionTitle from "../../hooks/useSectionTitle";
 
@@ -10,7 +9,7 @@ const Home = () => {
         "Bigg Offer",
         "For in this week, take your food, buy your best one"
       )}
-      <Offers></Offers>
+      <h1>Offers</h1>
 
       {useSectionTitle("New Items", "Discover our latest menu additions")}
       <NewItems></NewItems>
