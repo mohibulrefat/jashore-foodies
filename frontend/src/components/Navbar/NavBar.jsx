@@ -1,10 +1,12 @@
 import { Bars3Icon, MoonIcon, SunIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo.png";
+import { AuthContext } from "../../provider/AuthProvider";
 
 const NavBar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
+  const { user, loading } = useContext(AuthContext);
   return (
     <div className="bg-[#FFF8EE] py-4">
       <div className="w-full md:w-11/12 mx-auto">
@@ -19,32 +21,47 @@ const NavBar = () => {
               </span>
             </Link>
             {/* primary */}
-            <div className="hidden lg:flex gap-8">
-              <a href="#">HOME</a>
-              <a href="#">RESTAURANTS</a>
-              <a href="#">FOOD ITEMS</a>
-              <a href="#">MY DASHBOARD</a>
+            <div className="hidden lg:flex gap-8 text-lg">
+              <NavLink to="/">Home</NavLink>
+              <NavLink to="allrestaurents">Restaurents</NavLink>
+              <NavLink to="allrestaurentsitems">All Items</NavLink>
+              <NavLink to="">My Dashboard</NavLink>
             </div>
           </div>
           {/* secondary */}
           <div className="flex gap-6 items-center">
-            <div className="flex gap-5 items-center">
+            <div className="flex gap-2 items-center">
               <div className="flex items-center gap-2">
                 <MoonIcon className="h-6 w-6 " />
                 <SunIcon className="h-6 w-6" />
+                {
+                  <img
+                    className="w-9 h-9 rounded-full border-2 border-[#E94339]"
+                    src={user?.photoURL}
+                    alt=""
+                  />
+                }
               </div>
-              <div className="hidden lg:flex gap-2 font-poppins">
-                <Link to="/login">
-                  <button className="w-28 mx-auto rounded-lg border-solid border-2 border-[#E94339] py-1 px-4 hover:bg-[#E94339] hover:text-white text-gray-900">
-                    LOGIN
+              {!user && loading ? (
+                <div className="hidden lg:flex gap-2 font-poppins">
+                  <Link to="/signin">
+                    <button className="w-28 mx-auto rounded-lg border-solid border-2 border-[#E94339] py-1 px-4 hover:bg-[#E94339] hover:text-white text-gray-900">
+                      LOGIN
+                    </button>
+                  </Link>
+                  <Link to="/signup">
+                    <button className="w-28 mx-auto rounded-lg border-solid border-2 hover:border-[#E94339] hover:bg-white hover:text-gray-900 py-1 px-4 bg-[#E94339] text-white">
+                      SIGNUP
+                    </button>
+                  </Link>
+                </div>
+              ) : (
+                <div className="hidden lg:flex gap-2 font-poppins">
+                  <button className="w-20 mx-auto rounded-lg border-solid border-2 hover:border-[#E94339] hover:bg-white hover:text-gray-900 py-1 px-1 bg-[#E94339] text-white">
+                    LOGOUT
                   </button>
-                </Link>
-                <Link to="/signup">
-                  <button className="w-28 mx-auto rounded-lg border-solid border-2 hover:border-[#E94339] hover:bg-white hover:text-gray-900 py-1 px-4 bg-[#E94339] text-white">
-                    SIGNUP
-                  </button>
-                </Link>
-              </div>
+                </div>
+              )}
             </div>
             {/* Mobile navigation toggle */}
             <div className="lg:hidden flex items-center pr-4">
@@ -63,20 +80,30 @@ const NavBar = () => {
       >
         <div className="px-8">
           <div className="flex flex-col gap-6 text-sm tracking-wider">
-            <a href="#">HOME</a>
-            <a href="#">RESTAURANTS</a>
-            <a href="#">FOOD ITEMS</a>
-            <a href="#">MY DASHBOARD</a>
-            <Link to="/login">
-              <button className="w-28 mx-auto rounded-lg border-solid border-2 border-[#E94339] py-1 px-4 hover:bg-[#E94339] hover:text-white">
-                LOGIN
-              </button>
-            </Link>
-            <Link to="/signup">
-              <button className="w-28 mx-auto rounded-lg border-solid border-2 hover:border-[#E94339] py-1 px-4 bg-[#E94339] text-white">
-                SIGNUP
-              </button>
-            </Link>
+            <NavLink to="/">Home</NavLink>
+            <NavLink to="allrestaurents">Restaurents</NavLink>
+            <NavLink to="allrestaurentsitems">All Items</NavLink>
+            <NavLink to="">My Dashboard</NavLink>
+            {!user && loading ? (
+              <>
+                <Link to="/signin">
+                  <button className="w-28 mx-auto rounded-lg border-solid border-2 border-[#E94339] py-1 px-4 hover:bg-[#E94339] hover:text-white">
+                    LOGIN
+                  </button>
+                </Link>
+                <Link to="/signup">
+                  <button className="w-28 mx-auto rounded-lg border-solid border-2 hover:border-[#E94339] py-1 px-4 bg-[#E94339] text-white">
+                    SIGNUP
+                  </button>
+                </Link>
+              </>
+            ) : (
+              <>
+                <button className="w-20 mx-auto rounded-lg border-solid border-2 hover:border-[#E94339] hover:bg-white hover:text-gray-900 py-1 px-1 bg-[#E94339] text-white">
+                  LOGOUT
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>
