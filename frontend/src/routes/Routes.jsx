@@ -1,10 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
+import Dashboard from "../layout/Dashboard";
 import Main from "../layout/Main";
+import { AllOffers } from "../pages/AllOffers/AllOffers";
+import AllRestaurantsItems from "../pages/AllRestaurrentsItems/AllRestaurentsItems";
 import SignIn from "../pages/Authentication/SignIn";
 import SignUp from "../pages/Authentication/SignUp";
 import Home from "../pages/Home/Home";
-import { AllOffers } from "../pages/AllOffers/AllOffers";
-import AllRestaurantsItems from "../pages/AllRestaurrentsItems/AllRestaurentsItems";
+import AllRestaurents from "../pages/AllRestaurents/AllRestaurents";
+import Additems from "../pages/Temporary/Additems";
+import RestaurantRegister from "../pages/Temporary/RestaurantRegister";
 
 const router = createBrowserRouter([
   {
@@ -25,13 +29,29 @@ const router = createBrowserRouter([
       },
       {
         path: "allrestaurantsitems",
-        element: <AllRestaurantsItems></AllRestaurantsItems>
+        element: <AllRestaurantsItems></AllRestaurantsItems>,
       },
       {
         path: "offers",
-        element: <AllOffers></AllOffers>
+        element: <AllOffers></AllOffers>,
+      },
+      {
+        path: "allrestaurants",
+        element: <AllRestaurents></AllRestaurents>
+      },
+      {
+        path:"additems",
+        element: <Additems></Additems>
+      },
+      {
+        path:"restaturantregister",
+        element: <RestaurantRegister></RestaurantRegister>
       }
     ],
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard></Dashboard>,
   },
 ]);
 export default router;

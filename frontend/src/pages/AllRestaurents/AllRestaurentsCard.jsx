@@ -1,4 +1,4 @@
-const RestaurantsCard = ({ restu }) => {
+const AllRestaurentsCard = ({ restu }) => {
   const {
     // restaurantId,
     name,
@@ -31,4 +31,4 @@ const RestaurantsCard = ({ restu }) => {
   );
 };
 
-export default RestaurantsCard;
+export default AllRestaurentsCard;
