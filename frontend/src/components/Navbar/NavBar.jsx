@@ -84,14 +84,14 @@ const NavBar = () => {
                         <li>
                           <Link to="/signup">
                             <button className="w-28 mx-auto rounded-lg border-solid border-2 hover:border-[#E94339] hover:bg-white hover:text-gray-900 py-1 px-4 bg-[#E94339] text-white">
-                              SIGNUP
+                              Customer
                             </button>
                           </Link>
                         </li>
                         <li>
-                          <Link to="/signup">
+                          <Link to="/registerrestaurant">
                             <button className="w-28 mx-auto rounded-lg border-solid border-2 hover:border-[#E94339] hover:bg-white hover:text-gray-900 py-1 px-4 bg-[#E94339] text-white">
-                              SIGNUP
+                              Restaurant
                             </button>
                           </Link>
                         </li>

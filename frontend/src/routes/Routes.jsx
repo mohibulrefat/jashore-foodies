@@ -9,6 +9,8 @@ import Home from "../pages/Home/Home";
 import AllRestaurents from "../pages/AllRestaurents/AllRestaurents";
 import Additems from "../pages/Temporary/Additems";
 import RestaurantRegister from "../pages/Temporary/RestaurantRegister";
+import RegisterRestaurant from "../pages/Authentication/RegisterRestaurant";
+import RegisterDeliveryMan from "../pages/Authentication/RegisterDeliveryMan";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +28,14 @@ const router = createBrowserRouter([
       {
         path: "signup",
         element: <SignUp></SignUp>,
+      },
+      {
+        path: "registerrestaurant",
+        element: <RegisterRestaurant></RegisterRestaurant>
+      },
+      {
+        path: "registerdeliveryman",
+        element: <RegisterDeliveryMan></RegisterDeliveryMan>
       },
       {
         path: "allrestaurantsitems",

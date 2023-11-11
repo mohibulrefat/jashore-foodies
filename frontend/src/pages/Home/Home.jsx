@@ -1,15 +1,19 @@
 import NewItems from "../../components/NewItems/NewItems";
 import Trending from "../../components/Trending/Trending";
 import useSectionTitle from "../../hooks/useSectionTitle";
+import Banner from "./Banner/Banner";
+import BigOffer from "./BigOffer/BigOffer";
+import CustomerFeedback from "./CustomerFeedback/CustomerFeedback";
 
 const Home = () => {
   return (
     <div>
+      <Banner></Banner>
       {useSectionTitle(
         "Bigg Offer",
         "For in this week, take your food, buy your best one"
       )}
-      <h1>Offers</h1>
+      <BigOffer></BigOffer>
 
       {useSectionTitle("New Items", "Discover our latest menu additions")}
       <NewItems></NewItems>
@@ -22,6 +26,7 @@ const Home = () => {
         "Customer Feedback",
         "What our customers are saying about us"
       )}
+      <CustomerFeedback></CustomerFeedback>
     </div>
   );
 };
