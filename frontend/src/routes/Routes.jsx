@@ -7,10 +7,9 @@ import SignIn from "../pages/Authentication/SignIn";
 import SignUp from "../pages/Authentication/SignUp";
 import Home from "../pages/Home/Home";
 import AllRestaurents from "../pages/AllRestaurents/AllRestaurents";
-import Additems from "../pages/Temporary/Additems";
-import RestaurantRegister from "../pages/Temporary/RestaurantRegister";
 import RegisterRestaurant from "../pages/Authentication/RegisterRestaurant";
 import RegisterDeliveryMan from "../pages/Authentication/RegisterDeliveryMan";
+import Additems from "../Dashborad/Restaurant/AddItems";
 
 const router = createBrowserRouter([
   {
@@ -55,7 +54,7 @@ const router = createBrowserRouter([
       },
       {
         path:"restaturantregister",
-        element: <RestaurantRegister></RestaurantRegister>
+        element: <RegisterRestaurant></RegisterRestaurant>
       }
     ],
   },
