@@ -37,8 +37,6 @@ const NavBar = () => {
               <NavLink to="allrestaurantsitems">All Items</NavLink>
               <NavLink to="offers">Offers</NavLink>
               <NavLink to="/dashboard">My Dashboard</NavLink>
-              <NavLink to="/additems">add items</NavLink>
-              <NavLink to="/restaturantregister">restaturantregister</NavLink>
             </div>
           </div>
           {/* secondary */}

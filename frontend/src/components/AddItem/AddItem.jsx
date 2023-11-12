@@ -1,8 +1,8 @@
 const AddItem = () => {
-    return (
-        <div className=" p-24  ">
+  return (
+    <div className="w-full">
       <h1 className="text-2xl font-extrabold text-center">Add Food Item</h1>
-      <form className="m-6 bg-slate-100 rounded-xl shadow-lg  p-8  border border-[#E94339]" >
+      <form className="m-6 bg-slate-100 rounded-xl shadow-lg  p-8  border border-[#E94339]">
         {/* form-row-name-and-quantity */}
         <div className="md:flex ">
           <div className="form-control md:w-1/2">
@@ -61,7 +61,7 @@ const AddItem = () => {
             </label>
           </div>
         </div>
-     
+
         <div className="md:flex ">
           <div className="form-control md:w-1/2">
             <label className="label">
@@ -114,7 +114,7 @@ const AddItem = () => {
         />
       </form>
     </div>
-    );
+  );
 };
 
 export default AddItem;
