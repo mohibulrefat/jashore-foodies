@@ -11,6 +11,7 @@ const Banner = () => {
           The food at your doorstep. Why starve when you have us. You hunger
           partner. Straight out of the oven to your doorstep.{" "}
         </p>
+        <h2>This is banner section</h2>
       </div>
       <div>
         <img className="w-[450px] h-[412px]" src={banner} alt="" />
