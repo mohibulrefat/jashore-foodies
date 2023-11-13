@@ -2,11 +2,14 @@ import { Bars3Icon, MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo.png";
+// import useUserType from "../../hooks/useUserType";
 import { AuthContext } from "../../provider/AuthProvider";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+  // const { isCustomer, isAdmin, isRestaurant, isUserTypeLoading } =
+  //   useUserType();
+  //  console.log(isCustomer, isAdmin, isRestaurant, isUserTypeLoading)
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
@@ -33,9 +36,9 @@ const NavBar = () => {
             {/* primary */}
             <div className="hidden lg:flex gap-8 text-lg">
               <NavLink to="/">Home</NavLink>
-              <NavLink to="allrestaurants">Restaurants</NavLink>
-              <NavLink to="allrestaurantsitems">All Items</NavLink>
-              <NavLink to="offers">Offers</NavLink>
+              <NavLink to="/allrestaurants">Restaurants</NavLink>
+              <NavLink to="/allrestaurantsitems">All Items</NavLink>
+              <NavLink to="/offers">Offers</NavLink>
               <NavLink to="/dashboard">My Dashboard</NavLink>
             </div>
           </div>

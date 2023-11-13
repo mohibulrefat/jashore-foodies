@@ -14,6 +14,8 @@ import SignUp from "../pages/Authentication/SignUp";
 import Home from "../pages/Home/Home";
 import OrderRequest from "../Dashborad/Restaurant/OrderRequest/OrderRequest";
 import ReservationRequest from "../Dashborad/Restaurant/ReservationRequest/ReservationRequest";
+import VerifyRestaurant from "../Dashborad/Admin/VerifyRestauant/VerifyRestaurant";
+import AdminHome from "../Dashborad/Admin/Home/AdminHome";
 
 const router = createBrowserRouter([
   {
@@ -86,6 +88,15 @@ const router = createBrowserRouter([
       {
         path: "reservationrequest",
         element: <ReservationRequest></ReservationRequest>
+      },
+      // Admin route
+      {
+        path:"verifyrestaurants",
+        element: <VerifyRestaurant></VerifyRestaurant>
+      },
+      {
+        path:"",
+        element: <AdminHome></AdminHome>
       }
     ],
   },

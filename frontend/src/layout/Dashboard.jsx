@@ -4,10 +4,13 @@ import { GiFoodTruck, GiRoundTable, GiTabletopPlayers } from "react-icons/gi";
 import { NavLink, Outlet } from "react-router-dom";
 import Footer from "../Footer/Footer";
 import NavBar from "../components/Navbar/NavBar";
+import useUserType from "../hooks/useUserType";
+import HashLoader from "react-spinners/ClipLoader";
 const Dashboard = () => {
-  const isAdmin = false;
-  const isRestaurant = true;
-  const isCustomer = false;
+  const {isCustomer, isAdmin, isRestaurant, isUserTypeLoading} = useUserType();
+  if(isUserTypeLoading){
+    return <HashLoader color="#36d7b7" />
+  }
   return (
     <div>
       <NavBar></NavBar>
@@ -20,7 +23,7 @@ const Dashboard = () => {
                 <FaHome></FaHome>
                 <button>Home</button>
               </NavLink>
-              <NavLink className="border rounded-xl text-left flex items-center gap-1 px-3 py-2 border-[#E94339] hover:bg-[#E94339] text-[#E94339] hover:text-white">
+              <NavLink to="verifyrestaurants" className="border rounded-xl text-left flex items-center gap-1 px-3 py-2 border-[#E94339] hover:bg-[#E94339] text-[#E94339] hover:text-white">
                 <GiTabletopPlayers></GiTabletopPlayers>
                 <button>Verify restaurant</button>
               </NavLink>

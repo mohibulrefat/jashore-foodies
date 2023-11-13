@@ -1,11 +1,11 @@
 import { BsArrowRightCircle } from "react-icons/bs";
-import TrendingCard from "./TrendingCard";
-const Trending = () => {
+import NewItemsCard from "./NewItemsCard";
+const NewItems = () => {
   return (
     <div>
       <div className="mt-5 grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-11/12 mx-auto">
         {Array.from({ length: 4 }, (_, i) => (
-          <TrendingCard key={i}></TrendingCard>
+          <NewItemsCard key={i}></NewItemsCard>
         ))}
       </div>
       <div className="flex justify-end w-11/12 mx-auto">
@@ -17,4 +17,4 @@ const Trending = () => {
   );
 };
 
-export default Trending;
+export default NewItems;
