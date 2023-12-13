@@ -9,7 +9,7 @@ const VerifyRestaurant = () => {
       .then((response) => setRestaurants(response.data));
   }, []);
   return (
-    <div className="grid grid-cols-2 gap-3">
+    <div className="grid lg:grid-cols-2 gap-3">
       {restaurnts.map((restaurant) => (
         <VerifyRestaurantCard
           key={restaurant._id}
