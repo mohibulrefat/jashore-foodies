@@ -1,4 +1,12 @@
+import { useEffect } from "react";
+
 const AdminHome = () => {
+  // const [info, setInfo] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:3000/adminhomeinfo")
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  }, []);
   return (
     <div>
       <div className="grid grid-cols-4 gap-3 mt-10">
