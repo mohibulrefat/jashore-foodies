@@ -1,7 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
+import AdminHome from "../Dashborad/Admin/Home/AdminHome";
+import VerifyRestaurant from "../Dashborad/Admin/VerifyRestauant/VerifyRestaurant";
 import Additems from "../Dashborad/Restaurant/AddItems/AddItems";
 import AddTable from "../Dashborad/Restaurant/AddTable/AddTable";
+import AuthorityFeedback from "../Dashborad/Restaurant/Feedback/AuthorityFeedback";
 import RestaurantHome from "../Dashborad/Restaurant/Home/RestaurantHome";
+import OrderRequest from "../Dashborad/Restaurant/OrderRequest/OrderRequest";
+import ReservationRequest from "../Dashborad/Restaurant/ReservationRequest/ReservationRequest";
 import Dashboard from "../layout/Dashboard";
 import Main from "../layout/Main";
 import { AllOffers } from "../pages/AllOffers/AllOffers";
@@ -12,11 +17,6 @@ import RegisterRestaurant from "../pages/Authentication/RegisterRestaurant";
 import SignIn from "../pages/Authentication/SignIn";
 import SignUp from "../pages/Authentication/SignUp";
 import Home from "../pages/Home/Home";
-import OrderRequest from "../Dashborad/Restaurant/OrderRequest/OrderRequest";
-import ReservationRequest from "../Dashborad/Restaurant/ReservationRequest/ReservationRequest";
-import VerifyRestaurant from "../Dashborad/Admin/VerifyRestauant/VerifyRestaurant";
-import AdminHome from "../Dashborad/Admin/Home/AdminHome";
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -70,8 +70,12 @@ const router = createBrowserRouter([
     children: [
       // Restaurant routes
       {
-        path: "restauranthome",
+        path: "restaurant", //restaurant home
         element: <RestaurantHome></RestaurantHome>,
+      },
+      {
+        path: "authorityfeedback", //feedback from authority
+        element: <AuthorityFeedback></AuthorityFeedback>,
       },
       {
         path: "additem",
@@ -83,21 +87,21 @@ const router = createBrowserRouter([
       },
       {
         path: "orderrequest",
-        element: <OrderRequest></OrderRequest>
+        element: <OrderRequest></OrderRequest>,
       },
       {
         path: "reservationrequest",
-        element: <ReservationRequest></ReservationRequest>
+        element: <ReservationRequest></ReservationRequest>,
       },
       // Admin route
       {
-        path:"verifyrestaurants",
-        element: <VerifyRestaurant></VerifyRestaurant>
+        path: "verifyrestaurants",
+        element: <VerifyRestaurant></VerifyRestaurant>,
       },
       {
-        path:"",
-        element: <AdminHome></AdminHome>
-      }
+        path: "admin",
+        element: <AdminHome></AdminHome>,
+      },
     ],
   },
 ]);

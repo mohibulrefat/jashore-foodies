@@ -5,10 +5,13 @@ import { NavLink, Outlet } from "react-router-dom";
 import HashLoader from "react-spinners/ClipLoader";
 import Footer from "../Footer/Footer";
 import NavBar from "../components/Navbar/NavBar";
+import useRestaurantApproval from "../hooks/useRestaurantApproval";
 import useUserType from "../hooks/useUserType";
 const Dashboard = () => {
   const { isCustomer, isAdmin, isRestaurant, isUserTypeLoading } =
     useUserType();
+
+  const isRestaurantApprovad = useRestaurantApproval();
   if (isUserTypeLoading) {
     return <HashLoader color="#36d7b7" />;
   }
@@ -33,8 +36,8 @@ const Dashboard = () => {
               </NavLink>
             </>
           )}
-          {isRestaurant && (
-            <>
+          {isRestaurant && isRestaurantApprovad ? (
+            <div>
               <NavLink
                 to="restauranthome"
                 className="border rounded-xl text-left flex items-center gap-1 px-3 py-2 border-[#E94339] hover:bg-[#E94339] text-[#E94339] hover:text-white"
@@ -70,7 +73,17 @@ const Dashboard = () => {
                 <GiTabletopPlayers></GiTabletopPlayers>
                 <button>Reservation Request</button>
               </NavLink>
-            </>
+            </div>
+          ) : (
+            <div>
+              <NavLink
+                to="authorityfeedback"
+                className="border rounded-xl text-left flex items-center gap-1 px-3 py-2 border-[#E94339] hover:bg-[#E94339] text-[#E94339] hover:text-white"
+              >
+                <GiTabletopPlayers></GiTabletopPlayers>
+                <button>Authority Feedback</button>
+              </NavLink>
+            </div>
           )}
           {isCustomer && (
             <>
