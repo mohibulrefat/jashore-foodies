@@ -1,3 +1,4 @@
+import axios from "axios";
 import { BiTime } from "react-icons/bi";
 import { FaPhone } from "react-icons/fa";
 import { FaMapLocationDot } from "react-icons/fa6";
@@ -5,6 +6,7 @@ import { TfiEmail } from "react-icons/tfi";
 
 const VerifyRestaurantCard = ({ restaurant }) => {
   const {
+    _id,
     address,
     category,
     contact,
@@ -14,6 +16,20 @@ const VerifyRestaurantCard = ({ restaurant }) => {
     photo,
     restaurantname,
   } = restaurant;
+  const message = {
+    message:
+      "Congratulations on the approval! Your hard work paid off, and I'm thrilled for your well-deserved success. Looking forward to seeing more great things from you.",
+  };
+  const handleApproval = async (_id) => {
+    const result = await axios.post(
+      `http://localhost:3000/approverestaurant/${_id}`,
+      message
+    );
+    console.log(result);
+    if (result.data.acknowledged == true) {
+      alert("successfull");
+    }
+  };
   return (
     <div className="p-5 bg-[#fff8ee] rounded shadow shadow-red-20 border">
       <p className="rounded-full text-black py-1 px-5 ml-4 border-2 border-[#E94339] font-bold">
@@ -56,7 +72,10 @@ const VerifyRestaurantCard = ({ restaurant }) => {
         <button className="mx-auto rounded-full border-solid border-2 hover:bg-[#E94339] border-[#E94339] py-1 px-4 bg-white hover:text-white">
           See Details
         </button>
-        <button className="mx-auto rounded-full border-solid border-2 hover:bg-[#E94339] border-[#E94339] py-1 px-4 bg-white hover:text-white">
+        <button
+          onClick={() => handleApproval(_id)}
+          className="mx-auto rounded-full border-solid border-2 hover:bg-[#E94339] border-[#E94339] py-1 px-4 bg-white hover:text-white"
+        >
           Approve
         </button>
       </div>

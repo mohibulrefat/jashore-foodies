@@ -23,7 +23,10 @@ const Dashboard = () => {
           <h1 className="text-3xl font-semibold">DASHBOARD</h1>
           {isAdmin && (
             <>
-              <NavLink className="border rounded-xl text-left flex items-center gap-1 px-3 py-2 border-[#E94339] hover:bg-[#E94339] text-[#E94339] hover:text-white">
+              <NavLink
+                to="admin"
+                className="border rounded-xl text-left flex items-center gap-1 px-3 py-2 border-[#E94339] hover:bg-[#E94339] text-[#E94339] hover:text-white"
+              >
                 <FaHome></FaHome>
                 <button>Home</button>
               </NavLink>
@@ -36,10 +39,21 @@ const Dashboard = () => {
               </NavLink>
             </>
           )}
-          {isRestaurant && isRestaurantApprovad ? (
+          {isRestaurant && !isRestaurantApprovad && (
             <div>
               <NavLink
-                to="restauranthome"
+                to="authorityfeedback"
+                className="border rounded-xl text-left flex items-center gap-1 px-3 py-2 border-[#E94339] hover:bg-[#E94339] text-[#E94339] hover:text-white"
+              >
+                <GiTabletopPlayers></GiTabletopPlayers>
+                <button>Authority Feedback</button>
+              </NavLink>
+            </div>
+          )}
+          {isRestaurant && isRestaurantApprovad && (
+            <div>
+              <NavLink
+                to="restaurant"
                 className="border rounded-xl text-left flex items-center gap-1 px-3 py-2 border-[#E94339] hover:bg-[#E94339] text-[#E94339] hover:text-white"
               >
                 <FaHome></FaHome>
@@ -73,9 +87,6 @@ const Dashboard = () => {
                 <GiTabletopPlayers></GiTabletopPlayers>
                 <button>Reservation Request</button>
               </NavLink>
-            </div>
-          ) : (
-            <div>
               <NavLink
                 to="authorityfeedback"
                 className="border rounded-xl text-left flex items-center gap-1 px-3 py-2 border-[#E94339] hover:bg-[#E94339] text-[#E94339] hover:text-white"
