@@ -17,6 +17,7 @@ import RegisterRestaurant from "../pages/Authentication/RegisterRestaurant";
 import SignIn from "../pages/Authentication/SignIn";
 import SignUp from "../pages/Authentication/SignUp";
 import Home from "../pages/Home/Home";
+import ReserveTable from "../pages/ReserveTable/ReserveTable";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
       {
         path: "restaturantregister",
         element: <RegisterRestaurant></RegisterRestaurant>,
+      },
+      {
+        path: "reservetable",
+        element: <ReserveTable></ReserveTable>,
       },
     ],
   },

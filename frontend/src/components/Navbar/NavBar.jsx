@@ -35,8 +35,9 @@ const NavBar = () => {
             <div className="hidden lg:flex gap-8 text-lg">
               <NavLink to="/">Home</NavLink>
               <NavLink to="/allrestaurants">Restaurants</NavLink>
-              <NavLink to="/allrestaurantsitems">All Items</NavLink>
+              <NavLink to="/allrestaurantsitems">Items</NavLink>
               <NavLink to="/offers">Offers</NavLink>
+              <NavLink to="/reservetable">Reserve Table</NavLink>
               {isAdmin && <NavLink to="/dashboard/admin">My Dashboard</NavLink>}
               {isRestaurant && (
                 <NavLink to="/dashboard/restaurant">My Dashboard</NavLink>
