@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import AllRestaurentsCard from "./AllRestaurentsCard";
+import RestaurantsCard from "./RestaurantsCard";
 
-const AllRestaurents = () => {
+const Restaurants = () => {
   const [restarents, setRestaurants] = useState([]);
   useEffect(() => {
     fetch("restaurants.json")
@@ -13,14 +13,14 @@ const AllRestaurents = () => {
       <h1>Resturents</h1>
       <div className="grid grid-cols-3 gap-7">
         {restarents.map((restu) => (
-          <AllRestaurentsCard
+          <RestaurantsCard
             key={restu.restaurantId}
             restu={restu}
-          ></AllRestaurentsCard>
+          ></RestaurantsCard>
         ))}
       </div>
     </div>
   );
 };
 
-export default AllRestaurents;
+export default Restaurants;

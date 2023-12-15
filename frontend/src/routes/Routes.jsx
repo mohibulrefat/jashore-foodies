@@ -10,7 +10,6 @@ import ReservationRequest from "../Dashborad/Restaurant/ReservationRequest/Reser
 import Dashboard from "../layout/Dashboard";
 import Main from "../layout/Main";
 import { AllOffers } from "../pages/AllOffers/AllOffers";
-import AllRestaurents from "../pages/AllRestaurents/AllRestaurents";
 import AllRestaurantsItems from "../pages/AllRestaurrentsItems/AllRestaurentsItems";
 import RegisterDeliveryMan from "../pages/Authentication/RegisterDeliveryMan";
 import RegisterRestaurant from "../pages/Authentication/RegisterRestaurant";
@@ -18,6 +17,8 @@ import SignIn from "../pages/Authentication/SignIn";
 import SignUp from "../pages/Authentication/SignUp";
 import Home from "../pages/Home/Home";
 import ReserveTable from "../pages/ReserveTable/ReserveTable";
+import RestaurantDetails from "../pages/RestaurantDetails/RestaurantDetails";
+import Restaurants from "../pages/Restaurants/Restaurants";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -53,7 +54,7 @@ const router = createBrowserRouter([
       },
       {
         path: "allrestaurants",
-        element: <AllRestaurents></AllRestaurents>,
+        element: <Restaurants></Restaurants>
       },
       {
         path: "additems",
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
         path: "reservetable",
         element: <ReserveTable></ReserveTable>,
       },
+      {
+        path:"restaurantdetails/:restaurantId",
+        element: <RestaurantDetails></RestaurantDetails>
+      }
     ],
   },
   {

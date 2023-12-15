@@ -1,6 +1,7 @@
 import { BiDetail } from "react-icons/bi";
 import { MdOutlineTableBar } from "react-icons/md";
 import { TbCurrencyTaka } from "react-icons/tb";
+import { Link } from "react-router-dom";
 
 const ReserveTableCard = ({ table }) => {
   const {
@@ -13,6 +14,7 @@ const ReserveTableCard = ({ table }) => {
     shape,
     availability,
     restaurantName,
+    restaurantId,
   } = table;
   return (
     <div className="p-5 bg-[#fff8ee] rounded shadow shadow-red-200">
@@ -63,10 +65,13 @@ const ReserveTableCard = ({ table }) => {
       </div>
       <p className="py-2">{description}</p>
       <div className="h-10 flex justify-between items-center mt-2">
-        <button className=" flex items-center hover:border hover:border-[#E94339] p-1 rounded-full">
-          <BiDetail className="text-[#E94339]" size={20}></BiDetail>
-          <p>Restaurant Details</p>
-        </button>
+        {/* <Link to={`/restaurantdetails/${restaurantEmail}`}> */}
+        <Link to={`/restaurantdetails/${restaurantId}`}>
+          <button className=" flex items-center hover:border hover:border-[#E94339] p-1 rounded-full">
+            <BiDetail className="text-[#E94339]" size={20}></BiDetail>
+            <p>Restaurant Details</p>
+          </button>
+        </Link>
         <button className="flex items-center hover:border hover:border-[#E94339] p-1 rounded-full">
           <MdOutlineTableBar className="text-[#E94339]" size={20} />
           <p>Reserve Now</p>

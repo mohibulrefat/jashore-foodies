@@ -1,10 +1,16 @@
-import { useContext } from "react";
-import { AuthContext } from "../../../provider/AuthProvider";
 import axios from "axios";
+import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../../provider/AuthProvider";
 
 const AddTable = () => {
   const { user } = useContext(AuthContext);
+  const [resdetails, setResDetails] = useState(null);
+  useEffect(() => {
+    fetch(`http://localhost:3000/restaurantdetails/${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => setResDetails(data));
+  }, [user]);
   const handleAddTable = async (event) => {
     event.preventDefault();
     const form = event.target;
@@ -15,7 +21,6 @@ const AddTable = () => {
     const capacity = form.capacity.value;
     const description = form.description.value;
     const photo = form.photo.value;
-
     const newTable = {
       length,
       width,
@@ -27,6 +32,7 @@ const AddTable = () => {
       availability: false,
       restaurantName: user?.displayName,
       restaurantEmail: user?.email,
+      restaurantId: resdetails._id,
     };
     axios.post("http://localhost:3000/addtable", newTable).then((data) => {
       if (data.data.insertedId) {

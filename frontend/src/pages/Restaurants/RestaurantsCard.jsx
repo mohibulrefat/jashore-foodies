@@ -3,7 +3,7 @@ import { BiTime } from "react-icons/bi";
 import { FaPhone } from "react-icons/fa";
 import { FaMapLocationDot } from "react-icons/fa6";
 import { TfiEmail } from "react-icons/tfi";
-const AllRestaurentsCard = ({ restu }) => {
+const RestaurantsCard = ({ restu }) => {
   const {
     // restaurantId,
     name,
@@ -61,4 +61,4 @@ const AllRestaurentsCard = ({ restu }) => {
   );
 };
 
-export default AllRestaurentsCard;
+export default RestaurantsCard;
