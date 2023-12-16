@@ -9,6 +9,7 @@ const useUserType = () => {
     queryKey: ["data", user?.email],
     queryFn: async () => {
       const res = await axios.get(`http://localhost:3000/role/${user?.email}`);
+      console.log(res)
       return res?.data;
     },
   });

@@ -11,7 +11,6 @@ const NavBar = () => {
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
-
   const closeDropdown = () => {
     setIsOpen(false);
   };

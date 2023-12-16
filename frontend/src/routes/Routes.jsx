@@ -1,10 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 import AdminHome from "../Dashborad/Admin/Home/AdminHome";
 import VerifyRestaurant from "../Dashborad/Admin/VerifyRestauant/VerifyRestaurant";
+import CustomerHome from "../Dashborad/Customer/Home/CustomerHome";
 import Additems from "../Dashborad/Restaurant/AddItems/AddItems";
 import AddTable from "../Dashborad/Restaurant/AddTable/AddTable";
 import AuthorityFeedback from "../Dashborad/Restaurant/Feedback/AuthorityFeedback";
 import RestaurantHome from "../Dashborad/Restaurant/Home/RestaurantHome";
+import MyItems from "../Dashborad/Restaurant/MyItems/MyItems";
+import MyTables from "../Dashborad/Restaurant/MyTables/MyTables";
 import OrderRequest from "../Dashborad/Restaurant/OrderRequest/OrderRequest";
 import ReservationRequest from "../Dashborad/Restaurant/ReservationRequest/ReservationRequest";
 import Dashboard from "../layout/Dashboard";
@@ -54,7 +57,7 @@ const router = createBrowserRouter([
       },
       {
         path: "allrestaurants",
-        element: <Restaurants></Restaurants>
+        element: <Restaurants></Restaurants>,
       },
       {
         path: "additems",
@@ -69,15 +72,21 @@ const router = createBrowserRouter([
         element: <ReserveTable></ReserveTable>,
       },
       {
-        path:"restaurantdetails/:restaurantId",
-        element: <RestaurantDetails></RestaurantDetails>
-      }
+        path: "restaurantdetails/:restaurantId",
+        element: <RestaurantDetails></RestaurantDetails>,
+      },
     ],
   },
   {
     path: "/dashboard",
     element: <Dashboard></Dashboard>,
     children: [
+      // Customer Routes
+      {
+        path: "customer",
+        element: <CustomerHome></CustomerHome>,
+      },
+
       // Restaurant routes
       {
         path: "restaurant", //restaurant home
@@ -92,8 +101,16 @@ const router = createBrowserRouter([
         element: <Additems></Additems>,
       },
       {
+        path: "myitems",
+        element: <MyItems></MyItems>,
+      },
+      {
         path: "addtable",
         element: <AddTable></AddTable>,
+      },
+      {
+        path: "mytables",
+        element: <MyTables></MyTables>,
       },
       {
         path: "orderrequest",

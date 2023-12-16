@@ -36,6 +36,7 @@ const SignUp = () => {
                 name: data.name,
                 email: data.email,
                 photo: data.photo,
+                role: "customer"
               };
               fetch("http://localhost:3000/users", {
                 method: "POST",
@@ -46,6 +47,7 @@ const SignUp = () => {
               })
                 .then((res) => res.json())
                 .then((data) => {
+                  // console.log(data)
                   if (data.insertedId) {
                     reset();
                     Swal.fire({
