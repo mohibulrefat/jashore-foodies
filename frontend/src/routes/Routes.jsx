@@ -23,6 +23,8 @@ import ReserveTable from "../pages/ReserveTable/ReserveTable";
 import ReserveTableDetails from "../pages/ReserveTable/ReserveTableDetails";
 import RestaurantDetails from "../pages/RestaurantDetails/RestaurantDetails";
 import Restaurants from "../pages/Restaurants/Restaurants";
+import Successfull from "../pages/PaymentStatus/Successfull";
+import Failed from "../pages/PaymentStatus/Failed";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -80,6 +82,14 @@ const router = createBrowserRouter([
         path: "reservetabledetails/:tableId",
         element: <ReserveTableDetails></ReserveTableDetails>,
       },
+      {
+        path:"payment/success/:tranId",
+        element: <Successfull></Successfull>
+      },
+      {
+        path:"payment/failed/:tranId",
+        element: <Failed></Failed>
+      }
     ],
   },
   {

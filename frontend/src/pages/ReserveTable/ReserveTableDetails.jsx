@@ -46,17 +46,17 @@ const ReserveTableDetails = () => {
   }, [tableId, user, loading]);
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
-    // data.productId = book?._id;
-    // fetch("http://localhost:5000/order", {
-    //   method: "POST",
-    //   headers: {
-    //     "content-type": "application/json",
-    //   },
-    //   body: JSON.stringify(data),
-    // })
-    //   .then((res) => res.json())
-    //   .then((result) => window.location.replace(result.url));
+    data.table = table;
+    data.customer = customer;
+    fetch("http://localhost:3000/reservepayment", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((result) => window.location.replace(result.url));
   };
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 my-16 gap-5 w-11/12 mx-auto">
@@ -151,6 +151,9 @@ const ReserveTableDetails = () => {
         </div>
       </div>
       <div>
+        <h1>
+          You are going to pay TK {parseFloat(table?.price) * (0.5).toFixed(2)}
+        </h1>
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col gap-5 border p-3 rounded-lg"
@@ -162,7 +165,7 @@ const ReserveTableDetails = () => {
             defaultValue={customer?.name}
           />
           <select
-            {...register("curency")}
+            {...register("currency")}
             className="input input-bordered input-sm w-full max-w-md"
           >
             <option value="BDT">BDT</option>
@@ -187,7 +190,7 @@ const ReserveTableDetails = () => {
           />
 
           <input
-          disabled ={!agreed}
+            disabled={!agreed}
             type="submit"
             value="PAY"
             className="btn btn-outline btn-error text-white input input-bordered input-sm w-full max-w-md"
