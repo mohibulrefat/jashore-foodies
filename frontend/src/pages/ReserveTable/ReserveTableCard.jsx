@@ -4,7 +4,8 @@ import { TbCurrencyTaka } from "react-icons/tb";
 import { Link } from "react-router-dom";
 
 const ReserveTableCard = ({ table }) => {
-  const {
+  let {
+    _id,
     length,
     width,
     price,
@@ -39,7 +40,7 @@ const ReserveTableCard = ({ table }) => {
           </h1>
           <h4 className="flex items-center justify-end">
             <TbCurrencyTaka size={25}></TbCurrencyTaka>
-            <span>{parseFloat(price)}/Hour</span>
+            <span>{parseFloat(price).toFixed(2)}/Hour</span>
           </h4>
         </div>
       </div>
@@ -64,7 +65,7 @@ const ReserveTableCard = ({ table }) => {
         </p>
       </div>
       <p className="py-2">{description}</p>
-      <div className="h-10 flex justify-between items-center mt-2">
+      <div className="h-10 flex justify-between items-center ">
         {/* <Link to={`/restaurantdetails/${restaurantEmail}`}> */}
         <Link to={`/restaurantdetails/${restaurantId}`}>
           <button className=" flex items-center hover:border hover:border-[#E94339] p-1 rounded-full">
@@ -72,10 +73,12 @@ const ReserveTableCard = ({ table }) => {
             <p>Restaurant Details</p>
           </button>
         </Link>
-        <button className="flex items-center hover:border hover:border-[#E94339] p-1 rounded-full">
-          <MdOutlineTableBar className="text-[#E94339]" size={20} />
-          <p>Reserve Now</p>
-        </button>
+        <Link to={`/reservetabledetails/${_id}`}>
+          <button className="flex items-center hover:border hover:border-[#E94339] p-1 rounded-full">
+            <MdOutlineTableBar className="text-[#E94339]" size={20} />
+            <p>Reserve Now</p>
+          </button>
+        </Link>
       </div>
     </div>
   );

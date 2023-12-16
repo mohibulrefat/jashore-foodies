@@ -20,6 +20,7 @@ import SignIn from "../pages/Authentication/SignIn";
 import SignUp from "../pages/Authentication/SignUp";
 import Home from "../pages/Home/Home";
 import ReserveTable from "../pages/ReserveTable/ReserveTable";
+import ReserveTableDetails from "../pages/ReserveTable/ReserveTableDetails";
 import RestaurantDetails from "../pages/RestaurantDetails/RestaurantDetails";
 import Restaurants from "../pages/Restaurants/Restaurants";
 const router = createBrowserRouter([
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
       {
         path: "restaurantdetails/:restaurantId",
         element: <RestaurantDetails></RestaurantDetails>,
+      },
+      {
+        path: "reservetabledetails/:tableId",
+        element: <ReserveTableDetails></ReserveTableDetails>,
       },
     ],
   },
