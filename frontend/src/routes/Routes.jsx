@@ -11,7 +11,7 @@ import RestaurantHome from "../Dashborad/Restaurant/Home/RestaurantHome";
 import MyItems from "../Dashborad/Restaurant/MyItems/MyItems";
 import MyTables from "../Dashborad/Restaurant/MyTables/MyTables";
 import OrderRequest from "../Dashborad/Restaurant/OrderRequest/OrderRequest";
-import ReservationRequest from "../Dashborad/Restaurant/ReservationRequest/ReservationRequest";
+import TableReservation from "../Dashborad/Restaurant/TableReservation/TableReservation";
 import Dashboard from "../layout/Dashboard";
 import Main from "../layout/Main";
 import { AllOffers } from "../pages/AllOffers/AllOffers";
@@ -142,8 +142,8 @@ const router = createBrowserRouter([
         element: <OrderRequest></OrderRequest>,
       },
       {
-        path: "reservationrequest",
-        element: <ReservationRequest></ReservationRequest>,
+        path: "tablereservation",
+        element: <TableReservation></TableReservation>,
       },
       // Admin route
       {

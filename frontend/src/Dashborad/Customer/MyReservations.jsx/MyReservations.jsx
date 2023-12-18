@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../../provider/AuthProvider";
 import { Circles } from "react-loader-spinner";
+import { AuthContext } from "../../../provider/AuthProvider";
 
 const MyReservations = () => {
   const { user, loading } = useContext(AuthContext);
@@ -26,7 +26,8 @@ const MyReservations = () => {
           `http://localhost:3000/myreservations/${user?.email}`
         );
         const data = await reservationResponse.json();
-        setReserved(data);
+        setReserved(data.result1);
+        setReservedHistory(data.result2);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -34,8 +35,8 @@ const MyReservations = () => {
 
     fetchData();
   }, [user, loading]);
-  return <div>MyReservations {reserved.length}
-  Reservations history{}</div>;
+  return <div>Current Reservations {reserved.length} <br />
+    Reservations history {reservedHistory.length}</div>;
 };
 
 export default MyReservations;

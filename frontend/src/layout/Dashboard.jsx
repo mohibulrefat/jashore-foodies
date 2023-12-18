@@ -95,11 +95,17 @@ const Dashboard = () => {
                 <button>Order Request</button>
               </NavLink>
               <NavLink
-                to="reservationrequest"
+                to="tablereservation"
                 className="border rounded-xl text-left flex items-center gap-1 px-3 py-2 border-[#E94339] hover:bg-[#E94339] text-[#E94339] hover:text-white"
               >
                 <GiTabletopPlayers></GiTabletopPlayers>
-                <button>Reservation Request</button>
+                <button>Table Reservation</button>
+              </NavLink>
+              <NavLink
+                className="border rounded-xl text-left flex items-center gap-1 px-3 py-2 border-[#E94339] hover:bg-[#E94339] text-[#E94339] hover:text-white"
+              >
+                <GiTabletopPlayers></GiTabletopPlayers>
+                <button>Order History</button>
               </NavLink>
               <NavLink
                 to="authorityfeedback"
