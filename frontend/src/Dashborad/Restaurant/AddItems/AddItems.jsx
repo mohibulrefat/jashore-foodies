@@ -32,7 +32,7 @@ const Additems = () => {
 
     const newItem = {
       name,
-      price,
+      price: parseFloat(price),
       cusinetype,
       ingredients: { ing1, ing2, ing3 },
       description,
@@ -41,6 +41,9 @@ const Additems = () => {
       availability: false,
       restaurantName: user?.displayName,
       restaurantEmail: user?.email,
+      offer: 0.0,
+      rating: 0,
+      sold: 0,
     };
     axios.post("http://localhost:3000/additem", newItem).then((data) => {
       if (data.data.insertedId) {
@@ -78,9 +81,10 @@ const Additems = () => {
               <span className="label-text">Price in Taka</span>
             </label>
             <input
-              type="text"
+              type="number"
               name="price"
-              placeholder="Ex: 60"
+              step="0.01"
+              placeholder="Ex: 60.00"
               className="input input-bordered bg-gray-100 "
             />
           </div>

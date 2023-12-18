@@ -1,11 +1,15 @@
 import { Bars3Icon, MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 import { useContext, useState } from "react";
+import { FaCartArrowDown } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo.png";
+import useCart from "../../hooks/useCart";
 import useUserType from "../../hooks/useUserType";
 import { AuthContext } from "../../provider/AuthProvider";
 
 const NavBar = () => {
+  const [cart] = useCart();
+  console.log(cart);
   const [isOpen, setIsOpen] = useState(false);
   const { isCustomer, isAdmin, isRestaurant } = useUserType();
   const toggleDropdown = () => {
@@ -34,7 +38,7 @@ const NavBar = () => {
             <div className="hidden lg:flex gap-8 text-lg">
               <NavLink to="/">Home</NavLink>
               <NavLink to="/allrestaurants">Restaurants</NavLink>
-              <NavLink to="/allrestaurantsitems">Items</NavLink>
+              <NavLink to="/allitems">Items</NavLink>
               <NavLink to="/offers">Offers</NavLink>
               <NavLink to="/reservetable">Reserve Table</NavLink>
               {isAdmin && <NavLink to="/dashboard/admin">My Dashboard</NavLink>}
@@ -50,6 +54,16 @@ const NavBar = () => {
           <div className="flex gap-6 items-center">
             <div className="flex gap-2 items-center">
               <div className="flex items-center gap-2">
+                <Link to="/cart" className="relative">
+                  <button>
+                    <FaCartArrowDown className="h-6 w-6" />
+                    {cart.length > 0 && (
+                      <p className="rounded-full text-lg text-[#E94339] absolute -top-3 right-4 w-7 font-extrabold">
+                        {cart.length}
+                      </p>
+                    )}
+                  </button>
+                </Link>
                 <MoonIcon className="h-6 w-6 " />
                 <SunIcon className="h-6 w-6" />
                 {user && (

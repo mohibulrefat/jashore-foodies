@@ -15,12 +15,12 @@ import TableReservation from "../Dashborad/Restaurant/TableReservation/TableRese
 import Dashboard from "../layout/Dashboard";
 import Main from "../layout/Main";
 import { AllOffers } from "../pages/AllOffers/AllOffers";
-import AllRestaurantsItems from "../pages/AllRestaurrentsItems/AllRestaurentsItems";
 import RegisterDeliveryMan from "../pages/Authentication/RegisterDeliveryMan";
 import RegisterRestaurant from "../pages/Authentication/RegisterRestaurant";
 import SignIn from "../pages/Authentication/SignIn";
 import SignUp from "../pages/Authentication/SignUp";
 import Home from "../pages/Home/Home";
+import Items from "../pages/Items/Items";
 import Failed from "../pages/PaymentStatus/Failed";
 import Successfull from "../pages/PaymentStatus/Successfull";
 import ReserveTable from "../pages/ReserveTable/ReserveTable";
@@ -53,8 +53,8 @@ const router = createBrowserRouter([
         element: <RegisterDeliveryMan></RegisterDeliveryMan>,
       },
       {
-        path: "allrestaurantsitems",
-        element: <AllRestaurantsItems></AllRestaurantsItems>,
+        path: "allitems",
+        element: <Items></Items>,
       },
       {
         path: "offers",
