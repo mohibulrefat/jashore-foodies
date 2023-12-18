@@ -116,7 +116,7 @@ const Dashboard = () => {
                 <FaHome></FaHome>
                 <button>Home</button>
               </NavLink>
-              <NavLink className="border rounded-xl text-left flex items-center gap-1 px-3 py-2 border-[#E94339] hover:bg-[#E94339] text-[#E94339] hover:text-white">
+              <NavLink to="myreservations" className="border rounded-xl text-left flex items-center gap-1 px-3 py-2 border-[#E94339] hover:bg-[#E94339] text-[#E94339] hover:text-white">
                 <AiOutlineAppstoreAdd></AiOutlineAppstoreAdd>
                 <button>My Reservation</button>
               </NavLink>
@@ -124,7 +124,7 @@ const Dashboard = () => {
                 <GiRoundTable></GiRoundTable>
                 <button>My Orders</button>
               </NavLink>
-              <NavLink className="border rounded-xl text-left flex items-center gap-1 px-3 py-2 border-[#E94339] hover:bg-[#E94339] text-[#E94339] hover:text-white">
+              <NavLink to="paymenthistory" className="border rounded-xl text-left flex items-center gap-1 px-3 py-2 border-[#E94339] hover:bg-[#E94339] text-[#E94339] hover:text-white">
                 <GiFoodTruck></GiFoodTruck>
                 <button>Payment History</button>
               </NavLink>

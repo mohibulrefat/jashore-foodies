@@ -2,6 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import AdminHome from "../Dashborad/Admin/Home/AdminHome";
 import VerifyRestaurant from "../Dashborad/Admin/VerifyRestauant/VerifyRestaurant";
 import CustomerHome from "../Dashborad/Customer/Home/CustomerHome";
+import MyReservations from "../Dashborad/Customer/MyReservations.jsx/MyReservations";
+import PaymentHistory from "../Dashborad/Customer/PaymentHistory/PaymentHistory";
 import Additems from "../Dashborad/Restaurant/AddItems/AddItems";
 import AddTable from "../Dashborad/Restaurant/AddTable/AddTable";
 import AuthorityFeedback from "../Dashborad/Restaurant/Feedback/AuthorityFeedback";
@@ -19,12 +21,12 @@ import RegisterRestaurant from "../pages/Authentication/RegisterRestaurant";
 import SignIn from "../pages/Authentication/SignIn";
 import SignUp from "../pages/Authentication/SignUp";
 import Home from "../pages/Home/Home";
+import Failed from "../pages/PaymentStatus/Failed";
+import Successfull from "../pages/PaymentStatus/Successfull";
 import ReserveTable from "../pages/ReserveTable/ReserveTable";
 import ReserveTableDetails from "../pages/ReserveTable/ReserveTableDetails";
 import RestaurantDetails from "../pages/RestaurantDetails/RestaurantDetails";
 import Restaurants from "../pages/Restaurants/Restaurants";
-import Successfull from "../pages/PaymentStatus/Successfull";
-import Failed from "../pages/PaymentStatus/Failed";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -83,13 +85,13 @@ const router = createBrowserRouter([
         element: <ReserveTableDetails></ReserveTableDetails>,
       },
       {
-        path:"payment/success/:tranId",
-        element: <Successfull></Successfull>
+        path: "payment/success/:tranId",
+        element: <Successfull></Successfull>,
       },
       {
-        path:"payment/failed/:tranId",
-        element: <Failed></Failed>
-      }
+        path: "payment/failed/:tranId",
+        element: <Failed></Failed>,
+      },
     ],
   },
   {
@@ -100,6 +102,14 @@ const router = createBrowserRouter([
       {
         path: "customer",
         element: <CustomerHome></CustomerHome>,
+      },
+      {
+        path: "myreservations",
+        element: <MyReservations></MyReservations>,
+      },
+      {
+        path: "paymenthistory",
+        element: <PaymentHistory></PaymentHistory>,
       },
 
       // Restaurant routes
