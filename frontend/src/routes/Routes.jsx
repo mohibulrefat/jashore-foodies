@@ -2,6 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import AdminHome from "../Dashborad/Admin/Home/AdminHome";
 import VerifyRestaurant from "../Dashborad/Admin/VerifyRestauant/VerifyRestaurant";
 import CustomerHome from "../Dashborad/Customer/Home/CustomerHome";
+import MyCart from "../Dashborad/Customer/MyCart/MyCart";
+import OrderDetails from "../Dashborad/Customer/MyCart/OrderDetails";
 import MyReservations from "../Dashborad/Customer/MyReservations.jsx/MyReservations";
 import PaymentHistory from "../Dashborad/Customer/PaymentHistory/PaymentHistory";
 import Additems from "../Dashborad/Restaurant/AddItems/AddItems";
@@ -111,7 +113,14 @@ const router = createBrowserRouter([
         path: "paymenthistory",
         element: <PaymentHistory></PaymentHistory>,
       },
-
+      {
+        path: "mycart",
+        element: <MyCart></MyCart>,
+      },
+      {
+        path: "orderdetails",
+        element: <OrderDetails></OrderDetails>,
+      },
       // Restaurant routes
       {
         path: "restaurant", //restaurant home

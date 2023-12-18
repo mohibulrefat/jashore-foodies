@@ -7,6 +7,7 @@ import Footer from "../Footer/Footer";
 import NavBar from "../components/Navbar/NavBar";
 import useRestaurantApproval from "../hooks/useRestaurantApproval";
 import useUserType from "../hooks/useUserType";
+import { MdOutlineShoppingCart } from "react-icons/md";
 const Dashboard = () => {
   const { isCustomer, isAdmin, isRestaurant, isUserTypeLoading } =
     useUserType();
@@ -125,6 +126,10 @@ const Dashboard = () => {
               <NavLink to="myreservations" className="border rounded-xl text-left flex items-center gap-1 px-3 py-2 border-[#E94339] hover:bg-[#E94339] text-[#E94339] hover:text-white">
                 <AiOutlineAppstoreAdd></AiOutlineAppstoreAdd>
                 <button>My Reservation</button>
+              </NavLink>
+              <NavLink to="mycart" className="border rounded-xl text-left flex items-center gap-1 px-3 py-2 border-[#E94339] hover:bg-[#E94339] text-[#E94339] hover:text-white">
+              <MdOutlineShoppingCart />
+                <button>My Cart</button>
               </NavLink>
               <NavLink className="border rounded-xl text-left flex items-center gap-1 px-3 py-2 border-[#E94339] hover:bg-[#E94339] text-[#E94339] hover:text-white">
                 <GiRoundTable></GiRoundTable>

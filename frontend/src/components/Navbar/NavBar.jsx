@@ -9,7 +9,6 @@ import { AuthContext } from "../../provider/AuthProvider";
 
 const NavBar = () => {
   const [cart] = useCart();
-  console.log(cart);
   const [isOpen, setIsOpen] = useState(false);
   const { isCustomer, isAdmin, isRestaurant } = useUserType();
   const toggleDropdown = () => {
@@ -54,7 +53,7 @@ const NavBar = () => {
           <div className="flex gap-6 items-center">
             <div className="flex gap-2 items-center">
               <div className="flex items-center gap-2">
-                <Link to="/cart" className="relative">
+                <Link to="/dashboard/mycart" className="relative">
                   <button>
                     <FaCartArrowDown className="h-6 w-6" />
                     {cart.length > 0 && (
