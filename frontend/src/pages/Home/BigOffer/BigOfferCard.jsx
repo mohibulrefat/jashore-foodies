@@ -68,7 +68,7 @@ const BigOfferCard = ({ item }) => {
   };
   return (
     <div
-      className={`flex flex-col justify-between p-5 bg-[#fff8ee] rounded shadow shadow-red-200 relative`}
+      className={`flex flex-col justify-between p-5 bg-[#fff8ee] rounded shadow shadow-red-200 relative dark:bg-gray-900`}
     >
       {offer > 0 && (
         <p className="absolute right-1 top-1 rounded-full text-white py-1 px-2 bg-red-600">

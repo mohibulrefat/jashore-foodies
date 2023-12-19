@@ -17,7 +17,7 @@ const Dashboard = () => {
     return <HashLoader color="#36d7b7" />;
   }
   return (
-    <div>
+    <div className="dark:bg-gray-950">
       <NavBar></NavBar>
       <div className="w-11/12 mx-auto lg:flex min-h-screen">
         <div className=" lg:w-1/5 px-10 py-5 flex flex-col gap-3">

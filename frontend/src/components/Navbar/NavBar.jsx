@@ -1,13 +1,21 @@
 import { Bars3Icon, MoonIcon, SunIcon } from "@heroicons/react/24/outline";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaCartArrowDown } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import useCart from "../../hooks/useCart";
 import useUserType from "../../hooks/useUserType";
 import { AuthContext } from "../../provider/AuthProvider";
-
 const NavBar = () => {
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+  };
+  useEffect(() => {
+    document.documentElement.className = theme;
+  }, [theme]);
   const [cart] = useCart();
   const [isOpen, setIsOpen] = useState(false);
   const { isCustomer, isAdmin, isRestaurant } = useUserType();
@@ -21,7 +29,7 @@ const NavBar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const { user, logOut } = useContext(AuthContext);
   return (
-    <div className="bg-[#FFF8EE] py-4">
+    <div className="bg-[#FFF8EE] py-4 dark:text-gray-100 dark:bg-slate-900">
       <div className="w-full md:w-11/12 mx-auto">
         <div className="flex mx-auto justify-between w-full">
           {/* Primary menu and logo */}
@@ -29,7 +37,7 @@ const NavBar = () => {
             {/* logo */}
             <Link href="/" className="flex gap-1 text-gray-800 items-center ">
               <img src={logo} className="h-8 w-8 rounded-full" alt="" />
-              <span className="font-agbalumo text-2xl font-semibold">
+              <span className="font-agbalumo text-2xl font-semibold dark:text-white">
                 JASHORE FOODIES
               </span>
             </Link>
@@ -53,7 +61,7 @@ const NavBar = () => {
           <div className="flex gap-6 items-center">
             <div className="flex gap-2 items-center">
               <div className="flex items-center gap-2">
-                <Link to="/dashboard/mycart" className="relative">
+                <Link to="/dashboard/mycart" className="relative flex">
                   <button>
                     <FaCartArrowDown className="h-6 w-6" />
                     {cart.length > 0 && (
@@ -63,11 +71,19 @@ const NavBar = () => {
                     )}
                   </button>
                 </Link>
-                <MoonIcon className="h-6 w-6 " />
-                <SunIcon className="h-6 w-6" />
+                <button
+                  className="p-1 rounded bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-300"
+                  onClick={toggleTheme}
+                >
+                  {theme === "light" ? (
+                    <MoonIcon className="h-6 w-6 " />
+                  ) : (
+                    <SunIcon className="h-6 w-6" />
+                  )}
+                </button>
                 {user && (
                   <img
-                    className="w-9 h-9 rounded-full border-2 border-[#E94339]"
+                    className="w-9 h-9 rounded-full border-2 border-[#E94339] dark:border-white"
                     src={user?.photoURL}
                     alt=""
                   />
@@ -76,7 +92,7 @@ const NavBar = () => {
               {!user ? (
                 <div className="hidden lg:flex gap-2 font-poppins">
                   <Link to="/signin">
-                    <button className="w-28 mx-auto rounded-lg border-solid border-2 border-[#E94339] py-1 px-4 hover:bg-[#E94339] hover:text-white text-gray-900">
+                    <button className="w-28 mx-auto rounded-lg border-solid border-2 border-[#E94339] py-1 px-4 hover:bg-[#E94339] hover:text-white text-gray-900 dark:border-white dark:hover:border-[#E94339] dark:text-white dark:bg-transparent dark:hover:text-[#E94339]">
                       LOGIN
                     </button>
                   </Link>
@@ -89,7 +105,7 @@ const NavBar = () => {
                     className={`dropdown dropdown-left ${isOpen ? "open" : ""}`}
                   >
                     <button
-                      className="w-28 mx-auto rounded-lg border-solid border-2 hover:border-[#E94339] hover:bg-white hover:text-gray-900 py-1 px-4 bg-[#E94339] text-white"
+                      className="w-28 mx-auto rounded-lg border-solid border-2 hover:border-[#E94339] hover:bg-white hover:text-gray-900 py-1 px-4 bg-[#E94339] text-white dark:bg-transparent dark:hover:text-[#E94339]"
                       onClick={toggleDropdown}
                     >
                       SIGNUP
@@ -121,7 +137,7 @@ const NavBar = () => {
                 <div className="hidden lg:flex gap-2 font-poppins">
                   <button
                     onClick={logOut}
-                    className="w-20 mx-auto rounded-lg border-solid border-2 hover:border-[#E94339] hover:bg-white hover:text-gray-900 py-1 px-1 bg-[#E94339] text-white"
+                    className="w-20 mx-auto rounded-lg border-solid border-2 hover:border-[#E94339] hover:bg-white hover:text-gray-900 py-1 px-1 bg-[#E94339] dark:bg-gray-800 text-white"
                   >
                     LOGOUT
                   </button>
