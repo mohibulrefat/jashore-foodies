@@ -1,14 +1,17 @@
 import axios from "axios";
 import { useContext } from "react";
+import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../../provider/AuthProvider";
 const imgbb_token = import.meta.env.VITE_ImageBB_token;
-const Additems = () => {
+const UpdateItem = () => {
   const { user, loading } = useContext(AuthContext);
+  const { id } = useParams();
+  console.log(id);
   if (loading) {
     return;
   }
-  const handleAdd = async (event) => {
+  const handleUpdate = async (event) => {
     event.preventDefault();
     const form = new FormData(event.target);
     const name = form.get("name");
@@ -47,7 +50,7 @@ const Additems = () => {
             Swal.fire({
               position: "center",
               icon: "success",
-              title: "Item added successfully",
+              title: "Updated successfully",
               showConfirmButton: false,
               timer: 800,
             });
@@ -59,10 +62,10 @@ const Additems = () => {
     <div className="card flex-shrink-0 md:w-1/2 my-10 shadow-2xl bg-[#FFF8EE] mx-auto">
       <div className="card-body">
         <h1 className="text-3xl text-center font-bold text-red-600">
-          Add Item
+          Update Item
         </h1>
         <p className="text-red-600 text-center border border-[#E94339] rounded-lg font-semibold"></p>
-        <form onSubmit={handleAdd}>
+        <form onSubmit={handleUpdate}>
           <div className="form-control">
             <label className="label">
               <span className="label-text">Item Name</span>
@@ -148,13 +151,12 @@ const Additems = () => {
               name="image"
               placeholder="Photo"
               className="input-bordered bg-gray-100 p-2 border rounded"
-              required
             />
           </div>
           <div className="form-control mt-6 w-1/2 mx-auto">
             <input
               type="submit"
-              value="Add"
+              value="Update"
               className="btn bg-[#E94339] text-white hover:border hover:border-[#E94339] hover:text-[#E94339]"
             />
           </div>
@@ -164,4 +166,4 @@ const Additems = () => {
   );
 };
 
-export default Additems;
+export default UpdateItem;

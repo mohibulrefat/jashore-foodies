@@ -29,6 +29,7 @@ import ReserveTable from "../pages/ReserveTable/ReserveTable";
 import ReserveTableDetails from "../pages/ReserveTable/ReserveTableDetails";
 import RestaurantDetails from "../pages/RestaurantDetails/RestaurantDetails";
 import Restaurants from "../pages/Restaurants/Restaurants";
+import UpdateItem from "../Dashborad/Restaurant/UpdateItem/UpdateItem";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -137,6 +138,10 @@ const router = createBrowserRouter([
       {
         path: "myitems",
         element: <MyItems></MyItems>,
+      },
+      {
+        path: "updateitem/:id",
+        element: <UpdateItem></UpdateItem>
       },
       {
         path: "addtable",
