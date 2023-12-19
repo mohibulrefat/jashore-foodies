@@ -1,42 +1,30 @@
 import axios from "axios";
 import { useContext } from "react";
 import Swal from "sweetalert2";
-import { Circles } from  'react-loader-spinner'
 import { AuthContext } from "../../../provider/AuthProvider";
+const imgbb_token = import.meta.env.VITE_ImageBB_token;
 const Additems = () => {
   const { user, loading } = useContext(AuthContext);
   if (loading) {
-    return (
-      <Circles
-        height="80"
-        width="80"
-        color="#4fa94d"
-        ariaLabel="circles-loading"
-        wrapperStyle={{}}
-        wrapperClass=""
-        visible={true}
-      />
-    );
+    return;
   }
   const handleAdd = async (event) => {
     event.preventDefault();
-    const form = event.target;
-    const name = form.name.value;
-    const price = form.price.value;
-    const cusinetype = form.cusinetype.value;
-    const ing1 = form.ing1.value;
-    const ing2 = form.ing2.value;
-    const ing3 = form.ing3.value;
-    const description = form.description.value;
-    const photo = form.photo.value;
-
+    const form = new FormData(event.target);
+    const name = form.get("name");
+    const price = form.get("price");
+    const cusinetype = form.get("cusinetype");
+    const ing1 = form.get("ing1");
+    const ing2 = form.get("ing2");
+    const ing3 = form.get("ing3");
+    const description = form.get("description");
+    const image = form.get("image");
     const newItem = {
       name,
       price: parseFloat(price),
       cusinetype,
       ingredients: { ing1, ing2, ing3 },
       description,
-      photo,
       date: new Date(),
       availability: false,
       restaurantName: user?.displayName,
@@ -45,17 +33,27 @@ const Additems = () => {
       rating: 0,
       sold: 0,
     };
-    axios.post("http://localhost:3000/additem", newItem).then((data) => {
-      if (data.data.insertedId) {
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Item added successfully",
-          showConfirmButton: false,
-          timer: 800,
+    const formData = new FormData();
+    formData.append("image", image);
+    fetch(`https://api.imgbb.com/1/upload?key=${imgbb_token}`, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        newItem.photo = data.data.display_url;
+        axios.post("http://localhost:3000/additem", newItem).then((data) => {
+          if (data.data.insertedId) {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Item added successfully",
+              showConfirmButton: false,
+              timer: 800,
+            });
+          }
         });
-      }
-    });
+      });
   };
   return (
     <div className="card flex-shrink-0 md:w-1/2 my-10 shadow-2xl bg-[#FFF8EE] mx-auto">
@@ -146,9 +144,9 @@ const Additems = () => {
               <span className="label-text">Photo</span>
             </label>
             <input
-              type="text"
-              name="photo"
-              placeholder="Photo URL"
+              type="file"
+              name="image"
+              placeholder="Photo"
               className="input input-bordered bg-gray-100"
               required
             />

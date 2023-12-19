@@ -2,49 +2,72 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../../provider/AuthProvider";
-
+const imgbb_token = import.meta.env.VITE_ImageBB_token;
 const AddTable = () => {
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   const [resdetails, setResDetails] = useState(null);
   useEffect(() => {
-    fetch(`http://localhost:3000/restaurantdetails/${user?.email}`)
-      .then((res) => res.json())
-      .then((data) => setResDetails(data));
-  }, [user]);
+    const fetchData = async () => {
+      try {
+        if (loading) {
+          return;
+        }
+        const response = await fetch(
+          `http://localhost:3000/restaurantdetails/${user?.email}`
+        );
+        const data = await response.json();
+        setResDetails(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [user, loading]);
   const handleAddTable = async (event) => {
     event.preventDefault();
-    const form = event.target;
-    const length = form.length.value;
-    const width = form.width.value;
-    const price = form.price.value;
-    const shape = form.shape.value;
-    const capacity = form.capacity.value;
-    const description = form.description.value;
-    const photo = form.photo.value;
+    const form = new FormData(event.target);
+    const length = form.get("length");
+    const width = form.get("width");
+    const price = form.get("price");
+    const shape = form.get("shape");
+    const capacity = form.get("capacity");
+    const description = form.get("description");
+    const image = form.get("image");
     const newTable = {
       length,
       width,
       price,
       capacity,
       description,
-      photo,
       shape,
       availability: false,
       restaurantName: user?.displayName,
       restaurantEmail: user?.email,
       restaurantId: resdetails._id,
     };
-    axios.post("http://localhost:3000/addtable", newTable).then((data) => {
-      if (data.data.insertedId) {
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Table Added Successfully",
-          showConfirmButton: false,
-          timer: 800,
+    const formData = new FormData();
+    formData.append("image", image);
+    fetch(`https://api.imgbb.com/1/upload?key=${imgbb_token}`, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        newTable.photo = data.data.display_url;
+        axios.post("http://localhost:3000/addtable", newTable).then((data) => {
+          if (data.data.insertedId) {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Table Added Successfully",
+              showConfirmButton: false,
+              timer: 800,
+            });
+          }
         });
-      }
-    });
+        console.log(newTable);
+      });
   };
   return (
     <div className="card flex-shrink-0 md:w-1/2 my-10 shadow-2xl bg-[#FFF8EE] mx-auto">
@@ -140,9 +163,9 @@ const AddTable = () => {
               <span className="label-text">Photo</span>
             </label>
             <input
-              type="text"
-              name="photo"
-              placeholder="Photo URL"
+              type="file"
+              name="image"
+              placeholder="Photo"
               className="input input-bordered bg-gray-100"
               required
             />
