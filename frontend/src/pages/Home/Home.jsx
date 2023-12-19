@@ -1,8 +1,9 @@
-import NewItems from "./NewItems/NewItems";
 import useSectionTitle from "../../hooks/useSectionTitle";
 import Banner from "./Banner/Banner";
 import BigOffer from "./BigOffer/BigOffer";
 import CustomerFeedback from "./CustomerFeedback/CustomerFeedback";
+import NewItems from "./NewItems/NewItems";
+import ReserveTableHome from "./ReserveTableHome/ReserveTableHome";
 import Trending from "./Trending/Trending";
 
 const Home = () => {
@@ -19,8 +20,9 @@ const Home = () => {
       <NewItems></NewItems>
 
       {useSectionTitle("Trending", "What's hot and trending right now")}
-        <Trending></Trending>
+      <Trending></Trending>
       {useSectionTitle("Reserve a Table", "Book a table and dine with us")}
+      <ReserveTableHome></ReserveTableHome>
       {useSectionTitle(
         "Customer Feedback",
         "What our customers are saying about us"
