@@ -6,7 +6,7 @@ const MyTables = () => {
   const { user } = useContext(AuthContext);
   const [tables, setTables] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:3000/mytables/${user?.email}`)
+    fetch(`https://jashore-foodies-backend.vercel.app/mytables/${user?.email}`)
       .then((res) => res.json())
       .then((data) => setTables(data));
   }, [user]);

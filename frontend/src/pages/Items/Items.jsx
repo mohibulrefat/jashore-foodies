@@ -7,7 +7,9 @@ const Items = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/allitems`);
+        const response = await fetch(
+          `https://jashore-foodies-backend.vercel.app/allitems`
+        );
         const data = await response.json();
         // console.log(data);
         setAllitems(data);

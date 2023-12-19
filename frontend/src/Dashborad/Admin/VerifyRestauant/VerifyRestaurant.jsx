@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import VerifyRestaurantCard from "./VerifyRestaurantCard";
 const VerifyRestaurant = () => {
   const [restaurnts, setRestaurants] = useState([]);
-  const [fetchstate, setFetchstate] = useState(false)
+  const [fetchstate, setFetchstate] = useState(false);
   useEffect(() => {
     axios
-      .get("http://localhost:3000/pendingrestaurnt")
+      .get("https://jashore-foodies-backend.vercel.app/pendingrestaurnt")
       .then((response) => setRestaurants(response.data));
   }, [fetchstate]);
   return (
@@ -16,7 +16,7 @@ const VerifyRestaurant = () => {
           key={restaurant._id}
           restaurant={restaurant}
           fetchstate={fetchstate}
-          setFetchstate = {setFetchstate}
+          setFetchstate={setFetchstate}
         ></VerifyRestaurantCard>
       ))}
     </div>

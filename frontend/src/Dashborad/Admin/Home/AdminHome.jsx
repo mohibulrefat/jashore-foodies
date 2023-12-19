@@ -3,7 +3,7 @@ import { useEffect } from "react";
 const AdminHome = () => {
   // const [info, setInfo] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:3000/adminhomeinfo")
+    fetch("https://jashore-foodies-backend.vercel.app/adminhomeinfo")
       .then((res) => res.json())
       .then((data) => console.log(data));
   }, []);

@@ -1,10 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { TbCurrencyTaka } from "react-icons/tb";
-import { Circles } from "react-loader-spinner";
-import { useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 import { AuthContext } from "../../provider/AuthProvider";
 const ReserveTableDetails = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const { user, loading } = useContext(AuthContext);
   const { tableId } = useParams();
   const [table, setTable] = useState(null);
@@ -14,26 +16,16 @@ const ReserveTableDetails = () => {
     const fetchData = async () => {
       try {
         if (loading) {
-          return (
-            <Circles
-              height="80"
-              width="80"
-              color="#4fa94d"
-              ariaLabel="circles-loading"
-              wrapperStyle={{}}
-              wrapperClass=""
-              visible={true}
-            />
-          );
+          return;
         }
         const tableResponse = await fetch(
-          `http://localhost:3000/tabledetails/${tableId}`
+          `https://jashore-foodies-backend.vercel.app/tabledetails/${tableId}`
         );
         const tableData = await tableResponse.json();
         setTable(tableData);
 
         const customerResponse = await fetch(
-          `http://localhost:3000/customerdetails/${user?.email}`
+          `https://jashore-foodies-backend.vercel.app/customerdetails/${user?.email}`
         );
         const customerData = await customerResponse.json();
         setCustomer(customerData);
@@ -46,17 +38,32 @@ const ReserveTableDetails = () => {
   }, [tableId, user, loading]);
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
-    data.table = table;
-    data.customer = customer;
-    fetch("http://localhost:3000/reservepayment", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((result) => window.location.replace(result.url));
+    if (user) {
+      data.table = table;
+      data.customer = customer;
+      fetch("https://jashore-foodies-backend.vercel.app/reservepayment", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((res) => res.json())
+        .then((result) => window.location.replace(result.url));
+    } else {
+      Swal.fire({
+        title: "Please login to order the food",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Login now!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/signin", { state: { from: location } });
+        }
+      });
+    }
   };
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 my-16 gap-5 w-11/12 mx-auto">

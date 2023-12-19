@@ -8,7 +8,7 @@ const useRestaurantApproval = () => {
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get(
-        `http://localhost:3000/isrestaurantapproved/${user?.email}`
+        `https://jashore-foodies-backend.vercel.app/isrestaurantapproved/${user?.email}`
       );
       setIsRestaurantApprovad(result.data);
     };

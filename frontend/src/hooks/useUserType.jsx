@@ -8,7 +8,9 @@ const useUserType = () => {
     enabled: !loading && !!user?.email,
     queryKey: ["data", user?.email],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:3000/role/${user?.email}`);
+      const res = await axios.get(
+        `https://jashore-foodies-backend.vercel.app/role/${user?.email}`
+      );
       return res?.data;
     },
   });

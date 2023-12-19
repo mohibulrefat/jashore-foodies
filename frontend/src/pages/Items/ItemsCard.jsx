@@ -31,8 +31,8 @@ const ItemsCard = ({ item }) => {
         item,
         customerEmail: user.email,
       };
-      console.log(cartItem)
-      fetch("http://localhost:3000/carts", {
+      console.log(cartItem);
+      fetch("https://jashore-foodies-backend.vercel.app/carts", {
         method: "POST",
         headers: {
           "content-type": "application/json",

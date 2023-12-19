@@ -39,7 +39,7 @@ const VerifyRestaurantCard = ({ restaurant, fetchstate, setFetchstate }) => {
   };
   const handleApproval = async (_id) => {
     const result = await axios.post(
-      `http://localhost:3000/approverestaurant/${_id}`,
+      `https://jashore-foodies-backend.vercel.app/approverestaurant/${_id}`,
       message
     );
     console.log(result);

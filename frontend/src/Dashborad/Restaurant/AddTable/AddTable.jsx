@@ -13,7 +13,7 @@ const AddTable = () => {
           return;
         }
         const response = await fetch(
-          `http://localhost:3000/restaurantdetails/${user?.email}`
+          `https://jashore-foodies-backend.vercel.app/restaurantdetails/${user?.email}`
         );
         const data = await response.json();
         setResDetails(data);
@@ -55,17 +55,19 @@ const AddTable = () => {
       .then((res) => res.json())
       .then((data) => {
         newTable.photo = data.data.display_url;
-        axios.post("http://localhost:3000/addtable", newTable).then((data) => {
-          if (data.data.insertedId) {
-            Swal.fire({
-              position: "center",
-              icon: "success",
-              title: "Table Added Successfully",
-              showConfirmButton: false,
-              timer: 800,
-            });
-          }
-        });
+        axios
+          .post("https://jashore-foodies-backend.vercel.app/addtable", newTable)
+          .then((data) => {
+            if (data.data.insertedId) {
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Table Added Successfully",
+                showConfirmButton: false,
+                timer: 800,
+              });
+            }
+          });
         console.log(newTable);
       });
   };

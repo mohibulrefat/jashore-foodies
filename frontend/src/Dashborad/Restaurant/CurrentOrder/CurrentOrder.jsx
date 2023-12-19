@@ -1,12 +1,12 @@
+import axios from "axios";
 import moment from "moment";
 import { useContext, useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import useSectionTitle from "../../../hooks/useSectionTitle";
 import { AuthContext } from "../../../provider/AuthProvider";
-import axios from "axios";
-import Swal from "sweetalert2";
 
 const CurrentOrder = () => {
-    const [fetchstate, setfetchState] = useState(false);
+  const [fetchstate, setfetchState] = useState(false);
   const [orders, setOrders] = useState([]);
   const { user, loading } = useContext(AuthContext);
 
@@ -17,7 +17,7 @@ const CurrentOrder = () => {
           return;
         }
         const response = await fetch(
-          `http://localhost:3000/currentorders/${user?.email}`
+          `https://jashore-foodies-backend.vercel.app/currentorders/${user?.email}`
         );
         const data = await response.json();
         setOrders(data);
@@ -29,34 +29,34 @@ const CurrentOrder = () => {
     fetchData();
   }, [user, loading, fetchstate]);
   const handleDelivered = async (id) => {
-        const response = await axios.delete(
-          `http://localhost:3000/deliveredorder/${id}`
-        );
-        if(response.data.acknowledged){
-            setfetchState(!fetchstate)
-            Swal.fire({
-              position: 'center',
-              icon: 'success',
-              title: 'Delevery Status Updated.',
-              showConfirmButton: false,
-              timer: 700
-          });
-          }
+    const response = await axios.delete(
+      `https://jashore-foodies-backend.vercel.app/deliveredorder/${id}`
+    );
+    if (response.data.acknowledged) {
+      setfetchState(!fetchstate);
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Delevery Status Updated.",
+        showConfirmButton: false,
+        timer: 700,
+      });
+    }
   };
   const handleCancel = async (id) => {
-        const response = await axios.delete(
-          `http://localhost:3000/cancelorder/${id}`
-        );
-        if(response.data.acknowledged){
-            setfetchState(!fetchstate)
-            Swal.fire({
-              position: 'center',
-              icon: 'error',
-              title: 'Order Cancelled.',
-              showConfirmButton: false,
-              timer: 700
-          });
-          }
+    const response = await axios.delete(
+      `https://jashore-foodies-backend.vercel.app/cancelorder/${id}`
+    );
+    if (response.data.acknowledged) {
+      setfetchState(!fetchstate);
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Order Cancelled.",
+        showConfirmButton: false,
+        timer: 700,
+      });
+    }
   };
   return (
     <div>
@@ -106,10 +106,16 @@ const CurrentOrder = () => {
                   <td>{order.customerContact}</td>
                   <td>{order.instruction}</td>
                   <td className="flex gap-1 justify-center tables-center">
-                    <button onClick={()=>handleDelivered(order._id)} className="btn bg-green-500 btn-ghost btn-xs text-white">
+                    <button
+                      onClick={() => handleDelivered(order._id)}
+                      className="btn bg-green-500 btn-ghost btn-xs text-white"
+                    >
                       Delivered
                     </button>
-                    <button onClick={()=>handleCancel(order._id)} className="btn bg-red-500 btn-ghost btn-xs text-white">
+                    <button
+                      onClick={() => handleCancel(order._id)}
+                      className="btn bg-red-500 btn-ghost btn-xs text-white"
+                    >
                       Cancel
                     </button>
                   </td>

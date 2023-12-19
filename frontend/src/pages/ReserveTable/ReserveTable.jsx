@@ -5,7 +5,7 @@ import ReserveTableCard from "./ReserveTableCard";
 const ReserveTable = () => {
   const [tables, setTables] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:3000/tablereservation")
+    fetch("https://jashore-foodies-backend.vercel.app/tablereservation")
       .then((res) => res.json())
       .then((data) => setTables(data));
   }, []);

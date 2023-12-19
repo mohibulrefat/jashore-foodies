@@ -28,7 +28,7 @@ const MyCartCard = ({ item }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/carts/${item._id}`, {
+        fetch(`https://jashore-foodies-backend.vercel.app/carts/${item._id}`, {
           method: "DELETE",
           headers: {
             "content-type": "application/json",

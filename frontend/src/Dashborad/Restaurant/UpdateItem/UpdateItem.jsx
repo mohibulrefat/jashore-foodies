@@ -45,17 +45,19 @@ const UpdateItem = () => {
       .then((res) => res.json())
       .then((data) => {
         newItem.photo = data.data.display_url;
-        axios.post("http://localhost:3000/additem", newItem).then((data) => {
-          if (data.data.insertedId) {
-            Swal.fire({
-              position: "center",
-              icon: "success",
-              title: "Updated successfully",
-              showConfirmButton: false,
-              timer: 800,
-            });
-          }
-        });
+        axios
+          .post("https://jashore-foodies-backend.vercel.app/additem", newItem)
+          .then((data) => {
+            if (data.data.insertedId) {
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Updated successfully",
+                showConfirmButton: false,
+                timer: 800,
+              });
+            }
+          });
       });
   };
   return (
