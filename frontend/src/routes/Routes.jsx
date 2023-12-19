@@ -3,7 +3,8 @@ import AdminHome from "../Dashborad/Admin/Home/AdminHome";
 import VerifyRestaurant from "../Dashborad/Admin/VerifyRestauant/VerifyRestaurant";
 import CustomerHome from "../Dashborad/Customer/Home/CustomerHome";
 import MyCart from "../Dashborad/Customer/MyCart/MyCart";
-import MyReservations from "../Dashborad/Customer/MyReservations.jsx/MyReservations";
+import MyOrders from "../Dashborad/Customer/MyOrders/MyOrders";
+import MyReservations from "../Dashborad/Customer/MyReservations/MyReservations";
 import PaymentHistory from "../Dashborad/Customer/PaymentHistory/PaymentHistory";
 import Additems from "../Dashborad/Restaurant/AddItems/AddItems";
 import AddTable from "../Dashborad/Restaurant/AddTable/AddTable";
@@ -115,6 +116,10 @@ const router = createBrowserRouter([
       {
         path: "mycart",
         element: <MyCart></MyCart>,
+      },
+      {
+        path: "myorders",
+        element: <MyOrders></MyOrders>,
       },
       // Restaurant routes
       {

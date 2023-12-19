@@ -1,13 +1,13 @@
 import { AiOutlineAppstoreAdd } from "react-icons/ai";
 import { FaHome } from "react-icons/fa";
 import { GiFoodTruck, GiRoundTable, GiTabletopPlayers } from "react-icons/gi";
+import { MdOutlineShoppingCart } from "react-icons/md";
 import { NavLink, Outlet } from "react-router-dom";
 import HashLoader from "react-spinners/ClipLoader";
 import Footer from "../Footer/Footer";
 import NavBar from "../components/Navbar/NavBar";
 import useRestaurantApproval from "../hooks/useRestaurantApproval";
 import useUserType from "../hooks/useUserType";
-import { MdOutlineShoppingCart } from "react-icons/md";
 const Dashboard = () => {
   const { isCustomer, isAdmin, isRestaurant, isUserTypeLoading } =
     useUserType();
@@ -102,9 +102,7 @@ const Dashboard = () => {
                 <GiTabletopPlayers></GiTabletopPlayers>
                 <button>Table Reservation</button>
               </NavLink>
-              <NavLink
-                className="border rounded-xl text-left flex items-center gap-1 px-3 py-2 border-[#E94339] hover:bg-[#E94339] text-[#E94339] hover:text-white"
-              >
+              <NavLink className="border rounded-xl text-left flex items-center gap-1 px-3 py-2 border-[#E94339] hover:bg-[#E94339] text-[#E94339] hover:text-white">
                 <GiTabletopPlayers></GiTabletopPlayers>
                 <button>Order History</button>
               </NavLink>
@@ -119,29 +117,40 @@ const Dashboard = () => {
           )}
           {isCustomer && (
             <div className="space-y-1">
-              <NavLink className="border rounded-xl text-left flex items-center gap-1 px-3 py-2 border-[#E94339] hover:bg-[#E94339] text-[#E94339] hover:text-white">
+              <NavLink
+                to="customer"
+                className="border rounded-xl text-left flex items-center gap-1 px-3 py-2 border-[#E94339] hover:bg-[#E94339] text-[#E94339] hover:text-white"
+              >
                 <FaHome></FaHome>
                 <button>Home</button>
               </NavLink>
-              <NavLink to="myreservations" className="border rounded-xl text-left flex items-center gap-1 px-3 py-2 border-[#E94339] hover:bg-[#E94339] text-[#E94339] hover:text-white">
+              <NavLink
+                to="myreservations"
+                className="border rounded-xl text-left flex items-center gap-1 px-3 py-2 border-[#E94339] hover:bg-[#E94339] text-[#E94339] hover:text-white"
+              >
                 <AiOutlineAppstoreAdd></AiOutlineAppstoreAdd>
                 <button>My Reservation</button>
               </NavLink>
-              <NavLink to="mycart" className="border rounded-xl text-left flex items-center gap-1 px-3 py-2 border-[#E94339] hover:bg-[#E94339] text-[#E94339] hover:text-white">
-              <MdOutlineShoppingCart />
+              <NavLink
+                to="mycart"
+                className="border rounded-xl text-left flex items-center gap-1 px-3 py-2 border-[#E94339] hover:bg-[#E94339] text-[#E94339] hover:text-white"
+              >
+                <MdOutlineShoppingCart />
                 <button>My Cart</button>
               </NavLink>
-              <NavLink className="border rounded-xl text-left flex items-center gap-1 px-3 py-2 border-[#E94339] hover:bg-[#E94339] text-[#E94339] hover:text-white">
+              <NavLink
+                to="myorders"
+                className="border rounded-xl text-left flex items-center gap-1 px-3 py-2 border-[#E94339] hover:bg-[#E94339] text-[#E94339] hover:text-white"
+              >
                 <GiRoundTable></GiRoundTable>
                 <button>My Orders</button>
               </NavLink>
-              <NavLink to="paymenthistory" className="border rounded-xl text-left flex items-center gap-1 px-3 py-2 border-[#E94339] hover:bg-[#E94339] text-[#E94339] hover:text-white">
+              <NavLink
+                to="paymenthistory"
+                className="border rounded-xl text-left flex items-center gap-1 px-3 py-2 border-[#E94339] hover:bg-[#E94339] text-[#E94339] hover:text-white"
+              >
                 <GiFoodTruck></GiFoodTruck>
                 <button>Payment History</button>
-              </NavLink>
-              <NavLink className="border rounded-xl text-left flex items-center gap-1 px-3 py-2 border-[#E94339] hover:bg-[#E94339] text-[#E94339] hover:text-white">
-                <GiTabletopPlayers></GiTabletopPlayers>
-                <button>Favourites</button>
               </NavLink>
             </div>
           )}
