@@ -96,13 +96,13 @@ const Dashboard = () => {
                 <button>Table Reservation</button>
               </NavLink>
               <NavLink
-                to="orderrequest"
+                to="restaurantcurrentorder"
                 className="border rounded-xl text-left flex items-center gap-1 px-3 py-2 border-[#E94339] hover:bg-[#E94339] text-[#E94339] hover:text-white"
               >
                 <GiFoodTruck></GiFoodTruck>
-                <button>Order Request</button>
+                <button>Current Order</button>
               </NavLink>
-              <NavLink className="border rounded-xl text-left flex items-center gap-1 px-3 py-2 border-[#E94339] hover:bg-[#E94339] text-[#E94339] hover:text-white">
+              <NavLink to="restaurnatorderhistory" className="border rounded-xl text-left flex items-center gap-1 px-3 py-2 border-[#E94339] hover:bg-[#E94339] text-[#E94339] hover:text-white">
                 <GiTabletopPlayers></GiTabletopPlayers>
                 <button>Order History</button>
               </NavLink>

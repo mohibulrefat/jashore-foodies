@@ -46,6 +46,21 @@ const MyItems = () => {
       }
     }
   };
+  const handleAvailable = async (id) => {
+    const response = await axios.patch(
+      `http://localhost:3000/updateitemavailable/${id}`
+    );
+    if(response.data.acknowledged){
+      setfetchState(!fetchstate)
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Update Successful.',
+        showConfirmButton: false,
+        timer: 700
+    });
+    }
+  };
   return (
     <div className="px-5 border-l-2 ml-5 mt-2">
       {useSectionTitle("Your Items", "All the items you are selling")}
@@ -75,9 +90,12 @@ const MyItems = () => {
                 <td>{item.availability ? "Available" : "Not Available"}</td>
                 <td>{item.offer}</td>
                 <td className="flex gap-1 justify-center items-center">
-                  <button className="btn bg-green-500 btn-ghost btn-xs text-white">
-                    Change Available
-                  </button>
+                  <input
+                    onClick={() => handleAvailable(item._id)}
+                    type="checkbox"
+                    className="toggle toggle-success"
+                    defaultChecked={item.availability}
+                  />
                   <Link to={`/dashboard/updateitem/${item._id}`}>
                     <button className="btn bg-gray-600 btn-ghost btn-xs text-white">
                       Update

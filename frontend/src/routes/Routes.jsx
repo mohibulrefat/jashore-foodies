@@ -8,12 +8,13 @@ import MyReservations from "../Dashborad/Customer/MyReservations/MyReservations"
 import PaymentHistory from "../Dashborad/Customer/PaymentHistory/PaymentHistory";
 import Additems from "../Dashborad/Restaurant/AddItems/AddItems";
 import AddTable from "../Dashborad/Restaurant/AddTable/AddTable";
+import CurrentOrder from "../Dashborad/Restaurant/CurrentOrder/CurrentOrder";
 import AuthorityFeedback from "../Dashborad/Restaurant/Feedback/AuthorityFeedback";
 import RestaurantHome from "../Dashborad/Restaurant/Home/RestaurantHome";
 import MyItems from "../Dashborad/Restaurant/MyItems/MyItems";
 import MyTables from "../Dashborad/Restaurant/MyTables/MyTables";
-import OrderRequest from "../Dashborad/Restaurant/OrderRequest/OrderRequest";
 import TableReservation from "../Dashborad/Restaurant/TableReservation/TableReservation";
+import UpdateItem from "../Dashborad/Restaurant/UpdateItem/UpdateItem";
 import Dashboard from "../layout/Dashboard";
 import Main from "../layout/Main";
 import { AllOffers } from "../pages/AllOffers/AllOffers";
@@ -29,7 +30,7 @@ import ReserveTable from "../pages/ReserveTable/ReserveTable";
 import ReserveTableDetails from "../pages/ReserveTable/ReserveTableDetails";
 import RestaurantDetails from "../pages/RestaurantDetails/RestaurantDetails";
 import Restaurants from "../pages/Restaurants/Restaurants";
-import UpdateItem from "../Dashborad/Restaurant/UpdateItem/UpdateItem";
+import OrderHistory from "../Dashborad/Restaurant/OrderHistory/OrderHistory";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -141,7 +142,7 @@ const router = createBrowserRouter([
       },
       {
         path: "updateitem/:id",
-        element: <UpdateItem></UpdateItem>
+        element: <UpdateItem></UpdateItem>,
       },
       {
         path: "addtable",
@@ -152,8 +153,12 @@ const router = createBrowserRouter([
         element: <MyTables></MyTables>,
       },
       {
-        path: "orderrequest",
-        element: <OrderRequest></OrderRequest>,
+        path: "restaurantcurrentorder",
+        element: <CurrentOrder></CurrentOrder>,
+      },
+      {
+        path: "restaurnatorderhistory",
+        element: <OrderHistory></OrderHistory>
       },
       {
         path: "tablereservation",
