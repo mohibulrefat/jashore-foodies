@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import img from "../../assets/login.svg";
 import { AuthContext } from "../../provider/AuthProvider";
 import Social from "./Social";
-
+const imgbb_token = import.meta.env.VITE_ImageBB_token;
 const SignUp = () => {
   const { createUser, updateUserProfile, logOut } = useContext(AuthContext);
   const {
@@ -27,49 +27,58 @@ const SignUp = () => {
         timer: 700,
       });
     } else {
-      createUser(data.email, data.password)
-        .then((result) => {
-          updateUserProfile(result.user, data.name, data.photo);
-          logOut()
-            .then(() => {
-              const saveUser = {
-                name: data.name,
-                email: data.email,
-                photo: data.photo,
-                role: "customer"
-              };
-              fetch("http://localhost:3000/users", {
-                method: "POST",
-                headers: {
-                  "content-type": "application/json",
-                },
-                body: JSON.stringify(saveUser),
-              })
-                .then((res) => res.json())
-                .then((data) => {
-                  // console.log(data)
-                  if (data.insertedId) {
-                    reset();
-                    Swal.fire({
-                      position: "center",
-                      icon: "success",
-                      title: "Signup Successful.",
-                      showConfirmButton: false,
-                      timer: 700,
-                    });
-                    navigate("/signin");
-                  }
+      const formData = new FormData();
+      formData.append("image", data.image[0]);
+      fetch(`https://api.imgbb.com/1/upload?key=${imgbb_token}`, {
+        method: "POST",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          createUser(data.email, data.password)
+            .then((result) => {
+              updateUserProfile(result.user, data.name, res.data.display_url);
+              logOut()
+                .then(() => {
+                  const saveUser = {
+                    name: data.name,
+                    email: data.email,
+                    photo: res.data.display_url,
+                    role: "customer",
+                  };
+                  fetch("http://localhost:3000/users", {
+                    method: "POST",
+                    headers: {
+                      "content-type": "application/json",
+                    },
+                    body: JSON.stringify(saveUser),
+                  })
+                    .then((res) => res.json())
+                    .then((data) => {
+                      // console.log(data)
+                      if (data.insertedId) {
+                        reset();
+                        Swal.fire({
+                          position: "center",
+                          icon: "success",
+                          title: "Signup Successful.",
+                          showConfirmButton: false,
+                          timer: 700,
+                        });
+                        navigate("/signin");
+                      }
+                    })
+                    .catch((error) => console.log(error));
                 })
                 .catch((error) => console.log(error));
             })
-            .catch((error) => console.log(error));
-        })
-        .catch((error) => {
-          if (error.message.includes("email-already-in-use")) {
-            setErrormsg("Already Registered");
-          } else {
-            setErrormsg(error.message);
-          }
+            .catch((error) => {
+              if (error.message.includes("email-already-in-use")) {
+                setErrormsg("Already Registered");
+              } else {
+                setErrormsg(error.message);
+              }
+            });
         });
     }
   };
@@ -164,12 +173,12 @@ const SignUp = () => {
               </div>
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Photo URL</span>
+                  <span className="label-text">Photo</span>
                 </label>
                 <input
-                  type="text"
-                  {...register("photo")}
-                  placeholder="Photo URL"
+                  type="file"
+                  {...register("image")}
+                  placeholder="Photo"
                   className="input input-bordered bg-gray-100"
                 />
               </div>

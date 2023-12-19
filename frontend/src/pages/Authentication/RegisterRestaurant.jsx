@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import img from "../../assets/restaurant_registration.jpg";
 import { AuthContext } from "../../provider/AuthProvider";
+const imgbb_token = import.meta.env.VITE_ImageBB_token;
 const RegisterRestaurant = () => {
   const { register, handleSubmit, reset } = useForm();
   const { createUser, updateUserProfile, logOut } = useContext(AuthContext);
@@ -11,42 +12,55 @@ const RegisterRestaurant = () => {
   const onSubmit = (data) => {
     data.status = "pending";
     data.role = "restaurant";
-    createUser(data.email, data.password)
-      .then((result) => {
-        updateUserProfile(result.user, data.restaurantname, data.photo);
-        logOut()
-          .then(() => {
-            fetch("http://localhost:3000/restaurants", {
-              method: "POST",
-              headers: {
-                "content-type": "application/json",
-              },
-              body: JSON.stringify(data),
-            })
-              .then((res) => res.json())
-              .then((data) => {
-                if (data.insertedId) {
-                  reset();
-                  Swal.fire({
-                    position: "center",
-                    icon: "success",
-                    title: "Signup Successful.",
-                    showConfirmButton: false,
-                    timer: 700,
-                  });
-                  navigate("/signin");
-                }
+    const formData = new FormData();
+    formData.append("image", data.image[0]);
+    fetch(`https://api.imgbb.com/1/upload?key=${imgbb_token}`, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        const photoUrl = res.data.display_url;
+        delete data.image;
+        data.photo = photoUrl;
+        createUser(data.email, data.password)
+          .then((result) => {
+            updateUserProfile(result.user, data.restaurantname, data.photo);
+            delete data.password;
+            logOut()
+              .then(() => {
+                fetch("http://localhost:3000/restaurants", {
+                  method: "POST",
+                  headers: {
+                    "content-type": "application/json",
+                  },
+                  body: JSON.stringify(data),
+                })
+                  .then((res) => res.json())
+                  .then((data) => {
+                    if (data.insertedId) {
+                      reset();
+                      Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Signup Successful.",
+                        showConfirmButton: false,
+                        timer: 700,
+                      });
+                      navigate("/signin");
+                    }
+                  })
+                  .catch((error) => console.log(error));
               })
               .catch((error) => console.log(error));
           })
-          .catch((error) => console.log(error));
-      })
-      .catch((error) => {
-        if (error.message.includes("email-already-in-use")) {
-          console.log("Already Registered");
-        } else {
-          console.log(error.message);
-        }
+          .catch((error) => {
+            if (error.message.includes("email-already-in-use")) {
+              console.log("Already Registered");
+            } else {
+              console.log(error.message);
+            }
+          });
       });
   };
   return (
@@ -79,9 +93,9 @@ const RegisterRestaurant = () => {
                   <span className="label-text">Photo</span>
                 </label>
                 <input
-                  type="text"
-                  name="photo"
-                  {...register("photo")}
+                  type="file"
+                  name="image"
+                  {...register("image")}
                   placeholder="Ex: Cafe Mariot"
                   className="input input-bordered bg-gray-100 "
                 />
