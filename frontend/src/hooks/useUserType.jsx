@@ -12,7 +12,7 @@ const useUserType = () => {
       return res?.data;
     },
   });
-  return {...data, isUserTypeLoading};
+  return { ...data, isUserTypeLoading };
 };
 
 export default useUserType;

@@ -1,11 +1,38 @@
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../provider/AuthProvider";
 import AllOffersCard from "./AllOffersCard";
+import useSectionTitle from "../../hooks/useSectionTitle";
 
 export const AllOffers = () => {
+  const { user, loading } = useContext(AuthContext);
+  const [items, setItems] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (loading) {
+          return;
+        }
+        const response = await fetch(`http://localhost:3000/offers`);
+        const data = await response.json();
+        setItems(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [user, loading]);
   return (
-      <div className="mt-16 grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-11/12 mx-auto">
-        {Array.from({ length: 8 }, (_, i) => (
-          <AllOffersCard key={i}></AllOffersCard>
+    <div>
+      {useSectionTitle(
+        "All Offers",
+        "Discover our latest offers"
+      )}
+      <div className="mt-5 grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-11/12 mx-auto">
+        {items.map((item) => (
+          <AllOffersCard key={item._id} item={item}></AllOffersCard>
         ))}
+      </div>
     </div>
   );
 };
