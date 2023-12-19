@@ -18,17 +18,17 @@ const ReserveTableCard = ({ table }) => {
     restaurantId,
   } = table;
   return (
-    <div className="p-5 bg-[#fff8ee] rounded shadow shadow-red-200">
+    <div className="p-5 bg-[#fff8ee] rounded shadow shadow-red-200 dark:bg-gray-900 dark:text-white dark:shadow">
       <img
-        className="rounded shadow-2xl shadow-red-200 h-72 w-full"
+        className="rounded dark:shadow shadow-2xl shadow-red-200 h-72 w-full"
         src={photo}
         alt=""
       />
       <div className="flex justify-between mt-2 border-b-2 border-red-400 pb-1">
-        <h1 className="text-xl text-[#3E312D] font-[700] font-inter">
+        <h1 className="text-xl text-[#3E312D] font-[700] font-inter dark:text-white">
           <span className="uppercase">{shape}</span> Table
         </h1>
-        <p className="text-xl font-semibold flex gap-2">
+        <p className="text-xl font-semibold flex gap-2 ">
           <span className="text-lg">from</span>
           <span>{restaurantName}</span>
         </p>

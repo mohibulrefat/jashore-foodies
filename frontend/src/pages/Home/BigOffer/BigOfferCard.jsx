@@ -68,7 +68,7 @@ const BigOfferCard = ({ item }) => {
   };
   return (
     <div
-      className={`flex flex-col justify-between p-5 bg-[#fff8ee] rounded shadow shadow-red-200 relative dark:bg-gray-900`}
+      className={`flex flex-col justify-between p-5 bg-[#fff8ee] rounded shadow shadow-red-200 relative dark:bg-gray-950 dark:text-white dark:shadow-none dark:border dark:border-gray-600`}
     >
       {offer > 0 && (
         <p className="absolute right-1 top-1 rounded-full text-white py-1 px-2 bg-red-600">
@@ -77,12 +77,12 @@ const BigOfferCard = ({ item }) => {
       )}
       <div>
         <img
-          className="rounded shadow-2xl shadow-red-200 w-full h-48"
+          className="rounded shadow-2xl shadow-red-200 w-full h-48 dark:shadow-sm"
           src={photo}
           alt=""
         />
         <div className="flex justify-between mt-2 border-b-2 border-red-400">
-          <h1 className="text-lg text-[#3E312D] font-[700] font-inter">
+          <h1 className="text-lg text-[#3E312D] font-[700] font-inter dark:text-white">
             {name}
           </h1>
           <div className="flex justify-between items-center text-xl font-semibold">
