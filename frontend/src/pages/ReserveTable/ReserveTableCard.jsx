@@ -28,7 +28,7 @@ const ReserveTableCard = ({ table }) => {
         <h1 className="text-xl text-[#3E312D] font-[700] font-inter">
           <span className="uppercase">{shape}</span> Table
         </h1>
-        <p className="text-xl font-semibold flex">
+        <p className="text-xl font-semibold flex gap-2">
           <span className="text-lg">from</span>
           <span>{restaurantName}</span>
         </p>
@@ -68,14 +68,14 @@ const ReserveTableCard = ({ table }) => {
       <div className="h-10 flex justify-between items-center ">
         {/* <Link to={`/restaurantdetails/${restaurantEmail}`}> */}
         <Link to={`/restaurantdetails/${restaurantId}`}>
-          <button className=" flex items-center hover:border hover:border-[#E94339] p-1 rounded-full">
-            <BiDetail className="text-[#E94339]" size={20}></BiDetail>
+          <button className="bg-gray-200 flex items-center text-[#E94339] hover:text-white hover:bg-[#E94339] p-1 rounded-full px-3">
+            <BiDetail size={20}></BiDetail>
             <p>Restaurant Details</p>
           </button>
         </Link>
         <Link to={`/reservetabledetails/${_id}`}>
-          <button className="flex items-center hover:border hover:border-[#E94339] p-1 rounded-full">
-            <MdOutlineTableBar className="text-[#E94339]" size={20} />
+          <button className="bg-gray-200 flex items-center text-[#E94339] hover:text-white hover:bg-[#E94339] p-1 rounded-full px-3">
+            <MdOutlineTableBar size={20} />
             <p>Reserve Now</p>
           </button>
         </Link>
