@@ -54,7 +54,7 @@ const ItemsCard = ({ item }) => {
         });
     } else {
       Swal.fire({
-        title: "Please login to order the food",
+        title: "Please Login First",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",

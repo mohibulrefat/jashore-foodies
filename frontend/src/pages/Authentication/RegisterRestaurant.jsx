@@ -147,7 +147,10 @@ const RegisterRestaurant = () => {
                 <input
                   type="text"
                   name="password"
-                  {...register("password")}
+                  {...register("password", {
+                    minLength: 6,
+                    pattern: /(?=.*[A-Z])(?=.*[!@#$&*])/,
+                  })}
                   placeholder="password"
                   className="input input-bordered bg-gray-100"
                   required
