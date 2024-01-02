@@ -11,7 +11,9 @@ const Trending = () => {
         if (loading) {
           return;
         }
-        const response = await fetch(`http://localhost:3000/trending`);
+        const response = await fetch(
+          `https://jashore-foodies-backend.vercel.app/trending`
+        );
         const data = await response.json();
         setItems(data);
       } catch (error) {

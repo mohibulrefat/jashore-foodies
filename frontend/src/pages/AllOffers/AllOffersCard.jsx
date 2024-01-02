@@ -5,11 +5,11 @@ import { TbCurrencyTaka } from "react-icons/tb";
 
 import "@smastrom/react-rating/style.css";
 import { useContext } from "react";
-import { AuthContext } from "../../provider/AuthProvider";
-import useCart from "../../hooks/useCart";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-const AllOffersCard = ({item}) => {
+import useCart from "../../hooks/useCart";
+import { AuthContext } from "../../provider/AuthProvider";
+const AllOffersCard = ({ item }) => {
   const { user } = useContext(AuthContext);
   const [, refetch] = useCart();
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ const AllOffersCard = ({item}) => {
         customerEmail: user.email,
       };
       console.log(cartItem);
-      fetch("http://localhost:3000/carts", {
+      fetch("https://jashore-foodies-backend.vercel.app/carts", {
         method: "POST",
         headers: {
           "content-type": "application/json",

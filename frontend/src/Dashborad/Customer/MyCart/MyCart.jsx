@@ -16,7 +16,7 @@ const MyCart = () => {
           return;
         }
         const customerResponse = await fetch(
-          `http://localhost:3000/customerdetails/${user?.email}`
+          `https://jashore-foodies-backend.vercel.app/customerdetails/${user?.email}`
         );
         const customerData = await customerResponse.json();
         setCustomer(customerData);
@@ -39,7 +39,7 @@ const MyCart = () => {
     data.customer = customer;
     data.totalPrice = totalPrice;
     console.log(data);
-    fetch("http://localhost:3000/foodpayment", {
+    fetch("https://jashore-foodies-backend.vercel.app/foodpayment", {
       method: "POST",
       headers: {
         "content-type": "application/json",

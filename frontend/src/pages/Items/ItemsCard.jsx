@@ -31,8 +31,8 @@ const ItemsCard = ({ item }) => {
         item,
         customerEmail: user.email,
       };
-      console.log(cartItem)
-      fetch("http://localhost:3000/carts", {
+      console.log(cartItem);
+      fetch("https://jashore-foodies-backend.vercel.app/carts", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -54,7 +54,7 @@ const ItemsCard = ({ item }) => {
         });
     } else {
       Swal.fire({
-        title: "Please login to order the food",
+        title: "Please Login First",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",

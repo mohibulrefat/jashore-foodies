@@ -15,7 +15,7 @@ const MyOrders = () => {
           return;
         }
         const reservationResponse = await fetch(
-          `http://localhost:3000/myorders/${user?.email}`
+          `https://jashore-foodies-backend.vercel.app/myorders/${user?.email}`
         );
         const data = await reservationResponse.json();
         setCurrent(data.result1);

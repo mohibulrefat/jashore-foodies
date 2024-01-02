@@ -12,7 +12,7 @@ const PaymentHistory = () => {
           return;
         }
         const userpaymenthistoryResponse = await fetch(
-          `http://localhost:3000/userpaymenthistory/${user?.email}`
+          `https://jashore-foodies-backend.vercel.app/userpaymenthistory/${user?.email}`
         );
         const data = await userpaymenthistoryResponse.json();
         setPayment(data);

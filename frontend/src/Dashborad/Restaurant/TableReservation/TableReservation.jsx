@@ -1,9 +1,9 @@
+import axios from "axios";
 import moment from "moment";
 import { useContext, useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import useSectionTitle from "../../../hooks/useSectionTitle";
 import { AuthContext } from "../../../provider/AuthProvider";
-import Swal from "sweetalert2";
-import axios from "axios";
 const TableReservation = () => {
   const [fetchstate, setfetchState] = useState(false);
   const { user, loading } = useContext(AuthContext);
@@ -16,7 +16,7 @@ const TableReservation = () => {
           return;
         }
         const reservationResponse = await fetch(
-          `http://localhost:3000/tablereservations/${user?.email}`
+          `https://jashore-foodies-backend.vercel.app/tablereservations/${user?.email}`
         );
         const data = await reservationResponse.json();
         setCurrentReserved(data.result1);
@@ -42,7 +42,7 @@ const TableReservation = () => {
     if (result.isConfirmed) {
       try {
         const response = await axios.delete(
-          `http://localhost:3000/cancelreservation/${id}`
+          `https://jashore-foodies-backend.vercel.app/cancelreservation/${id}`
         );
         if (response.status === 200) {
           setfetchState(!fetchstate);
@@ -99,7 +99,9 @@ const TableReservation = () => {
                   <td>{current.customerContact}</td>
                   <td className="flex gap-1 justify-center tables-center">
                     <button
-                    onClick={()=>handleCancel(current._id)} className="btn bg-red-500 btn-ghost btn-xs text-white">
+                      onClick={() => handleCancel(current._id)}
+                      className="btn bg-red-500 btn-ghost btn-xs text-white"
+                    >
                       Cancel
                     </button>
                   </td>

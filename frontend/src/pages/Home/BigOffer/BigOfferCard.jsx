@@ -31,7 +31,7 @@ const BigOfferCard = ({ item }) => {
         customerEmail: user.email,
       };
       console.log(cartItem);
-      fetch("http://localhost:3000/carts", {
+      fetch("https://jashore-foodies-backend.vercel.app/carts", {
         method: "POST",
         headers: {
           "content-type": "application/json",

@@ -46,7 +46,7 @@ const SignUp = () => {
                     photo: res.data.display_url,
                     role: "customer",
                   };
-                  fetch("http://localhost:3000/users", {
+                  fetch("https://jashore-foodies-backend.vercel.app/users", {
                     method: "POST",
                     headers: {
                       "content-type": "application/json",

@@ -5,7 +5,7 @@ import RestaurantsCard from "./RestaurantsCard";
 const Restaurants = () => {
   const [restarents, setRestaurants] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:3000/allrestaurants")
+    fetch("https://jashore-foodies-backend.vercel.app/allrestaurants")
       .then((res) => res.json())
       .then((data) => setRestaurants(data));
   }, []);

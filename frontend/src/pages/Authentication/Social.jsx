@@ -20,7 +20,7 @@ const Social = () => {
         email: loggedInUser.email,
         photo: loggedInUser.photoURL,
       };
-      fetch("http://localhost:3000/users", {
+      fetch("https://jashore-foodies-backend.vercel.app/users", {
         method: "POST",
         headers: {
           "content-type": "application/json",

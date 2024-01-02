@@ -29,13 +29,16 @@ const RegisterRestaurant = () => {
             delete data.password;
             logOut()
               .then(() => {
-                fetch("http://localhost:3000/restaurants", {
-                  method: "POST",
-                  headers: {
-                    "content-type": "application/json",
-                  },
-                  body: JSON.stringify(data),
-                })
+                fetch(
+                  "https://jashore-foodies-backend.vercel.app/restaurants",
+                  {
+                    method: "POST",
+                    headers: {
+                      "content-type": "application/json",
+                    },
+                    body: JSON.stringify(data),
+                  }
+                )
                   .then((res) => res.json())
                   .then((data) => {
                     if (data.insertedId) {
@@ -144,7 +147,10 @@ const RegisterRestaurant = () => {
                 <input
                   type="text"
                   name="password"
-                  {...register("password")}
+                  {...register("password", {
+                    minLength: 6,
+                    pattern: /(?=.*[A-Z])(?=.*[!@#$&*])/,
+                  })}
                   placeholder="password"
                   className="input input-bordered bg-gray-100"
                   required

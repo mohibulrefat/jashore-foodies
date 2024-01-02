@@ -10,7 +10,7 @@ const MyItems = () => {
   const [fetchstate, setfetchState] = useState(false);
   const [items, setItems] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:3000/myitems/${user?.email}`)
+    fetch(`https://jashore-foodies-backend.vercel.app/myitems/${user?.email}`)
       .then((res) => res.json())
       .then((data) => setItems(data));
   }, [user, fetchstate]);
@@ -28,7 +28,7 @@ const MyItems = () => {
     if (result.isConfirmed) {
       try {
         const response = await axios.delete(
-          `http://localhost:3000/deleteitem/${id}`
+          `https://jashore-foodies-backend.vercel.app/deleteitem/${id}`
         );
         if (response.status === 200) {
           setfetchState(!fetchstate);
@@ -48,17 +48,17 @@ const MyItems = () => {
   };
   const handleAvailable = async (id) => {
     const response = await axios.patch(
-      `http://localhost:3000/updateitemavailable/${id}`
+      `https://jashore-foodies-backend.vercel.app/updateitemavailable/${id}`
     );
-    if(response.data.acknowledged){
-      setfetchState(!fetchstate)
+    if (response.data.acknowledged) {
+      setfetchState(!fetchstate);
       Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Update Successful.',
+        position: "center",
+        icon: "success",
+        title: "Update Successful.",
         showConfirmButton: false,
-        timer: 700
-    });
+        timer: 700,
+      });
     }
   };
   return (
