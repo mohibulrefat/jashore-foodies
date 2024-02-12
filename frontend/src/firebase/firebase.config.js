@@ -5,12 +5,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCDJkDuiNKok_ufkrOmhXghqgEsHjO6rrs",
-  authDomain: "jashore-foodies-d027d.firebaseapp.com",
-  projectId: "jashore-foodies-d027d",
-  storageBucket: "jashore-foodies-d027d.appspot.com",
-  messagingSenderId: "82170844632",
-  appId: "1:82170844632:web:e7a8b0a54efbd5af240ead"
+  //apiKey: "AIzaSyCDJkDuiNKok_ufkrOmhXghqgEsHjO6rrs",
+  //authDomain: "jashore-foodies-d027d.firebaseapp.com",
+  //projectId: "jashore-foodies-d027d",
+  //storageBucket: "jashore-foodies-d027d.appspot.com",
+  //messagingSenderId: "82170844632",
+  //appId: "1:82170844632:web:e7a8b0a54efbd5af240ead"
 };
 
 // Initialize Firebase
