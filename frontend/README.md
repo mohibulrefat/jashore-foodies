@@ -15,8 +15,8 @@ This Project is created with React.js, Express,js, Firebase and React Router,
 
 ## Links
 A list of links according to this project:
-* Live Site: [Jashore Foodies]() 
-* Server Side Code Link: [Server Repo]()
+* Live Site: [Jashore Foodies](https://jashore-foodies-d027d.web.app/) 
+* Server Side Code Link: [Server Repo](https://github.com/mirza-mohibul-hasan/jashore-foodies-backend)
 ## Admin Info
 
 ## Frontend Installation
