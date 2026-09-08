@@ -7,7 +7,7 @@
   "license": "ISC",
   "packageManager": "pnpm@10.4.1",
   "engines": {
-    "node": ">=18",
+    "node": ">=20.19",
     "pnpm": ">=9"
   },
   "scripts": {
@@ -22,5 +22,11 @@
   },
   "devDependencies": {
     "prettier": "^3.2.5"
+  },
+  "pnpm": {
+    "ignoredBuiltDependencies": [
+      "@firebase/util",
+      "protobufjs"
+    ]
   }
 }
