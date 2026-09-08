@@ -18,7 +18,7 @@ This is a monorepo managed with [pnpm workspaces](https://pnpm.io/workspaces).
 - **Frontend:** React 19, Vite 8, React Router 7, TanStack Query 5, Tailwind CSS 4,
   DaisyUI 5, Axios, Swiper
 - **Backend:** Node.js, Express 5, MongoDB 7, JSON Web Tokens, SSLCommerz (sandbox)
-- **Hosting:** Frontend on Firebase Hosting; backend as a container / Node host
+- **Hosting:** Frontend as a static site; backend as a container / Node host
 
 ## Authentication
 
@@ -104,8 +104,9 @@ From `backend/`, `pnpm seed:admin` creates/updates the admin account.
 
 ## Deployment
 
-- **Frontend:** `pnpm build`, then `firebase deploy` from `frontend/` (Firebase
-  Hosting only — no Firebase Auth). Set `VITE_API_BASE_URL` to the deployed API.
+- **Frontend:** `pnpm build` produces static files in `frontend/dist/`. Serve them
+  from any static host with an SPA fallback (all paths rewrite to `/index.html`).
+  Set `VITE_API_BASE_URL` to the deployed API before building.
 - **Backend:** a standard Node/Express app with a `Dockerfile` — deploy the
   container (or `pnpm --filter @jashore-foodies/backend start`) to any Node host.
   Set the env vars there — in particular `CLIENT_ORIGIN` must be the deployed
