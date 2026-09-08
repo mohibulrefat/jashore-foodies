@@ -1,7 +1,7 @@
 services:
   mongo:
     image: mongo:7
-    restart: unless-stopped
+    restart: on-failure
     ports:
       - "${MONGO_PORT:-27017}:27017"
     volumes:
@@ -16,7 +16,7 @@ services:
     build:
       context: .
       dockerfile: backend/Dockerfile
-    restart: unless-stopped
+    restart: on-failure
     depends_on:
       mongo:
         condition: service_healthy
@@ -36,7 +36,7 @@ services:
     build:
       context: .
       dockerfile: frontend/Dockerfile
-    restart: unless-stopped
+    restart: on-failure
     depends_on:
       - backend
     env_file:
