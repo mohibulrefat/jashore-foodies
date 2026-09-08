@@ -1,23 +1,5 @@
-import { useContext } from "react";
-import { Navigate, useLocation } from "react-router-dom";
-import { RingLoader } from "react-spinners";
-import { AuthContext } from "../provider/AuthContext";
-import useUserType from "../hooks/useUserType";
+import RoleRoute from "./RoleRoute";
 
-const AdminRoute = ({children}) => {
-    const { user, loading } = useContext(AuthContext);
-    const location = useLocation();
-    const { isAdmin, isUserTypeLoading } = useUserType();
-
-    if (loading || isUserTypeLoading) {
-        return <div className="flex justify-center"><RingLoader  color="#e2136e"  className='text-center my-24'/></div>
-    }
-
-    if (user && isAdmin) {
-        return children;
-    }
-
-    return <Navigate to="/login" state={{ from: location }} replace></Navigate>
-};
+const AdminRoute = ({ children }) => <RoleRoute role="admin">{children}</RoleRoute>;
 
 export default AdminRoute;
