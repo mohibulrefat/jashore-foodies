@@ -16,6 +16,11 @@
     "build": "pnpm --filter @jashore-foodies/frontend build",
     "preview": "pnpm --filter @jashore-foodies/frontend preview",
     "start:backend": "pnpm --filter @jashore-foodies/backend start",
-    "lint": "pnpm --filter @jashore-foodies/frontend lint"
+    "lint": "pnpm --filter @jashore-foodies/frontend lint",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "prettier": "^3.2.5"
   }
 }
