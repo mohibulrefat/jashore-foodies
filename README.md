@@ -1,5 +1,13 @@
 # Jashore Foodies
 
+> [!NOTE]
+> **A pet project that taught me full-stack.** 🍜
+>
+> Originally built during an industry internship / collaboration for my
+> university Software Development Lab course. I'm picking it back up to keep it
+> alive — and to put AI coding agents (Claude Code, Antigravity, Codex) through
+> their paces while I'm at it.
+
 Restaurant discovery, table reservation, and food ordering platform for Jashore.
 Customers browse restaurants and menus, reserve tables, and order food; restaurants
 manage their menu, tables, and orders; admins approve new restaurants.
