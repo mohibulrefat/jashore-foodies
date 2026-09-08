@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useContext } from "react";
-import { AuthContext } from "../provider/AuthProvider";
+import { AuthContext } from "../provider/AuthContext";
 const useUserType = () => {
   const { user, loading } = useContext(AuthContext);
   const { data: data, isLoading: isUserTypeLoading } = useQuery({

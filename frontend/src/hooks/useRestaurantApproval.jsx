@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../provider/AuthProvider";
+import { AuthContext } from "../provider/AuthContext";
 
 const useRestaurantApproval = () => {
   const { user } = useContext(AuthContext);

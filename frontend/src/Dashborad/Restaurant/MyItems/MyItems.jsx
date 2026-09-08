@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import useSectionTitle from "../../../hooks/useSectionTitle";
-import { AuthContext } from "../../../provider/AuthProvider";
+import { AuthContext } from "../../../provider/AuthContext";
 
 const MyItems = () => {
   const { user } = useContext(AuthContext);

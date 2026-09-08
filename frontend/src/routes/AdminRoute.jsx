@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { RingLoader } from "react-spinners";
-import { AuthContext } from "../provider/AuthProvider";
+import { AuthContext } from "../provider/AuthContext";
 import useUserType from "../hooks/useUserType";
 
 const AdminRoute = ({children}) => {

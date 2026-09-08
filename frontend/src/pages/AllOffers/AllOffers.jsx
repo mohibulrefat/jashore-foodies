@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import useSectionTitle from "../../hooks/useSectionTitle";
-import { AuthContext } from "../../provider/AuthProvider";
+import { AuthContext } from "../../provider/AuthContext";
 import AllOffersCard from "./AllOffersCard";
 
 export const AllOffers = () => {

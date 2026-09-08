@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import img from "../../assets/restaurant_registration.jpg";
-import { AuthContext } from "../../provider/AuthProvider";
+import { AuthContext } from "../../provider/AuthContext";
 const imgbb_token = import.meta.env.VITE_ImageBB_token;
 const RegisterRestaurant = () => {
   const { register, handleSubmit, reset } = useForm();

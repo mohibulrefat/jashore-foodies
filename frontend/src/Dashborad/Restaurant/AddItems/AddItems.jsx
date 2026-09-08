@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useContext } from "react";
 import Swal from "sweetalert2";
-import { AuthContext } from "../../../provider/AuthProvider";
+import { AuthContext } from "../../../provider/AuthContext";
 const imgbb_token = import.meta.env.VITE_ImageBB_token;
 const Additems = () => {
   const { user, loading } = useContext(AuthContext);

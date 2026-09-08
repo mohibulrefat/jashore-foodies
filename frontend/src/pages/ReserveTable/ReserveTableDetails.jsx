@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { TbCurrencyTaka } from "react-icons/tb";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
-import { AuthContext } from "../../provider/AuthProvider";
+import { AuthContext } from "../../provider/AuthContext";
 const ReserveTableDetails = () => {
   const navigate = useNavigate();
   const location = useLocation();

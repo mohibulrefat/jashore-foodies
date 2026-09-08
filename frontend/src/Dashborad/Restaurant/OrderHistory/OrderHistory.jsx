@@ -1,7 +1,7 @@
 import moment from "moment";
 import { useContext, useEffect, useState } from "react";
 import useSectionTitle from "../../../hooks/useSectionTitle";
-import { AuthContext } from "../../../provider/AuthProvider";
+import { AuthContext } from "../../../provider/AuthContext";
 
 const OrderHistory = () => {
   const [orders, setOrders] = useState([]);

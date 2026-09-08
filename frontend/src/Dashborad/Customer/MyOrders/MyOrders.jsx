@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { BiDetail } from "react-icons/bi";
 import { TbCurrencyTaka } from "react-icons/tb";
 import useSectionTitle from "../../../hooks/useSectionTitle";
-import { AuthContext } from "../../../provider/AuthProvider";
+import { AuthContext } from "../../../provider/AuthContext";
 const MyOrders = () => {
   const { user, loading } = useContext(AuthContext);
   const [current, setCurrent] = useState([]);

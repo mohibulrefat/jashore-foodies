@@ -3,7 +3,7 @@ import moment from "moment";
 import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import useSectionTitle from "../../../hooks/useSectionTitle";
-import { AuthContext } from "../../../provider/AuthProvider";
+import { AuthContext } from "../../../provider/AuthContext";
 
 const CurrentOrder = () => {
   const [fetchstate, setfetchState] = useState(false);

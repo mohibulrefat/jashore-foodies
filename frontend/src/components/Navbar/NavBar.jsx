@@ -5,7 +5,7 @@ import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import useCart from "../../hooks/useCart";
 import useUserType from "../../hooks/useUserType";
-import { AuthContext } from "../../provider/AuthProvider";
+import { AuthContext } from "../../provider/AuthContext";
 const NavBar = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const toggleTheme = () => {

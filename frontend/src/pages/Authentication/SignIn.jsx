@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { FaFacebook, FaGoogle } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { AuthContext } from "../../provider/AuthProvider";
+import { AuthContext } from "../../provider/AuthContext";
 const SignIn = () => {
   const { signIn } = useContext(AuthContext);
   const navigate = useNavigate();

@@ -4,7 +4,7 @@ import { MdOutlineTableBar } from "react-icons/md";
 import { TbCurrencyTaka } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import useSectionTitle from "../../../hooks/useSectionTitle";
-import { AuthContext } from "../../../provider/AuthProvider";
+import { AuthContext } from "../../../provider/AuthContext";
 const MyReservations = () => {
   const { user, loading } = useContext(AuthContext);
   const [reserved, setReserved] = useState([]);
