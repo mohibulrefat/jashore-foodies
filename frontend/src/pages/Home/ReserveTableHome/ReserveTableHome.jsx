@@ -2,13 +2,12 @@ import { useEffect, useState } from "react";
 import { BsArrowRightCircle } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import ReserveTableCard from "../../ReserveTable/ReserveTableCard";
+import api from "../../../lib/api";
 
 const ReserveTableHome = () => {
   const [tables, setTables] = useState([]);
   useEffect(() => {
-    fetch("https://jashore-foodies-backend.vercel.app/tablereservation")
-      .then((res) => res.json())
-      .then((data) => setTables(data));
+    api.get("/tablereservation").then(({ data }) => setTables(data));
   }, []);
   return (
     <div>

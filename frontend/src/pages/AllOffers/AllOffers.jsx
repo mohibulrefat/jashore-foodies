@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import useSectionTitle from "../../hooks/useSectionTitle";
 import { AuthContext } from "../../provider/AuthContext";
+import api from "../../lib/api";
 import AllOffersCard from "./AllOffersCard";
 
 export const AllOffers = () => {
@@ -12,10 +13,7 @@ export const AllOffers = () => {
         if (loading) {
           return;
         }
-        const response = await fetch(
-          `https://jashore-foodies-backend.vercel.app/offers`
-        );
-        const data = await response.json();
+        const { data } = await api.get("/offers");
         setItems(data);
       } catch (error) {
         console.error("Error fetching data:", error);

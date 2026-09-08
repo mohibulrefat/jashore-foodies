@@ -1,7 +1,7 @@
-import axios from "axios";
 import moment from "moment";
 import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import api from "../../../lib/api";
 import useSectionTitle from "../../../hooks/useSectionTitle";
 import { AuthContext } from "../../../provider/AuthContext";
 
@@ -13,13 +13,10 @@ const CurrentOrder = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (loading) {
+        if (loading || !user) {
           return;
         }
-        const response = await fetch(
-          `https://jashore-foodies-backend.vercel.app/currentorders/${user?.email}`
-        );
-        const data = await response.json();
+        const { data } = await api.get("/restaurant/currentorders");
         setOrders(data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -29,9 +26,7 @@ const CurrentOrder = () => {
     fetchData();
   }, [user, loading, fetchstate]);
   const handleDelivered = async (id) => {
-    const response = await axios.delete(
-      `https://jashore-foodies-backend.vercel.app/deliveredorder/${id}`
-    );
+    const response = await api.delete(`/restaurant/deliveredorder/${id}`);
     if (response.data.acknowledged) {
       setfetchState(!fetchstate);
       Swal.fire({
@@ -44,9 +39,7 @@ const CurrentOrder = () => {
     }
   };
   const handleCancel = async (id) => {
-    const response = await axios.delete(
-      `https://jashore-foodies-backend.vercel.app/cancelorder/${id}`
-    );
+    const response = await api.delete(`/restaurant/cancelorder/${id}`);
     if (response.data.acknowledged) {
       setfetchState(!fetchstate);
       Swal.fire({

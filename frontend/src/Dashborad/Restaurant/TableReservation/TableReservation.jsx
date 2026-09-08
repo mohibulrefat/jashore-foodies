@@ -1,7 +1,7 @@
-import axios from "axios";
 import moment from "moment";
 import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import api from "../../../lib/api";
 import useSectionTitle from "../../../hooks/useSectionTitle";
 import { AuthContext } from "../../../provider/AuthContext";
 const TableReservation = () => {
@@ -12,13 +12,10 @@ const TableReservation = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (loading) {
+        if (loading || !user) {
           return;
         }
-        const reservationResponse = await fetch(
-          `https://jashore-foodies-backend.vercel.app/tablereservations/${user?.email}`
-        );
-        const data = await reservationResponse.json();
+        const { data } = await api.get("/restaurant/tablereservations");
         setCurrentReserved(data.result1);
         setReservedHistory(data.result2);
       } catch (error) {
@@ -41,9 +38,7 @@ const TableReservation = () => {
 
     if (result.isConfirmed) {
       try {
-        const response = await axios.delete(
-          `https://jashore-foodies-backend.vercel.app/cancelreservation/${id}`
-        );
+        const response = await api.delete(`/restaurant/cancelreservation/${id}`);
         if (response.status === 200) {
           setfetchState(!fetchstate);
           Swal.fire("Finished!", "Your item has been deleted.", "success");

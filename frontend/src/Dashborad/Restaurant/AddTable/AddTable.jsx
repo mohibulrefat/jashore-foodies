@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import api from "../../../lib/api";
 import { AuthContext } from "../../../provider/AuthContext";
 const imgbb_token = import.meta.env.VITE_ImageBB_token;
 const AddTable = () => {
@@ -9,13 +9,10 @@ const AddTable = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (loading) {
+        if (loading || !user) {
           return;
         }
-        const response = await fetch(
-          `https://jashore-foodies-backend.vercel.app/restaurantdetails/${user?.email}`
-        );
-        const data = await response.json();
+        const { data } = await api.get("/restaurant/restaurantprofile");
         setResDetails(data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -42,7 +39,7 @@ const AddTable = () => {
       description,
       shape,
       availability: false,
-      restaurantName: user?.displayName,
+      restaurantName: user?.name,
       restaurantEmail: user?.email,
       restaurantId: resdetails._id,
     };
@@ -55,20 +52,17 @@ const AddTable = () => {
       .then((res) => res.json())
       .then((data) => {
         newTable.photo = data.data.display_url;
-        axios
-          .post("https://jashore-foodies-backend.vercel.app/addtable", newTable)
-          .then((data) => {
-            if (data.data.insertedId) {
-              Swal.fire({
-                position: "center",
-                icon: "success",
-                title: "Table Added Successfully",
-                showConfirmButton: false,
-                timer: 800,
-              });
-            }
-          });
-        console.log(newTable);
+        api.post("/restaurant/addtable", newTable).then((data) => {
+          if (data.data.insertedId) {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Table Added Successfully",
+              showConfirmButton: false,
+              timer: 800,
+            });
+          }
+        });
       });
   };
   return (

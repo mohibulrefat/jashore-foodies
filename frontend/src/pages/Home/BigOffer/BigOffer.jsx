@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { BsArrowRightCircle } from "react-icons/bs";
 import { AuthContext } from "../../../provider/AuthContext";
+import api from "../../../lib/api";
 import BigOfferCard from "./BigOfferCard";
 
 const BigOffer = () => {
@@ -12,10 +13,7 @@ const BigOffer = () => {
         if (loading) {
           return;
         }
-        const response = await fetch(
-          `https://jashore-foodies-backend.vercel.app/bigoffers`
-        );
-        const data = await response.json();
+        const { data } = await api.get("/bigoffers");
         setItems(data);
       } catch (error) {
         console.error("Error fetching data:", error);

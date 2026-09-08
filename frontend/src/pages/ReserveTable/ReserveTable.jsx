@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import useSectionTitle from "../../hooks/useSectionTitle";
 import ReserveTableCard from "./ReserveTableCard";
+import api from "../../lib/api";
 
 const ReserveTable = () => {
   const [tables, setTables] = useState([]);
   useEffect(() => {
-    fetch("https://jashore-foodies-backend.vercel.app/tablereservation")
-      .then((res) => res.json())
-      .then((data) => setTables(data));
+    api.get("/tablereservation").then(({ data }) => setTables(data));
   }, []);
   return (
     <div>

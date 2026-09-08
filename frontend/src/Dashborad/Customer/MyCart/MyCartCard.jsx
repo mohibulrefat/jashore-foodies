@@ -2,6 +2,7 @@ import { Rating } from "@smastrom/react-rating";
 import { MdOutlineRemoveShoppingCart } from "react-icons/md";
 import { TbCurrencyTaka } from "react-icons/tb";
 import Swal from "sweetalert2";
+import api from "../../../lib/api";
 import useCart from "../../../hooks/useCart";
 
 const MyCartCard = ({ item }) => {
@@ -28,19 +29,12 @@ const MyCartCard = ({ item }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://jashore-foodies-backend.vercel.app/carts/${item._id}`, {
-          method: "DELETE",
-          headers: {
-            "content-type": "application/json",
-          },
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.deletedCount > 0) {
-              refetch();
-              Swal.fire("Deleted!", "Your file has been deleted.", "success");
-            }
-          });
+        api.delete(`/customer/carts/${item._id}`).then(({ data }) => {
+          if (data.deletedCount > 0) {
+            refetch();
+            Swal.fire("Deleted!", "Your file has been deleted.", "success");
+          }
+        });
       }
     });
   };

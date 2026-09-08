@@ -2,6 +2,7 @@ import moment from "moment";
 import { useContext, useEffect, useState } from "react";
 import { BiDetail } from "react-icons/bi";
 import { TbCurrencyTaka } from "react-icons/tb";
+import api from "../../../lib/api";
 import useSectionTitle from "../../../hooks/useSectionTitle";
 import { AuthContext } from "../../../provider/AuthContext";
 const MyOrders = () => {
@@ -11,13 +12,10 @@ const MyOrders = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (loading) {
+        if (loading || !user) {
           return;
         }
-        const reservationResponse = await fetch(
-          `https://jashore-foodies-backend.vercel.app/myorders/${user?.email}`
-        );
-        const data = await reservationResponse.json();
+        const { data } = await api.get("/customer/myorders");
         setCurrent(data.result1);
         setHistory(data.result2);
       } catch (error) {
@@ -27,7 +25,6 @@ const MyOrders = () => {
 
     fetchData();
   }, [user, loading]);
-  console.log(current);
   return (
     <div>
       {useSectionTitle("Delivery Pending")}

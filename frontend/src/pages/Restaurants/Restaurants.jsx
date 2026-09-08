@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import useSectionTitle from "../../hooks/useSectionTitle";
 import RestaurantsCard from "./RestaurantsCard";
+import api from "../../lib/api";
 
 const Restaurants = () => {
   const [restarents, setRestaurants] = useState([]);
   useEffect(() => {
-    fetch("https://jashore-foodies-backend.vercel.app/allrestaurants")
-      .then((res) => res.json())
-      .then((data) => setRestaurants(data));
+    api.get("/allrestaurants").then(({ data }) => setRestaurants(data));
   }, []);
   return (
     <div className="max-w-7xl mx-auto">

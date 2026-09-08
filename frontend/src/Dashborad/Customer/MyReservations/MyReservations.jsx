@@ -3,6 +3,7 @@ import { BiDetail } from "react-icons/bi";
 import { MdOutlineTableBar } from "react-icons/md";
 import { TbCurrencyTaka } from "react-icons/tb";
 import { Link } from "react-router-dom";
+import api from "../../../lib/api";
 import useSectionTitle from "../../../hooks/useSectionTitle";
 import { AuthContext } from "../../../provider/AuthContext";
 const MyReservations = () => {
@@ -12,13 +13,10 @@ const MyReservations = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (loading) {
+        if (loading || !user) {
           return;
         }
-        const reservationResponse = await fetch(
-          `https://jashore-foodies-backend.vercel.app/myreservations/${user?.email}`
-        );
-        const data = await reservationResponse.json();
+        const { data } = await api.get("/customer/myreservations");
         setReserved(data.result1);
         setReservedHistory(data.result2);
       } catch (error) {
@@ -28,7 +26,6 @@ const MyReservations = () => {
 
     fetchData();
   }, [user, loading]);
-  console.log(reserved);
   return (
     <div>
       {useSectionTitle("Current Reservations")}
