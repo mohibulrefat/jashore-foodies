@@ -1,0 +1,21 @@
+{
+  "name": "jashore-foodies",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Restaurant discovery, table reservation, and food ordering platform for Jashore.",
+  "repository": "https://github.com/mohibulrefat/jashore-foodies",
+  "license": "ISC",
+  "packageManager": "pnpm@10.4.1",
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=9"
+  },
+  "scripts": {
+    "dev:frontend": "pnpm --filter @jashore-foodies/frontend dev",
+    "dev:backend": "pnpm --filter @jashore-foodies/backend dev",
+    "build": "pnpm --filter @jashore-foodies/frontend build",
+    "preview": "pnpm --filter @jashore-foodies/frontend preview",
+    "start:backend": "pnpm --filter @jashore-foodies/backend start",
+    "lint": "pnpm --filter @jashore-foodies/frontend lint"
+  }
+}
