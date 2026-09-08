@@ -1,41 +1,8 @@
-import axios from "axios";
-import { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../provider/AuthContext";
+import api from "../lib/api";
 
-const axiosSecure = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || "http://localhost:3000",
-});
-
-const useAxiosSecure = () => {
-  const { logOut } = useContext(AuthContext);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    axiosSecure.interceptors.request.use((config) => {
-      const token = localStorage.getItem("access-token");
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
-      }
-      return config;
-    });
-
-    axiosSecure.interceptors.response.use(
-      (response) => response,
-      async (error) => {
-        if (
-          error.response &&
-          (error.response.status === 401 || error.response.status === 403)
-        ) {
-          await logOut();
-          navigate("/");
-        }
-        return Promise.reject(error);
-      }
-    );
-  }, [logOut, navigate]);
-
-  return [axiosSecure];
-};
+// The shared axios instance already carries the access token and the
+// refresh-on-401 interceptor (wired in AuthProvider). Kept as a hook that
+// returns a tuple so existing call sites (`const [axiosSecure] = ...`) work.
+const useAxiosSecure = () => [api];
 
 export default useAxiosSecure;
