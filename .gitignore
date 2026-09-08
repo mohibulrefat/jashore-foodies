@@ -29,9 +29,6 @@ lerna-debug.log*
 .eslintcache
 .firebase/
 
-# Deployment
-.vercel/
-
 # Editors
 .vscode/*
 !.vscode/extensions.json
