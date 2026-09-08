@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { BsArrowRightCircle } from "react-icons/bs";
-import { AuthContext } from "../../../provider/AuthProvider";
+import { AuthContext } from "../../../provider/AuthContext";
 import NewItemsCard from "./NewItemsCard";
 const NewItems = () => {
   const { user, loading } = useContext(AuthContext);

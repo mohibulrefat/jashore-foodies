@@ -1,6 +1,6 @@
 import moment from "moment";
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../../provider/AuthProvider";
+import { AuthContext } from "../../../provider/AuthContext";
 
 const PaymentHistory = () => {
   const [payment, setPayment] = useState([]);

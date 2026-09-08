@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { BsArrowRightCircle } from "react-icons/bs";
-import { AuthContext } from "../../../provider/AuthProvider";
+import { AuthContext } from "../../../provider/AuthContext";
 import BigOfferCard from "./BigOfferCard";
 
 const BigOffer = () => {

@@ -10,19 +10,19 @@ This is a monorepo managed with [pnpm workspaces](https://pnpm.io/workspaces).
 
 | Path        | Description                                                   |
 | ----------- | ------------------------------------------------------------- |
-| `frontend/` | React 18 + Vite SPA (Tailwind + DaisyUI, Firebase Auth)      |
+| `frontend/` | React 19 + Vite SPA (Tailwind + DaisyUI, Firebase Auth)      |
 | `backend/`  | Express + MongoDB REST API (JWT auth, SSLCommerz payments)   |
 
 ## Tech stack
 
-- **Frontend:** React 18, Vite, React Router 6, TanStack Query 5, Tailwind CSS,
-  DaisyUI, Firebase Authentication, Axios, Swiper
-- **Backend:** Node.js, Express 4, MongoDB, JSON Web Tokens, SSLCommerz (sandbox)
+- **Frontend:** React 19, Vite 8, React Router 7, TanStack Query 5, Tailwind CSS 4,
+  DaisyUI 5, Firebase Authentication, Axios, Swiper
+- **Backend:** Node.js, Express 5, MongoDB 7, JSON Web Tokens, SSLCommerz (sandbox)
 - **Hosting:** Frontend on Firebase Hosting, backend on Vercel
 
 ## Prerequisites
 
-- Node.js >= 18 (see `.nvmrc`)
+- Node.js >= 20.19 (see `.nvmrc`)
 - pnpm >= 9 (`corepack enable` or `npm i -g pnpm`)
 - A MongoDB Atlas database
 - A Firebase project with Authentication enabled
@@ -65,6 +65,7 @@ pnpm dev:frontend   # app on http://localhost:5173
 | `pnpm preview`       | Preview the production frontend build   |
 | `pnpm start:backend` | Start the API without watch             |
 | `pnpm lint`          | Lint the frontend                       |
+| `pnpm format`        | Format the repo with Prettier           |
 
 ## Deployment
 

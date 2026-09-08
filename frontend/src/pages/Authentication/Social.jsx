@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { FaGoogle } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { AuthContext } from "../../provider/AuthProvider";
+import { AuthContext } from "../../provider/AuthContext";
 const Social = () => {
   const { googleSignIn } = useContext(AuthContext);
   const navigate = useNavigate();

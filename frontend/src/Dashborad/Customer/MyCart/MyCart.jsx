@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import useCart from "../../../hooks/useCart";
 import useSectionTitle from "../../../hooks/useSectionTitle";
-import { AuthContext } from "../../../provider/AuthProvider";
+import { AuthContext } from "../../../provider/AuthContext";
 import MyCartCard from "./MyCartCard";
 const MyCart = () => {
   const { user, loading } = useContext(AuthContext);
