@@ -46,7 +46,7 @@ cp backend/.env.example backend/.env
 | File            | Keys                                                                                   |
 | --------------- | ------------------------------------------------------------------------------------- |
 | `frontend/.env` | `VITE_FIREBASE_*`, `VITE_API_BASE_URL`, `VITE_ImageBB_token`                          |
-| `backend/.env`  | `PORT`, `DB_USER`, `DB_PASS`, `ACCESS_TOKEN_SECRET`, `STORE_ID`, `STORE_PASS`         |
+| `backend/.env`  | `PORT`, `MONGODB_URI` or `DB_USER`/`DB_PASS`, `ACCESS_TOKEN_SECRET`, `STORE_ID`, `STORE_PASS` |
 
 ## Running
 
@@ -54,6 +54,21 @@ cp backend/.env.example backend/.env
 pnpm dev:backend    # API on http://localhost:3000
 pnpm dev:frontend   # app on http://localhost:5173
 ```
+
+## Running with Docker
+
+Brings up MongoDB, the API, and the frontend with hot reload:
+
+```bash
+cp frontend/.env.example frontend/.env   # fill in Firebase + imgbb keys
+docker compose up
+```
+
+- Frontend: http://localhost:5173 · API: http://localhost:3000 · MongoDB: `localhost:27017`
+- The API uses the bundled `mongo` service (`MONGODB_URI` is set by Compose); no Atlas needed.
+- Source is bind-mounted, so edits reload live.
+- Override ports or secrets with a root `.env` file: `BACKEND_PORT`, `FRONTEND_PORT`,
+  `MONGO_PORT`, `ACCESS_TOKEN_SECRET`, `STORE_ID`, `STORE_PASS`.
 
 ## Scripts (run from the repo root)
 
