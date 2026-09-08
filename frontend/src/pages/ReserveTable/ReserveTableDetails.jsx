@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { TbCurrencyTaka } from "react-icons/tb";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import api from "../../lib/api";
 import { AuthContext } from "../../provider/AuthContext";
 const ReserveTableDetails = () => {
   const navigate = useNavigate();
@@ -15,20 +16,14 @@ const ReserveTableDetails = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (loading) {
+        if (loading || !user) {
           return;
         }
-        const tableResponse = await fetch(
-          `https://jashore-foodies-backend.vercel.app/tabledetails/${tableId}`
-        );
-        const tableData = await tableResponse.json();
-        setTable(tableData);
+        const tableRes = await api.get(`/tabledetails/${tableId}`);
+        setTable(tableRes.data);
 
-        const customerResponse = await fetch(
-          `https://jashore-foodies-backend.vercel.app/customerdetails/${user?.email}`
-        );
-        const customerData = await customerResponse.json();
-        setCustomer(customerData);
+        const customerRes = await api.get("/customer/customerdetails");
+        setCustomer(customerRes.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -37,19 +32,12 @@ const ReserveTableDetails = () => {
     fetchData();
   }, [tableId, user, loading]);
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     if (user) {
       data.table = table;
       data.customer = customer;
-      fetch("https://jashore-foodies-backend.vercel.app/reservepayment", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
-        .then((res) => res.json())
-        .then((result) => window.location.replace(result.url));
+      const result = await api.post("/reservepayment", data);
+      window.location.replace(result.data.url);
     } else {
       Swal.fire({
         title: "Please login to order the food",

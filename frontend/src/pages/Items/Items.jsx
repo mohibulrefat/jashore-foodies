@@ -1,17 +1,14 @@
 import { useEffect, useState } from "react";
 import useSectionTitle from "../../hooks/useSectionTitle";
 import ItemsCard from "./ItemsCard";
+import api from "../../lib/api";
 
 const Items = () => {
   const [allitems, setAllitems] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          `https://jashore-foodies-backend.vercel.app/allitems`
-        );
-        const data = await response.json();
-        // console.log(data);
+        const { data } = await api.get("/allitems");
         setAllitems(data);
       } catch (error) {
         console.error("Error fetching data:", error);

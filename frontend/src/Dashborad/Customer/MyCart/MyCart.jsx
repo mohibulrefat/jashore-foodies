@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import api from "../../../lib/api";
 import useCart from "../../../hooks/useCart";
 import useSectionTitle from "../../../hooks/useSectionTitle";
 import { AuthContext } from "../../../provider/AuthContext";
@@ -12,14 +13,11 @@ const MyCart = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (loading) {
+        if (loading || !user) {
           return;
         }
-        const customerResponse = await fetch(
-          `https://jashore-foodies-backend.vercel.app/customerdetails/${user?.email}`
-        );
-        const customerData = await customerResponse.json();
-        setCustomer(customerData);
+        const { data } = await api.get("/customer/customerdetails");
+        setCustomer(data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -34,20 +32,12 @@ const MyCart = () => {
     return accumulator + itemPrice;
   }, 0);
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     data.items = cart;
     data.customer = customer;
     data.totalPrice = totalPrice;
-    console.log(data);
-    fetch("https://jashore-foodies-backend.vercel.app/foodpayment", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((result) => window.location.replace(result.url));
+    const result = await api.post("/foodpayment", data);
+    window.location.replace(result.data.url);
   };
   return (
     <>

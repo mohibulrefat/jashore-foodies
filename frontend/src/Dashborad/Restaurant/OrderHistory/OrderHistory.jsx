@@ -1,5 +1,6 @@
 import moment from "moment";
 import { useContext, useEffect, useState } from "react";
+import api from "../../../lib/api";
 import useSectionTitle from "../../../hooks/useSectionTitle";
 import { AuthContext } from "../../../provider/AuthContext";
 
@@ -10,13 +11,10 @@ const OrderHistory = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (loading) {
+        if (loading || !user) {
           return;
         }
-        const response = await fetch(
-          `https://jashore-foodies-backend.vercel.app/orderhistory/${user?.email}`
-        );
-        const data = await response.json();
+        const { data } = await api.get("/restaurant/orderhistory");
         setOrders(data);
       } catch (error) {
         console.error("Error fetching data:", error);

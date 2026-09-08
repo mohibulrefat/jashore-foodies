@@ -156,6 +156,14 @@ const Dashboard = () => {
           )}
         </div>
         <div className="lg:w-4/5">
+          <div className="px-10 pt-5">
+            <NavLink
+              to="change-password"
+              className="inline-flex items-center gap-1 text-sm text-[#E94339] hover:underline"
+            >
+              Change password
+            </NavLink>
+          </div>
           <Outlet></Outlet>
         </div>
       </div>

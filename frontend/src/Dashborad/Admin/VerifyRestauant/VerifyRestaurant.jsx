@@ -1,12 +1,12 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
+import api from "../../../lib/api";
 import VerifyRestaurantCard from "./VerifyRestaurantCard";
 const VerifyRestaurant = () => {
   const [restaurnts, setRestaurants] = useState([]);
   const [fetchstate, setFetchstate] = useState(false);
   useEffect(() => {
-    axios
-      .get("https://jashore-foodies-backend.vercel.app/pendingrestaurnt")
+    api
+      .get("/admin/pendingrestaurnt")
       .then((response) => setRestaurants(response.data));
   }, [fetchstate]);
   return (

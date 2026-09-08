@@ -1,15 +1,12 @@
-import axios from "axios";
 import { useContext } from "react";
-import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import api from "../../../lib/api";
 import { AuthContext } from "../../../provider/AuthContext";
 const imgbb_token = import.meta.env.VITE_ImageBB_token;
 const UpdateItem = () => {
   const { user, loading } = useContext(AuthContext);
-  const { id } = useParams();
-  console.log(id);
   if (loading) {
-    return;
+    return null;
   }
   const handleUpdate = async (event) => {
     event.preventDefault();
@@ -30,7 +27,7 @@ const UpdateItem = () => {
       description,
       date: new Date(),
       availability: false,
-      restaurantName: user?.displayName,
+      restaurantName: user?.name,
       restaurantEmail: user?.email,
       offer: 0.0,
       rating: 0,
@@ -45,8 +42,8 @@ const UpdateItem = () => {
       .then((res) => res.json())
       .then((data) => {
         newItem.photo = data.data.display_url;
-        axios
-          .post("https://jashore-foodies-backend.vercel.app/additem", newItem)
+        api
+          .post("/restaurant/additem", newItem)
           .then((data) => {
             if (data.data.insertedId) {
               Swal.fire({

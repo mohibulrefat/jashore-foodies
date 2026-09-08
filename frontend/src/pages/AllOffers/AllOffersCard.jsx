@@ -7,6 +7,7 @@ import "@smastrom/react-rating/style.css";
 import { useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import api from "../../lib/api";
 import useCart from "../../hooks/useCart";
 import { AuthContext } from "../../provider/AuthContext";
 const AllOffersCard = ({ item }) => {
@@ -31,16 +32,7 @@ const AllOffersCard = ({ item }) => {
         item,
         customerEmail: user.email,
       };
-      console.log(cartItem);
-      fetch("https://jashore-foodies-backend.vercel.app/carts", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(cartItem),
-      })
-        .then((res) => res.json())
-        .then((data) => {
+      api.post("/customer/carts", cartItem).then(({ data }) => {
           if (data.insertedId) {
             refetch();
             Swal.fire({

@@ -22,11 +22,5 @@
   },
   "devDependencies": {
     "prettier": "^3.2.5"
-  },
-  "pnpm": {
-    "ignoredBuiltDependencies": [
-      "@firebase/util",
-      "protobufjs"
-    ]
   }
 }

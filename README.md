@@ -1,5 +1,13 @@
 # Jashore Foodies
 
+> [!NOTE]
+> **A pet project that taught me full-stack.** 🍜
+>
+> Originally built during an industry internship / collaboration for my
+> university Software Development Lab course. I'm picking it back up to keep it
+> alive — and to put AI coding agents (Claude Code, Antigravity, Codex) through
+> their paces while I'm at it.
+
 Restaurant discovery, table reservation, and food ordering platform for Jashore.
 Customers browse restaurants and menus, reserve tables, and order food; restaurants
 manage their menu, tables, and orders; admins approve new restaurants.
@@ -10,23 +18,38 @@ This is a monorepo managed with [pnpm workspaces](https://pnpm.io/workspaces).
 
 | Path        | Description                                                   |
 | ----------- | ------------------------------------------------------------- |
-| `frontend/` | React 19 + Vite SPA (Tailwind + DaisyUI, Firebase Auth)      |
+| `frontend/` | React 19 + Vite SPA (Tailwind + DaisyUI)                     |
 | `backend/`  | Express + MongoDB REST API (JWT auth, SSLCommerz payments)   |
 
 ## Tech stack
 
 - **Frontend:** React 19, Vite 8, React Router 7, TanStack Query 5, Tailwind CSS 4,
-  DaisyUI 5, Firebase Authentication, Axios, Swiper
+  DaisyUI 5, Axios, Swiper
 - **Backend:** Node.js, Express 5, MongoDB 7, JSON Web Tokens, SSLCommerz (sandbox)
-- **Hosting:** Frontend on Firebase Hosting, backend on Vercel
+- **Hosting:** Frontend as a static site; backend as a container / Node host
+
+## Authentication
+
+First-party email/password auth (no third-party identity provider):
+
+- **Access token** — short-lived JWT, held in memory by the client, sent as
+  `Authorization: Bearer`.
+- **Refresh token** — long-lived, stored in an httpOnly cookie, rotated on every
+  refresh, and revocable (hashes tracked in the `refreshtokens` collection).
+- A shared axios instance silently refreshes on `401` and replays the request.
+- Roles (`customer` / `restaurant` / `admin`) live in the `accounts` collection;
+  route middleware (`requireAuth`, `requireRole`) guards the API and
+  `PrivateRoute` / role routes guard the dashboards.
+- Create the first admin with
+  `pnpm --filter @jashore-foodies/backend seed:admin` (`ADMIN_EMAIL` /
+  `ADMIN_PASSWORD`).
 
 ## Prerequisites
 
 - Node.js >= 20.19 (see `.nvmrc`)
 - pnpm >= 9 (`corepack enable` or `npm i -g pnpm`)
-- A MongoDB Atlas database
-- A Firebase project with Authentication enabled
-- SSLCommerz sandbox credentials
+- MongoDB (a local instance, an Atlas cluster, or the bundled Docker service)
+- SSLCommerz sandbox credentials (only for the payment flow)
 
 ## Setup
 
@@ -45,8 +68,8 @@ cp backend/.env.example backend/.env
 
 | File            | Keys                                                                                   |
 | --------------- | ------------------------------------------------------------------------------------- |
-| `frontend/.env` | `VITE_FIREBASE_*`, `VITE_API_BASE_URL`, `VITE_ImageBB_token`                          |
-| `backend/.env`  | `PORT`, `DB_USER`, `DB_PASS`, `ACCESS_TOKEN_SECRET`, `STORE_ID`, `STORE_PASS`         |
+| `frontend/.env` | `VITE_API_BASE_URL`, `VITE_ImageBB_token`                                             |
+| `backend/.env`  | `MONGODB_URI` or `DB_USER`/`DB_PASS`, `ACCESS_TOKEN_SECRET`, `REFRESH_TOKEN_SECRET`, `CLIENT_ORIGIN`, `ADMIN_EMAIL`/`ADMIN_PASSWORD`, `STORE_ID`/`STORE_PASS` |
 
 ## Running
 
@@ -54,6 +77,24 @@ cp backend/.env.example backend/.env
 pnpm dev:backend    # API on http://localhost:3000
 pnpm dev:frontend   # app on http://localhost:5173
 ```
+
+## Running with Docker
+
+Brings up MongoDB, the API, and the frontend with hot reload:
+
+```bash
+cp frontend/.env.example frontend/.env   # fill in the imgbb key
+docker compose up
+docker compose exec backend pnpm seed:admin   # first admin (ADMIN_EMAIL/PASSWORD)
+```
+
+- Frontend: http://localhost:5173 · API: http://localhost:3000 · MongoDB: `localhost:27017`
+- The API uses the bundled `mongo` service (`MONGODB_URI` is set by Compose); no Atlas needed.
+- JWT secrets and the admin credentials default to dev values in `docker-compose.yml`.
+- Source is bind-mounted, so edits reload live.
+- Override ports or secrets with a root `.env` file: `BACKEND_PORT`, `FRONTEND_PORT`,
+  `MONGO_PORT`, `ACCESS_TOKEN_SECRET`, `REFRESH_TOKEN_SECRET`, `ADMIN_EMAIL`,
+  `ADMIN_PASSWORD`, `STORE_ID`, `STORE_PASS`.
 
 ## Scripts (run from the repo root)
 
@@ -67,11 +108,18 @@ pnpm dev:frontend   # app on http://localhost:5173
 | `pnpm lint`          | Lint the frontend                       |
 | `pnpm format`        | Format the repo with Prettier           |
 
+From `backend/`, `pnpm seed:admin` creates/updates the admin account.
+
 ## Deployment
 
-- **Frontend:** `pnpm build`, then `firebase deploy` from `frontend/`.
-- **Backend:** pushed to Vercel (`backend/vercel.json`). Set the same env vars in
-  the Vercel project settings.
+- **Frontend:** `pnpm build` produces static files in `frontend/dist/`. Serve them
+  from any static host with an SPA fallback (all paths rewrite to `/index.html`).
+  Set `VITE_API_BASE_URL` to the deployed API before building.
+- **Backend:** a standard Node/Express app with a `Dockerfile` — deploy the
+  container (or `pnpm --filter @jashore-foodies/backend start`) to any Node host.
+  Set the env vars there — in particular `CLIENT_ORIGIN` must be the deployed
+  frontend origin so credentialed CORS works, and `NODE_ENV=production` so the
+  refresh cookie is `Secure` + `SameSite=None`.
 
 ## Branches
 

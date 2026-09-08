@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import img from "../../assets/deliveryman.jpg";
-import Social from "./Social";
+// NOTE: delivery-man onboarding is not implemented on the backend yet.
 const RegisterDeliveryMan = () => {
   return (
     <div className="hero min-h-screen">
@@ -19,7 +19,6 @@ const RegisterDeliveryMan = () => {
             </h1>
             <p className="text-red-600 text-center border border-[#E94339] rounded-lg font-semibold"></p>
             <form>
-              <Social></Social>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Name</span>

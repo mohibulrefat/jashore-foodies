@@ -1,9 +1,9 @@
-import axios from "axios";
 import { BiTime } from "react-icons/bi";
 import { FaPhone } from "react-icons/fa";
 import { FaMapLocationDot } from "react-icons/fa6";
 import { TfiEmail } from "react-icons/tfi";
 import Swal from "sweetalert2";
+import api from "../../../lib/api";
 
 const VerifyRestaurantCard = ({ restaurant, fetchstate, setFetchstate }) => {
   const {
@@ -38,12 +38,8 @@ const VerifyRestaurantCard = ({ restaurant, fetchstate, setFetchstate }) => {
       "Congratulations on the approval! Your hard work paid off, and I'm thrilled for your well-deserved success. Looking forward to seeing more great things from you.",
   };
   const handleApproval = async (_id) => {
-    const result = await axios.post(
-      `https://jashore-foodies-backend.vercel.app/approverestaurant/${_id}`,
-      message
-    );
-    console.log(result);
-    if (result.data.acknowledged == true) {
+    const result = await api.post(`/admin/approverestaurant/${_id}`, message);
+    if (result.data.acknowledged === true) {
       setFetchstate(!fetchstate);
       Swal.fire({
         title: "Approved",

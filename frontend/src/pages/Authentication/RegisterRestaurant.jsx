@@ -1,73 +1,64 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import img from "../../assets/restaurant_registration.jpg";
 import { AuthContext } from "../../provider/AuthContext";
+
 const imgbb_token = import.meta.env.VITE_ImageBB_token;
+
 const RegisterRestaurant = () => {
   const { register, handleSubmit, reset } = useForm();
-  const { createUser, updateUserProfile, logOut } = useContext(AuthContext);
+  const { register: registerUser } = useContext(AuthContext);
   const navigate = useNavigate();
-  const onSubmit = (data) => {
-    data.status = "pending";
-    data.role = "restaurant";
-    const formData = new FormData();
-    formData.append("image", data.image[0]);
-    fetch(`https://api.imgbb.com/1/upload?key=${imgbb_token}`, {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        const photoUrl = res.data.display_url;
-        delete data.image;
-        data.photo = photoUrl;
-        createUser(data.email, data.password)
-          .then((result) => {
-            updateUserProfile(result.user, data.restaurantname, data.photo);
-            delete data.password;
-            logOut()
-              .then(() => {
-                fetch(
-                  "https://jashore-foodies-backend.vercel.app/restaurants",
-                  {
-                    method: "POST",
-                    headers: {
-                      "content-type": "application/json",
-                    },
-                    body: JSON.stringify(data),
-                  }
-                )
-                  .then((res) => res.json())
-                  .then((data) => {
-                    if (data.insertedId) {
-                      reset();
-                      Swal.fire({
-                        position: "center",
-                        icon: "success",
-                        title: "Signup Successful.",
-                        showConfirmButton: false,
-                        timer: 700,
-                      });
-                      navigate("/signin");
-                    }
-                  })
-                  .catch((error) => console.log(error));
-              })
-              .catch((error) => console.log(error));
-          })
-          .catch((error) => {
-            if (error.message.includes("email-already-in-use")) {
-              console.log("Already Registered");
-            } else {
-              console.log(error.message);
-            }
-          });
+  const [errormsg, setErrormsg] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+
+  const onSubmit = async (data) => {
+    setErrormsg("");
+    setSubmitting(true);
+    try {
+      let photo = "";
+      if (data.image?.[0]) {
+        const formData = new FormData();
+        formData.append("image", data.image[0]);
+        const res = await fetch(
+          `https://api.imgbb.com/1/upload?key=${imgbb_token}`,
+          { method: "POST", body: formData }
+        );
+        const uploaded = await res.json();
+        photo = uploaded?.data?.display_url || "";
+      }
+
+      const profile = { ...data };
+      delete profile.image;
+      await registerUser({
+        ...profile,
+        name: data.restaurantname,
+        photo,
+        role: "restaurant",
       });
+
+      reset();
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Registration Successful.",
+        showConfirmButton: false,
+        timer: 900,
+      });
+      navigate("/dashboard/restaurant", { replace: true });
+    } catch (error) {
+      setErrormsg(
+        error.response?.data?.message || "Registration failed, please try again"
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
+
   return (
-    <div className="hero lg:min-h-screen ">
+    <div className="hero lg:min-h-screen">
       <div className="hero-content flex-col lg:flex-row">
         <div className="w-3/5 hidden md:flex">
           <img src={img} alt="" />
@@ -77,18 +68,22 @@ const RegisterRestaurant = () => {
             <h1 className="text-3xl text-center font-bold text-red-600">
               Create Account
             </h1>
-            <p className="text-red-600 text-center border border-[#E94339] rounded-lg font-semibold"></p>
             <form onSubmit={handleSubmit(onSubmit)}>
+              {errormsg && (
+                <p className="text-center border border-[#E94339] text-[#E94339] text-sm my-1 font-semibold rounded-md py-1">
+                  {errormsg}
+                </p>
+              )}
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Restaurant Name</span>
                 </label>
                 <input
                   type="text"
-                  name="restaurantname"
                   {...register("restaurantname")}
+                  required
                   placeholder="Ex: Cafe Mariot"
-                  className="input input-bordered bg-gray-100 "
+                  className="input input-bordered bg-gray-100"
                 />
               </div>
               <div className="form-control">
@@ -97,10 +92,8 @@ const RegisterRestaurant = () => {
                 </label>
                 <input
                   type="file"
-                  name="image"
                   {...register("image")}
-                  placeholder="Ex: Cafe Mariot"
-                  className="input input-bordered bg-gray-100 "
+                  className="input input-bordered bg-gray-100"
                 />
               </div>
               <div className="form-control">
@@ -109,10 +102,9 @@ const RegisterRestaurant = () => {
                 </label>
                 <input
                   type="text"
-                  name="category"
                   {...register("category")}
                   placeholder="Ex: Chinese"
-                  className="input input-bordered bg-gray-100 "
+                  className="input input-bordered bg-gray-100"
                 />
               </div>
               <div className="form-control">
@@ -121,10 +113,9 @@ const RegisterRestaurant = () => {
                 </label>
                 <input
                   type="text"
-                  name="address"
                   {...register("address")}
                   placeholder="Ex: 14, Rail Road, Jessore"
-                  className="input input-bordered bg-gray-100 "
+                  className="input input-bordered bg-gray-100"
                 />
               </div>
               <div className="form-control">
@@ -132,8 +123,7 @@ const RegisterRestaurant = () => {
                   <span className="label-text">Email</span>
                 </label>
                 <input
-                  type="text"
-                  name="email"
+                  type="email"
                   {...register("email")}
                   placeholder="Ex: test@gmail.com"
                   className="input input-bordered bg-gray-100"
@@ -145,8 +135,7 @@ const RegisterRestaurant = () => {
                   <span className="label-text">Password</span>
                 </label>
                 <input
-                  type="text"
-                  name="password"
+                  type="password"
                   {...register("password", {
                     minLength: 6,
                     pattern: /(?=.*[A-Z])(?=.*[!@#$&*])/,
@@ -162,7 +151,6 @@ const RegisterRestaurant = () => {
                 </label>
                 <input
                   type="text"
-                  name="contact"
                   {...register("contact")}
                   placeholder="+880 1........."
                   className="input input-bordered bg-gray-100"
@@ -176,32 +164,32 @@ const RegisterRestaurant = () => {
                 <span className="flex border-2 rounded-xl justify-between bg-gray-100">
                   <input
                     type="time"
-                    name="starttime"
                     {...register("starttime")}
                     className="input border-0 bg-gray-100"
                   />
                   <span className="flex items-center">to</span>
                   <input
                     type="time"
-                    name="endtime"
                     {...register("endtime")}
                     className="input border-0 bg-gray-100"
                   />
                 </span>
               </div>
               <div className="form-control mt-6">
-                <input
+                <button
                   type="submit"
-                  value="Create"
-                  className="w-2/3 mx-auto btn bg-white hover:bg-[#E94339] hover:text-white border border-[#E94339]"
-                />
+                  disabled={submitting}
+                  className="w-2/3 mx-auto btn bg-white hover:bg-[#E94339] hover:text-white border border-[#E94339] disabled:opacity-60"
+                >
+                  {submitting ? "Creating..." : "Create"}
+                </button>
               </div>
             </form>
-            <p className=" my-4 text-center">
+            <p className="my-4 text-center">
               Already Have an Account?{" "}
-              <Link to="/login" className="text-red-600 font-bold">
+              <Link to="/signin" className="text-red-600 font-bold">
                 Login
-              </Link>{" "}
+              </Link>
             </p>
           </div>
         </div>

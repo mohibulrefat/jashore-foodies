@@ -9,11 +9,14 @@
   "scripts": {
     "dev": "node --watch index.js",
     "start": "node index.js",
+    "seed:admin": "node scripts/seedAdmin.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "team matrix",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",

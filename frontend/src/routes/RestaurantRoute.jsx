@@ -1,7 +1,7 @@
-const RestaurantRoute = () => {
-  return (
-    <div>RestaurantRoute</div>
-  )
-}
+import RoleRoute from "./RoleRoute";
 
-export default RestaurantRoute
+const RestaurantRoute = ({ children }) => (
+  <RoleRoute role="restaurant">{children}</RoleRoute>
+);
+
+export default RestaurantRoute;

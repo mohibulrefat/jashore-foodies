@@ -6,6 +6,7 @@ import { BsCartCheck } from "react-icons/bs";
 import { TbCurrencyTaka } from "react-icons/tb";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import api from "../../../lib/api";
 import useCart from "../../../hooks/useCart";
 import { AuthContext } from "../../../provider/AuthContext";
 const NewItemsCard = ({ item }) => {
@@ -30,16 +31,7 @@ const NewItemsCard = ({ item }) => {
         item,
         customerEmail: user.email,
       };
-      console.log(cartItem);
-      fetch("https://jashore-foodies-backend.vercel.app/carts", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(cartItem),
-      })
-        .then((res) => res.json())
-        .then((data) => {
+      api.post("/customer/carts", cartItem).then(({ data }) => {
           if (data.insertedId) {
             refetch();
             Swal.fire({

@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { BsArrowRightCircle } from "react-icons/bs";
 import { AuthContext } from "../../../provider/AuthContext";
+import api from "../../../lib/api";
 import NewItemsCard from "./NewItemsCard";
 const NewItems = () => {
   const { user, loading } = useContext(AuthContext);
@@ -11,10 +12,7 @@ const NewItems = () => {
         if (loading) {
           return;
         }
-        const response = await fetch(
-          `https://jashore-foodies-backend.vercel.app/newitems`
-        );
-        const data = await response.json();
+        const { data } = await api.get("/newitems");
         setItems(data);
       } catch (error) {
         console.error("Error fetching data:", error);

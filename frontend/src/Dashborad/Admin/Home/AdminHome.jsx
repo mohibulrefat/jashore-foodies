@@ -1,16 +1,19 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import api from "../../../lib/api";
 
 const AdminHome = () => {
-  // const [info, setInfo] = useState([]);
+  const [info, setInfo] = useState({ newreq: 0 });
   useEffect(() => {
-    fetch("https://jashore-foodies-backend.vercel.app/adminhomeinfo")
-      .then((res) => res.json())
-      .then((data) => console.log(data));
+    api
+      .get("/admin/adminhomeinfo")
+      .then(({ data }) => setInfo(data))
+      .catch(() => {});
   }, []);
   return (
     <div>
       <div className="grid grid-cols-4 gap-3 mt-10">
-        <div className="h-44 w-40 bg-[#FFE2E5] flex items-center justify-center">
+        <div className="h-44 w-40 bg-[#FFE2E5] flex flex-col items-center justify-center">
+          <span className="text-3xl font-bold">{info.newreq}</span>
           New Request
         </div>
         <div className="h-44 w-40 bg-[#DCFCE7] flex items-center justify-center">

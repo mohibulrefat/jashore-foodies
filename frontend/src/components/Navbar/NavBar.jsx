@@ -81,10 +81,10 @@ const NavBar = () => {
                     <SunIcon className="h-6 w-6" />
                   )}
                 </button>
-                {user && (
+                {user && user.photo && (
                   <img
                     className="w-9 h-9 rounded-full border-2 border-[#E94339] dark:border-white"
-                    src={user?.photoURL}
+                    src={user.photo}
                     alt=""
                   />
                 )}
@@ -134,7 +134,13 @@ const NavBar = () => {
                   </div>
                 </div>
               ) : (
-                <div className="hidden lg:flex gap-2 font-poppins">
+                <div className="hidden lg:flex gap-2 font-poppins items-center">
+                  <Link
+                    to="/dashboard/change-password"
+                    className="text-sm hover:text-[#E94339]"
+                  >
+                    Account
+                  </Link>
                   <button
                     onClick={logOut}
                     className="w-20 mx-auto rounded-lg border-solid border-2 hover:border-[#E94339] hover:bg-white hover:text-gray-900 py-1 px-1 bg-[#E94339] dark:bg-gray-800 text-white"

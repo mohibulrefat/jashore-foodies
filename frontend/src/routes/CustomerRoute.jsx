@@ -1,7 +1,7 @@
-const CustomerRoute = () => {
-  return (
-    <div>CustomerRoute</div>
-  )
-}
+import RoleRoute from "./RoleRoute";
 
-export default CustomerRoute
+const CustomerRoute = ({ children }) => (
+  <RoleRoute role="customer">{children}</RoleRoute>
+);
+
+export default CustomerRoute;

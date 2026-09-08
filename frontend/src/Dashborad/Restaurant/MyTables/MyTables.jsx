@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import api from "../../../lib/api";
 import useSectionTitle from "../../../hooks/useSectionTitle";
 import { AuthContext } from "../../../provider/AuthContext";
 
@@ -6,9 +7,8 @@ const MyTables = () => {
   const { user } = useContext(AuthContext);
   const [tables, setTables] = useState([]);
   useEffect(() => {
-    fetch(`https://jashore-foodies-backend.vercel.app/mytables/${user?.email}`)
-      .then((res) => res.json())
-      .then((data) => setTables(data));
+    if (!user) return;
+    api.get("/restaurant/mytables").then(({ data }) => setTables(data));
   }, [user]);
   return (
     <div className="px-5 border-l-2 ml-5 mt-2">

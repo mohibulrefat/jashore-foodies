@@ -1,7 +1,7 @@
-import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import api from "../../../lib/api";
 import useSectionTitle from "../../../hooks/useSectionTitle";
 import { AuthContext } from "../../../provider/AuthContext";
 
@@ -10,9 +10,8 @@ const MyItems = () => {
   const [fetchstate, setfetchState] = useState(false);
   const [items, setItems] = useState([]);
   useEffect(() => {
-    fetch(`https://jashore-foodies-backend.vercel.app/myitems/${user?.email}`)
-      .then((res) => res.json())
-      .then((data) => setItems(data));
+    if (!user) return;
+    api.get("/restaurant/myitems").then(({ data }) => setItems(data));
   }, [user, fetchstate]);
   const handleDelete = async (id) => {
     const result = await Swal.fire({
@@ -27,9 +26,7 @@ const MyItems = () => {
 
     if (result.isConfirmed) {
       try {
-        const response = await axios.delete(
-          `https://jashore-foodies-backend.vercel.app/deleteitem/${id}`
-        );
+        const response = await api.delete(`/restaurant/deleteitem/${id}`);
         if (response.status === 200) {
           setfetchState(!fetchstate);
           Swal.fire("Deleted!", "Your item has been deleted.", "success");
@@ -47,9 +44,7 @@ const MyItems = () => {
     }
   };
   const handleAvailable = async (id) => {
-    const response = await axios.patch(
-      `https://jashore-foodies-backend.vercel.app/updateitemavailable/${id}`
-    );
+    const response = await api.patch(`/restaurant/updateitemavailable/${id}`);
     if (response.data.acknowledged) {
       setfetchState(!fetchstate);
       Swal.fire({
