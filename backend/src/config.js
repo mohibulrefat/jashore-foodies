@@ -27,10 +27,12 @@ const config = {
     isLive: process.env.SSL_IS_LIVE === "true",
   },
 
-  // S3-compatible object storage (MinIO in dev). The client signs presigned
-  // URLs offline, so it only needs the browser-facing endpoint.
+  // S3-compatible object storage (MinIO in dev).
+  //  - endpoint:       reachable from the server (container -> minio)
+  //  - publicEndpoint: reachable from the browser (presigned PUT + public read)
   s3: {
-    endpoint:
+    endpoint: process.env.S3_ENDPOINT || "http://localhost:9000",
+    publicEndpoint:
       process.env.S3_PUBLIC_ENDPOINT ||
       process.env.S3_ENDPOINT ||
       "http://localhost:9000",
