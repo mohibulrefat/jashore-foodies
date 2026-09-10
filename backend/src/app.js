@@ -10,6 +10,7 @@ const customerRoutes = require("./routes/customer.routes");
 const restaurantRoutes = require("./routes/restaurant.routes");
 const adminRoutes = require("./routes/admin.routes");
 const paymentRoutes = require("./routes/payment.routes");
+const uploadRoutes = require("./routes/upload.routes");
 
 function createApp() {
   const app = express();
@@ -23,6 +24,7 @@ function createApp() {
   );
 
   app.use("/auth", authRoutes);
+  app.use("/uploads", uploadRoutes);
   app.use("/customer", customerRoutes);
   app.use("/restaurant", restaurantRoutes);
   app.use("/admin", adminRoutes);

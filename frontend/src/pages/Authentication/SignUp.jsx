@@ -3,9 +3,8 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import img from "../../assets/login.svg";
+import { uploadImage } from "../../lib/uploadImage";
 import { AuthContext } from "../../provider/AuthContext";
-
-const imgbb_token = import.meta.env.VITE_ImageBB_token;
 
 const SignUp = () => {
   const { register: registerUser } = useContext(AuthContext);
@@ -34,17 +33,7 @@ const SignUp = () => {
     }
     setSubmitting(true);
     try {
-      let photo = "";
-      if (data.image?.[0]) {
-        const formData = new FormData();
-        formData.append("image", data.image[0]);
-        const res = await fetch(
-          `https://api.imgbb.com/1/upload?key=${imgbb_token}`,
-          { method: "POST", body: formData }
-        );
-        const uploaded = await res.json();
-        photo = uploaded?.data?.display_url || "";
-      }
+      const photo = await uploadImage(data.image?.[0], "avatars");
 
       await registerUser({
         name: data.name,
