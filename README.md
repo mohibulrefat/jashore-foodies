@@ -25,7 +25,8 @@ This is a monorepo managed with [pnpm workspaces](https://pnpm.io/workspaces).
 
 - **Frontend:** React 19, Vite 8, React Router 7, TanStack Query 5, Tailwind CSS 4,
   DaisyUI 5, Axios, Swiper
-- **Backend:** Node.js, Express 5, MongoDB 7, JSON Web Tokens, SSLCommerz (sandbox)
+- **Backend:** Node.js, Express 5, MongoDB 7, JSON Web Tokens, MinIO / S3 storage,
+  SSLCommerz (sandbox)
 - **Hosting:** Frontend as a static site; backend as a container / Node host
 
 ## Authentication
@@ -44,11 +45,23 @@ First-party email/password auth (no third-party identity provider):
   `pnpm --filter @jashore-foodies/backend seed:admin` (`ADMIN_EMAIL` /
   `ADMIN_PASSWORD`).
 
+## Image uploads
+
+Images go to S3-compatible object storage (MinIO in dev):
+
+1. The client asks `POST /uploads/presign` for a short-lived presigned `PUT` URL.
+2. The browser uploads the file straight to storage — it never passes through the API.
+3. The returned public URL (`<S3_PUBLIC_ENDPOINT>/<bucket>/<key>`) is stored on the record.
+
+The bucket is public-read, so stored URLs render directly in `<img>` tags. Configure
+with the `S3_*` env vars; any S3 provider works in production.
+
 ## Prerequisites
 
 - Node.js >= 20.19 (see `.nvmrc`)
 - pnpm >= 9 (`corepack enable` or `npm i -g pnpm`)
 - MongoDB (a local instance, an Atlas cluster, or the bundled Docker service)
+- S3-compatible object storage (MinIO is bundled in the Docker stack)
 - SSLCommerz sandbox credentials (only for the payment flow)
 
 ## Setup
@@ -68,8 +81,8 @@ cp backend/.env.example backend/.env
 
 | File            | Keys                                                                                   |
 | --------------- | ------------------------------------------------------------------------------------- |
-| `frontend/.env` | `VITE_API_BASE_URL`, `VITE_ImageBB_token`                                             |
-| `backend/.env`  | `MONGODB_URI` or `DB_USER`/`DB_PASS`, `ACCESS_TOKEN_SECRET`, `REFRESH_TOKEN_SECRET`, `CLIENT_ORIGIN`, `ADMIN_EMAIL`/`ADMIN_PASSWORD`, `STORE_ID`/`STORE_PASS` |
+| `frontend/.env` | `VITE_API_BASE_URL`                                                                  |
+| `backend/.env`  | `MONGODB_URI` or `DB_USER`/`DB_PASS`, `ACCESS_TOKEN_SECRET`, `REFRESH_TOKEN_SECRET`, `CLIENT_ORIGIN`, `ADMIN_EMAIL`/`ADMIN_PASSWORD`, `S3_*`, `STORE_ID`/`STORE_PASS` |
 
 ## Running
 
@@ -80,21 +93,24 @@ pnpm dev:frontend   # app on http://localhost:5173
 
 ## Running with Docker
 
-Brings up MongoDB, the API, and the frontend with hot reload:
+Brings up MongoDB, MinIO, the API, and the frontend with hot reload:
 
 ```bash
-cp frontend/.env.example frontend/.env   # fill in the imgbb key
 docker compose up
 docker compose exec backend pnpm seed:admin   # first admin (ADMIN_EMAIL/PASSWORD)
 ```
 
-- Frontend: http://localhost:5173 · API: http://localhost:3000 · MongoDB: `localhost:27017`
-- The API uses the bundled `mongo` service (`MONGODB_URI` is set by Compose); no Atlas needed.
-- JWT secrets and the admin credentials default to dev values in `docker-compose.yml`.
+- Frontend http://localhost:5173 · API http://localhost:3000 · MongoDB `localhost:27017`
+- MinIO S3 API http://localhost:9000 · console http://localhost:9001 (`minioadmin` / `minioadmin`)
+- The `createbuckets` init service makes the bucket and sets it public-read; uploaded
+  images are served from `http://localhost:9000/<bucket>/...`.
+- The API uses the bundled `mongo` + `minio` services; no external accounts needed.
+- JWT secrets and admin/MinIO credentials default to dev values in `docker-compose.yml`.
 - Source is bind-mounted, so edits reload live.
 - Override ports or secrets with a root `.env` file: `BACKEND_PORT`, `FRONTEND_PORT`,
-  `MONGO_PORT`, `ACCESS_TOKEN_SECRET`, `REFRESH_TOKEN_SECRET`, `ADMIN_EMAIL`,
-  `ADMIN_PASSWORD`, `STORE_ID`, `STORE_PASS`.
+  `MONGO_PORT`, `MINIO_PORT`, `MINIO_CONSOLE_PORT`, `ACCESS_TOKEN_SECRET`,
+  `REFRESH_TOKEN_SECRET`, `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `MINIO_ROOT_USER`,
+  `MINIO_ROOT_PASSWORD`, `STORE_ID`, `STORE_PASS`.
 
 ## Scripts (run from the repo root)
 
