@@ -43,7 +43,8 @@ First-party email/password auth (no third-party identity provider):
   `PrivateRoute` / role routes guard the dashboards.
 - Create the first admin with
   `pnpm --filter @jashore-foodies/backend seed:admin` (`ADMIN_EMAIL` /
-  `ADMIN_PASSWORD`).
+  `ADMIN_PASSWORD`), or `pnpm --filter @jashore-foodies/backend seed` for the
+  full demo dataset.
 
 ## Image uploads
 
@@ -93,18 +94,29 @@ pnpm dev:frontend   # app on http://localhost:5173
 
 ## Running with Docker
 
-Brings up MongoDB, MinIO, the API, and the frontend with hot reload:
+One command brings up MongoDB, MinIO, the API, and the frontend with hot reload,
+**and seeds demo data** (restaurants, menus, tables, images):
 
 ```bash
-docker compose up
-docker compose exec backend pnpm seed:admin   # first admin (ADMIN_EMAIL/PASSWORD)
+docker compose up   # wait for the seed job to print its summary
 ```
+
+Open http://localhost:5173 — it's populated and ready to browse.
+
+| Demo login | Credentials |
+| ---------- | ----------- |
+| Admin | `admin@jashorefoodies.test` / `Admin@123` |
+| Customer | `customer@demo.test` / `Demo@123` |
+| Restaurant | `spice-villa@demo.test` (and 4 more) / `Demo@123` |
+| Restaurant (pending approval) | `green-fork@demo.test` / `Demo@123` |
 
 - Frontend http://localhost:5173 · API http://localhost:3000 · MongoDB `localhost:27017`
 - MinIO S3 API http://localhost:9000 · console http://localhost:9001 (`minioadmin` / `minioadmin`)
-- The `createbuckets` init service makes the bucket and sets it public-read; uploaded
-  images are served from `http://localhost:9000/<bucket>/...`.
-- The API uses the bundled `mongo` + `minio` services; no external accounts needed.
+- The `createbuckets` init service makes the bucket public-read; images are served
+  from `http://localhost:9000/<bucket>/...`.
+- The `seed` job is idempotent — re-run it with `docker compose run --rm seed`, or
+  skip it on `up` with `docker compose up mongo minio createbuckets backend frontend`.
+- The stack uses the bundled `mongo` + `minio` services; no external accounts needed.
 - JWT secrets and admin/MinIO credentials default to dev values in `docker-compose.yml`.
 - Source is bind-mounted, so edits reload live.
 - Override ports or secrets with a root `.env` file: `BACKEND_PORT`, `FRONTEND_PORT`,
@@ -124,7 +136,8 @@ docker compose exec backend pnpm seed:admin   # first admin (ADMIN_EMAIL/PASSWOR
 | `pnpm lint`          | Lint the frontend                       |
 | `pnpm format`        | Format the repo with Prettier           |
 
-From `backend/`, `pnpm seed:admin` creates/updates the admin account.
+From `backend/`: `pnpm seed` loads the full demo dataset (idempotent);
+`pnpm seed:admin` only creates/updates the admin account.
 
 ## Deployment
 
