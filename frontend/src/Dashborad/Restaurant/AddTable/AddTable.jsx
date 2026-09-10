@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import api from "../../../lib/api";
+import { uploadImage } from "../../../lib/uploadImage";
 import { AuthContext } from "../../../provider/AuthContext";
-const imgbb_token = import.meta.env.VITE_ImageBB_token;
 const AddTable = () => {
   const { user, loading } = useContext(AuthContext);
   const [resdetails, setResDetails] = useState(null);
@@ -43,27 +43,17 @@ const AddTable = () => {
       restaurantEmail: user?.email,
       restaurantId: resdetails._id,
     };
-    const formData = new FormData();
-    formData.append("image", image);
-    fetch(`https://api.imgbb.com/1/upload?key=${imgbb_token}`, {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        newTable.photo = data.data.display_url;
-        api.post("/restaurant/addtable", newTable).then((data) => {
-          if (data.data.insertedId) {
-            Swal.fire({
-              position: "center",
-              icon: "success",
-              title: "Table Added Successfully",
-              showConfirmButton: false,
-              timer: 800,
-            });
-          }
-        });
+    newTable.photo = await uploadImage(image, "tables");
+    const { data } = await api.post("/restaurant/addtable", newTable);
+    if (data.insertedId) {
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Table Added Successfully",
+        showConfirmButton: false,
+        timer: 800,
       });
+    }
   };
   return (
     <div className="card flex-shrink-0 md:w-1/2 my-10 shadow-2xl bg-[#FFF8EE] mx-auto">

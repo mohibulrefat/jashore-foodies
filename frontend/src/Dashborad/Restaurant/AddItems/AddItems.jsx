@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import Swal from "sweetalert2";
 import api from "../../../lib/api";
+import { uploadImage } from "../../../lib/uploadImage";
 import { AuthContext } from "../../../provider/AuthContext";
-const imgbb_token = import.meta.env.VITE_ImageBB_token;
 const Additems = () => {
   const { user, loading } = useContext(AuthContext);
   if (loading) {
@@ -33,29 +33,17 @@ const Additems = () => {
       rating: 0,
       sold: 0,
     };
-    const formData = new FormData();
-    formData.append("image", image);
-    fetch(`https://api.imgbb.com/1/upload?key=${imgbb_token}`, {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        newItem.photo = data.data.display_url;
-        api
-          .post("/restaurant/additem", newItem)
-          .then((data) => {
-            if (data.data.insertedId) {
-              Swal.fire({
-                position: "center",
-                icon: "success",
-                title: "Item added successfully",
-                showConfirmButton: false,
-                timer: 800,
-              });
-            }
-          });
+    newItem.photo = await uploadImage(image, "items");
+    const { data } = await api.post("/restaurant/additem", newItem);
+    if (data.insertedId) {
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Item added successfully",
+        showConfirmButton: false,
+        timer: 800,
       });
+    }
   };
   return (
     <div className="card flex-shrink-0 md:w-1/2 my-10 shadow-2xl bg-[#FFF8EE] mx-auto">
