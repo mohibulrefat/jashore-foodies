@@ -26,6 +26,21 @@ const config = {
     storePass: process.env.STORE_PASS,
     isLive: process.env.SSL_IS_LIVE === "true",
   },
+
+  // S3-compatible object storage (MinIO in dev). The client signs presigned
+  // URLs offline, so it only needs the browser-facing endpoint.
+  s3: {
+    endpoint:
+      process.env.S3_PUBLIC_ENDPOINT ||
+      process.env.S3_ENDPOINT ||
+      "http://localhost:9000",
+    region: process.env.S3_REGION || "us-east-1",
+    accessKey: process.env.S3_ACCESS_KEY || "minioadmin",
+    secretKey: process.env.S3_SECRET_KEY || "minioadmin",
+    bucket: process.env.S3_BUCKET || "jashore-foodies",
+    forcePathStyle: process.env.S3_FORCE_PATH_STYLE !== "false",
+    uploadUrlTtl: Number(process.env.S3_UPLOAD_URL_TTL || 300),
+  },
 };
 
 module.exports = config;
